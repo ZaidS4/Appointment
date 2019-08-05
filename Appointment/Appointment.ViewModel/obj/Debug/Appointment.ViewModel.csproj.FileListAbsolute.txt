@@ -1,0 +1,14 @@
+C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\bin\Debug\Appointment.ViewModel.dll
+C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\bin\Debug\Appointment.ViewModel.pdb
+C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\bin\Debug\Appointment.DAL.dll
+C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\bin\Debug\System.Web.Mvc.dll
+C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\bin\Debug\EntityFramework.dll
+C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\bin\Debug\Appointment.DAL.pdb
+C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\bin\Debug\Appointment.DAL.dll.config
+C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\bin\Debug\System.Web.Mvc.xml
+C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\bin\Debug\EntityFramework.xml
+C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\obj\Debug\Appointment.ViewModel.csprojAssemblyReference.cache
+C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\obj\Debug\Appointment.ViewModel.csproj.CoreCompileInputs.cache
+C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\obj\Debug\Appointment.ViewModel.csproj.CopyComplete
+C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\obj\Debug\Appointment.ViewModel.dll
+C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\obj\Debug\Appointment.ViewModel.pdb

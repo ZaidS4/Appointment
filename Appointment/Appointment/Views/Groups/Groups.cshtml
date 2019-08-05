@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Appointment.ViewModel.Models.GroupsViewModel>
+
+
+
+@(Html.Kendo().Grid(Model)
+                            .Name("Grid")
+                            .Columns(columns =>
+                            {
+                                columns.Bound(p => p.Name);
+                                columns.Bound(p => p.EmployeesNumber);
+                                columns.Command(command =>
+                                {
+                                    command.Custom("Delete").Click("deletegroup").HtmlAttributes(new { id = "deleteItem", title = "Delete", value = "View Details" });
+                                    command.Custom("Edit").Click("editgroup").HtmlAttributes(new { id = "editItem", title = "Edit", value = "View Details" });
+                                    command.Custom("Details").Click("viewgroup").HtmlAttributes(new { id = "viewItem", title = "View", style = "width:30px;", value = "View Details" });
+
+                                }).Width(250);
+                            })
+                            //.ToolBar(toolbar => toolbar.Template("<a class='k-button k-button-icontext' onclick='Add New Group()' href='#'></span>Add New Group</a>"))
+                            .ToolBar(toolbar => toolbar.Custom().Text("New Group").Action("Create", "Groups"))
+                            .Editable(editable => editable.Enabled(false).Mode(GridEditMode.InCell))
+                            .Pageable(pageable => pageable
+                                     .Refresh(true)
+                                     .PageSizes(true)
+                                     .ButtonCount(5))
+                            .Sortable()
+                            .Selectable()
+                            .Navigatable()
+                            .Scrollable()
+                            .Groupable()
+                            .ColumnMenu()
+                            .Filterable(filterable => filterable.Mode(GridFilterMode.Row))
+                            .DataSource(dataSource => dataSource
+                                .Server()
+                                .PageSize(20)
+                                .Model(model => model.Id(p => p.ID))
+                                .Read("Groups", "Groups")
+                                .Destroy("Destroy", "Groups")
+                            //.Update("Update", "Groups")
+                            //.Create("Create", "Groups")
+
+
+                            )
+
+
+)
+
+
+<script>
+
+    function viewgroup(e) {
+            e.preventDefault();
+
+            debugger;
+            window.location.href = "@Url.Action("Details", "Groups")";
+        }
+
+
+
+    function editgroup(e) {
+            e.preventDefault();
+
+            debugger;
+            window.location.href = "@Url.Action("Update", "Groups")";
+        }
+
+    function deletegroup(e) {
+            e.preventDefault();
+
+            debugger;
+            window.location.href = "@Url.Action("Delete", "Groups")";
+        }
+</script>
+
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            $("form.k-edit-form").kendoValidator();
+</script>
