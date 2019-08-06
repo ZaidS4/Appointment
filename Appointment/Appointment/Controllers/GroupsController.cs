@@ -13,7 +13,7 @@ using System.Web.Routing;
 namespace Appointment.Controllers
 {
     public class GroupsController : Controller
-    {
+    {   // lamees 
         // GET: Groups
         public ActionResult Groups()
         {
@@ -28,7 +28,7 @@ namespace Appointment.Controllers
             obj.Employees = GroupService.GetAllEmployee();
             return View(obj);
 
-        }
+        } 
 
         ///this method to add new Group to the database
         //[AcceptVerbs(HttpVerbs.Post)]
