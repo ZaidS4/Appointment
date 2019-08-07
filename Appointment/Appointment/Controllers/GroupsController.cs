@@ -1,5 +1,4 @@
 ﻿using Appointment.Business.Models;
-using Appointment.DAL;
 using Appointment.ViewModel.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
