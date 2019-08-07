@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0fdde103bd4348a4b4733b6e9b78f075" Name="Diagram1">
+        <EntityTypeShape EntityType="RemindersModel.Employee" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RemindersModel.EmployeesGroup" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RemindersModel.Group" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RemindersModel.LookUpCategory" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RemindersModel.Lookup" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RemindersModel.Permission" Width="1.5" PointX="5.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RemindersModel.Position" Width="1.5" PointX="3.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RemindersModel.Reminder" Width="1.5" PointX="6" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RemindersModel.RemindersGroup" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RemindersModel.Setting" Width="1.5" PointX="10.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RemindersModel.UserPermission" Width="1.5" PointX="8" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RemindersModel.User" Width="1.5" PointX="5.75" PointY="13.625" IsExpanded="true" />
+        <AssociationConnector Association="RemindersModel.FK_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="RemindersModel.FK_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="RemindersModel.FK_Groups" ManuallyRouted="false" />
+        <AssociationConnector Association="RemindersModel.FK_RemindersGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="RemindersModel.FK_Lookups_LookUpCategories" ManuallyRouted="false" />
+        <AssociationConnector Association="RemindersModel.FK_Lookups_Lookups" ManuallyRouted="false" />
+        <AssociationConnector Association="RemindersModel.FK_UserPermissions2" ManuallyRouted="false" />
+        <AssociationConnector Association="RemindersModel.FK_Position" ManuallyRouted="false" />
+        <AssociationConnector Association="RemindersModel.FK_Reminders" ManuallyRouted="false" />
+        <AssociationConnector Association="RemindersModel.FK_UserPermissions" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -31,12 +31,12 @@ namespace Appointment.Business.Job
         {
             try
             {
-                AppointmentContext db = new AppointmentContext();
+                RemindersEntities db = new RemindersEntities();
 
                 List<DateTime?> BirthDate = new List<DateTime?>();
                 BirthDate = db.Reminders.Where(x => x.TypeID == 1).Select(x => x.BirthDate).ToList();
 
-                List<DateTime?> startDate = new List<DateTime?>();
+                List<DateTime> startDate = new List<DateTime>();
                 startDate = db.Reminders.Where(x => x.TypeID == 2).Select(x => x.StartDate).ToList();
 
 
@@ -45,17 +45,21 @@ namespace Appointment.Business.Job
                 {
 
                     var t = DateTime.Now.Date.AddDays(Convert.ToDouble(StringResource.RemindeBefore));
-                    if (t.Day == item.Value.Day && t.Month == item.Value.Month)
+                    if (item.HasValue==true)
                     {
-                        bool res = SendEmailBirthday();
-                    }
 
+
+                        if (t.Day == item.Value.Day && t.Month == item.Value.Month)
+                        {
+                            bool res = SendEmailBirthday();
+                        }
+                    }
                 }
 
                 foreach (var item in startDate)
                 {
                     var t = DateTime.Now.Date.AddDays(Convert.ToDouble(StringResource.RemindeBefore));
-                    if (t.Day == item.Value.Day && t.Month == item.Value.Month)
+                    if (t.Day == item.Day && t.Month == item.Month)
                     {
                         bool res = SendEmailGeneral();
                     }
@@ -82,11 +86,11 @@ namespace Appointment.Business.Job
 
                 //list used to get all employees Email 
                 List<EmployeesViewModel> filter4 = new List<EmployeesViewModel>();
-                using (AppointmentContext db2 = new AppointmentContext())
+                using (RemindersEntities db2 = new RemindersEntities())
                 {
                     var filter1 = db2.Reminders.Where(x => x.TypeID == 1).Select(x => x.ID).ToList();
                     var filter2 = db2.RemindersGroups.Where(x => filter1.Contains(x.ReminderID)).Select(x => x.GroupID).Distinct().ToList();
-                    filter4 = db2.EmployeesGroups.Where(s => filter2.Contains(s.GroupID)).Select(s => new EmployeesViewModel { Name = s.Employees.Name, Email = s.Employees.Email }).ToList();
+                    filter4 = db2.EmployeesGroups.Where(s => filter2.Contains(s.GroupID)).Select(s => new EmployeesViewModel { Name = s.Employee.Name, Email = s.Employee.Email }).ToList();
                 }
 
                 //used to send the email with  the quartz
@@ -122,7 +126,7 @@ namespace Appointment.Business.Job
 
                 //list used to get all employees Email 
                 List<EmployeesViewModel> ToAllEmployee = new List<EmployeesViewModel>();
-                using (AppointmentContext db1 = new AppointmentContext())
+                using (RemindersEntities db1 = new RemindersEntities())
                 {
                     ToAllEmployee = db1.Employees.Select(s => new EmployeesViewModel { Name = s.Name, Email = s.Email }).ToList();
 
@@ -166,7 +170,7 @@ namespace Appointment.Business.Job
         public bool SendEmailGeneral()
         {
             List<string> ToAllEmployee = new List<string>();
-            using (AppointmentContext db1 = new AppointmentContext())
+            using (RemindersEntities db1 = new RemindersEntities())
             {
                 ToAllEmployee = db1.Employees.Select(x => x.Email).ToList();
             }
@@ -205,7 +209,7 @@ namespace Appointment.Business.Job
 
 //-----------------------------------------------Comments Area---------------------------------------------//
 
-//private List<EmployeesViewModel> _employees = AppointmentContext.Employees.Select(m => new EmployeesViewModel { Email = m.Email }).ToList;
+//private List<EmployeesViewModel> _employees = RemindersEntities.Employees.Select(m => new EmployeesViewModel { Email = m.Email }).ToList;
 //foreach (var item in EmployeesViewModel)
 //{
 

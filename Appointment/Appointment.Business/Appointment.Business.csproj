@@ -116,7 +116,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Appointment.DAL\Appointment.DAL.csproj">
-      <Project>{99db58da-4798-4809-a2cf-362c1699af4a}</Project>
+      <Project>{99DB58DA-4798-4809-A2CF-362C1699AF4A}</Project>
       <Name>Appointment.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Appointment.Resource\Appointment.Resource.csproj">

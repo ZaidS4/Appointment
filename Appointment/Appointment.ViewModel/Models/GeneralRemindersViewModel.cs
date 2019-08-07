@@ -37,8 +37,8 @@ namespace Appointment.ViewModel.Models
         [DataType(DataType.Date)]
         public DateTime? CreatedOn { get; set; }= DateTime.Now;
 
-        //[DataType(DataType.Date)]
-        //public DateTime? ModifyOn { get; set; }// = DateTime.Now;
+        [DataType(DataType.Date)]
+        public DateTime? ModifyOn { get; set; }// = DateTime.Now;
 
         public int? ModifyBy { get; set; }
 

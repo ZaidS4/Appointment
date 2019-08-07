@@ -22,28 +22,28 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/23/2019 09:24:13</publishTime>
     </File>
     <File Include="bin/Appointment.Business.dll">
-      <publishTime>08/05/2019 15:45:39</publishTime>
+      <publishTime>08/06/2019 15:15:35</publishTime>
     </File>
     <File Include="bin/Appointment.Business.dll.config">
-      <publishTime>07/31/2019 15:08:29</publishTime>
+      <publishTime>08/06/2019 11:41:39</publishTime>
     </File>
     <File Include="bin/Appointment.Business.pdb">
-      <publishTime>08/05/2019 15:45:39</publishTime>
+      <publishTime>08/06/2019 15:15:35</publishTime>
     </File>
     <File Include="bin/Appointment.DAL.dll">
-      <publishTime>08/05/2019 15:44:33</publishTime>
+      <publishTime>08/06/2019 13:53:33</publishTime>
     </File>
     <File Include="bin/Appointment.DAL.dll.config">
-      <publishTime>07/24/2019 13:47:58</publishTime>
+      <publishTime>08/06/2019 11:49:10</publishTime>
     </File>
     <File Include="bin/Appointment.DAL.pdb">
-      <publishTime>08/05/2019 15:44:33</publishTime>
+      <publishTime>08/06/2019 13:53:33</publishTime>
     </File>
     <File Include="bin/Appointment.dll">
-      <publishTime>08/05/2019 15:45:43</publishTime>
+      <publishTime>08/06/2019 15:15:40</publishTime>
     </File>
     <File Include="bin/Appointment.pdb">
-      <publishTime>08/05/2019 15:45:43</publishTime>
+      <publishTime>08/06/2019 15:15:40</publishTime>
     </File>
     <File Include="bin/Appointment.Resource.dll">
       <publishTime>08/05/2019 15:44:33</publishTime>
@@ -52,10 +52,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/05/2019 15:44:33</publishTime>
     </File>
     <File Include="bin/Appointment.ViewModel.dll">
-      <publishTime>08/05/2019 15:45:38</publishTime>
+      <publishTime>08/06/2019 13:53:33</publishTime>
+    </File>
+    <File Include="bin/Appointment.ViewModel.dll.config">
+      <publishTime>08/06/2019 11:41:38</publishTime>
     </File>
     <File Include="bin/Appointment.ViewModel.pdb">
-      <publishTime>08/05/2019 15:45:38</publishTime>
+      <publishTime>08/06/2019 13:53:33</publishTime>
     </File>
     <File Include="bin/Common.Logging.dll">
       <publishTime>12/13/2012 10:12:30</publishTime>
@@ -1267,10 +1270,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/05/2019 12:40:23</publishTime>
     </File>
     <File Include="Views/Reminder/Index.cshtml">
-      <publishTime>08/05/2019 14:34:52</publishTime>
+      <publishTime>08/06/2019 13:44:29</publishTime>
     </File>
     <File Include="Views/Reminder/NewEmployeeReminder.cshtml">
-      <publishTime>08/05/2019 12:49:06</publishTime>
+      <publishTime>08/06/2019 12:36:08</publishTime>
     </File>
     <File Include="Views/Reminder/NewGeneralReminder.cshtml">
       <publishTime>08/05/2019 12:48:43</publishTime>
@@ -1279,7 +1282,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/23/2019 09:23:43</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>08/04/2019 03:20:52</publishTime>
+      <publishTime>08/06/2019 13:06:20</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>07/24/2019 14:53:20</publishTime>
@@ -1288,7 +1291,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/23/2019 09:23:43</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/05/2019 15:45:45</publishTime>
+      <publishTime>08/06/2019 14:20:08</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -1,5 +1,4 @@
 ﻿using Appointment.Business.Models;
-using Appointment.DAL.Models;
 using Appointment.ViewModel.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -160,8 +159,12 @@ namespace Appointment.Controllers
             if (ModelState.IsValid)
             {
                 //The model is valid - insert the reminder and redisplay the grid.
-                //reminder.BirthDate = DateTime.MinValue;
-                //reminder.CreatedOn = DateTime.Now.Date;
+                
+                reminder.CreatedOn = DateTime.Now;
+                reminder.ModifyOn = DateTime.Now;
+                reminder.ModifyBy = 1;
+                reminder.CreatedBy = 1;
+
                 ReminderService.Create(reminder);
 
               //GridRouteValues() is an extension method which returns the 
@@ -185,6 +188,11 @@ namespace Appointment.Controllers
             TempData["isvalid"] = true;
             EmployeeRemindersViewModel obj = new EmployeeRemindersViewModel();
             obj.Positions = ReminderService.GetPositions();
+            obj.Employees = ReminderService.GetEmployees();
+
+            //ViewModels vm = new ViewModels();
+            //var listreminder = ReminderService.GetAll();
+            //vm.RemindersViewModel = listreminder.Where(x => x.ID.Equals(ID) || ID == null).ToList();
             return View(obj);
         }
 
@@ -202,8 +210,11 @@ namespace Appointment.Controllers
             if (ModelState.IsValid)
             {
                 //The model is valid - insert the reminder and redisplay the grid.
-                
-                
+
+                reminder.CreatedOn = DateTime.Now;
+                reminder.ModifyOn = DateTime.Now;
+                reminder.ModifyBy = 1;
+                reminder.CreatedBy = 1;
                 ReminderService.Create(reminder);
 
 

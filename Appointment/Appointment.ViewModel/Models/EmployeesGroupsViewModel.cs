@@ -1,5 +1,4 @@
-﻿using Appointment.DAL.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -30,8 +29,8 @@ namespace Appointment.ViewModel.Models
         public List<SelectListItem> Employees { get; set; }
 
         public List<EmployeesGroupsViewModel> EmployeesGroupViewModel { get; set; }
-        public virtual Employees Employee { get; set; }
-        public virtual Groups Groups { get; set; }
+        public virtual EmployeesViewModel Employee { get; set; }
+        public virtual GroupsViewModel Groups { get; set; }
 
     }
 }

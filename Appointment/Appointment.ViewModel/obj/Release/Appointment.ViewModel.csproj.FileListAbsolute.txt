@@ -2,13 +2,13 @@ C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\obj\Release\Appoint
 C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\obj\Release\Appointment.ViewModel.csproj.CoreCompileInputs.cache
 C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\bin\Release\Appointment.ViewModel.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\bin\Release\Appointment.ViewModel.pdb
-C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\bin\Release\Appointment.DAL.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\bin\Release\System.Web.Mvc.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\bin\Release\EntityFramework.dll
-C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\bin\Release\Appointment.DAL.pdb
-C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\bin\Release\Appointment.DAL.dll.config
 C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\bin\Release\System.Web.Mvc.xml
 C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\bin\Release\EntityFramework.xml
 C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\obj\Release\Appointment.ViewModel.csproj.CopyComplete
 C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\obj\Release\Appointment.ViewModel.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\obj\Release\Appointment.ViewModel.pdb
+C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\bin\Release\Appointment.ViewModel.dll.config
+C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\bin\Release\EntityFramework.SqlServer.xml

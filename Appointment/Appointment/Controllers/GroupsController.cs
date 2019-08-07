@@ -1,5 +1,4 @@
 ﻿using Appointment.Business.Models;
-using Appointment.DAL.Models;
 using Appointment.ViewModel.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -13,7 +12,7 @@ using System.Web.Routing;
 namespace Appointment.Controllers
 {
     public class GroupsController : Controller
-    {   // lamees 
+    {
         // GET: Groups
         public ActionResult Groups()
         {
@@ -28,7 +27,7 @@ namespace Appointment.Controllers
             obj.Employees = GroupService.GetAllEmployee();
             return View(obj);
 
-        } 
+        }
 
         ///this method to add new Group to the database
         //[AcceptVerbs(HttpVerbs.Post)]
@@ -60,9 +59,15 @@ namespace Appointment.Controllers
 
             if (ModelState.IsValid)
             {
+                group.CreatedOn = DateTime.Now;
+                group.ModifyOn = DateTime.Now;
+                group.CreatedBY = 1;
+                group.ModifyBy = 1;
 
                 GroupService.Create(group);
-                group.CreatedOn = DateTime.Now;
+
+               
+                
 
                 RouteValueDictionary routeValues = this.GridRouteValues();
                 return RedirectToAction("Groups", routeValues);

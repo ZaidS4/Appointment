@@ -1,0 +1,944 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RemindersModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="BirthDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeesGroups">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="GroupID" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyOn" Type="datetime" />
+          <Property Name="CreatedBY" Type="int" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="CreatedOn" Type="date" Nullable="false" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="LookUpCategories">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="NameEn" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NameAr" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1024" />
+          <Property Name="InternalID" Type="int" />
+          <Property Name="IsPrivate" Type="bit" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Lookups">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="NameEn" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NameAr" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1024" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="InternalID" Type="int" />
+          <Property Name="ParentID" Type="int" />
+          <Property Name="Sort" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsPrivate" Type="bit" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Permissions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reminders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="30" />
+          <Property Name="BirthDate" Type="date" />
+          <Property Name="PositionID" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="Image" Type="binary" MaxLength="100" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="BreifDescription" Type="varchar" MaxLength="200" />
+          <Property Name="Time" Type="time" Precision="7" />
+          <Property Name="EmployeeID" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="TypeID" Type="int" />
+        </EntityType>
+        <EntityType Name="RemindersGroups">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReminderID" Type="int" Nullable="false" />
+          <Property Name="GroupID" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Key" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Values" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="Description" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="IsPrivate" Type="bit" />
+        </EntityType>
+        <EntityType Name="UserPermissions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="PermissionID" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifyBy" Type="int" />
+          <Property Name="ModifyOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Employee">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="EmployeesGroups" Type="Self.EmployeesGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmployeesGroups">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Reminders" Type="Self.Reminders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Reminders">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="EmployeesGroups" Type="Self.EmployeesGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmployeesGroups">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lookups_LookUpCategories">
+          <End Role="LookUpCategories" Type="Self.LookUpCategories" Multiplicity="1" />
+          <End Role="Lookups" Type="Self.Lookups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookUpCategories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Lookups">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lookups_Lookups">
+          <End Role="Lookups" Type="Self.Lookups" Multiplicity="1" />
+          <End Role="Lookups1" Type="Self.Lookups" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Lookups">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Lookups1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Position">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="0..1" />
+          <End Role="Reminders" Type="Self.Reminders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Reminders">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reminders">
+          <End Role="Reminders" Type="Self.Reminders" Multiplicity="1" />
+          <End Role="RemindersGroups" Type="Self.RemindersGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reminders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RemindersGroups">
+              <PropertyRef Name="ReminderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RemindersGroups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="RemindersGroups" Type="Self.RemindersGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RemindersGroups">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPermissions">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserPermissions" Type="Self.UserPermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserPermissions">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPermissions2">
+          <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
+          <End Role="UserPermissions" Type="Self.UserPermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserPermissions">
+              <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RemindersModelStoreContainer">
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeesGroups" EntityType="Self.EmployeesGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LookUpCategories" EntityType="Self.LookUpCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lookups" EntityType="Self.Lookups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reminders" EntityType="Self.Reminders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RemindersGroups" EntityType="Self.RemindersGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserPermissions" EntityType="Self.UserPermissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Employee" Association="Self.FK_Employee">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="EmployeesGroups" EntitySet="EmployeesGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees" Association="Self.FK_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Reminders" EntitySet="Reminders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups" Association="Self.FK_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="EmployeesGroups" EntitySet="EmployeesGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lookups_LookUpCategories" Association="Self.FK_Lookups_LookUpCategories">
+            <End Role="LookUpCategories" EntitySet="LookUpCategories" />
+            <End Role="Lookups" EntitySet="Lookups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lookups_Lookups" Association="Self.FK_Lookups_Lookups">
+            <End Role="Lookups" EntitySet="Lookups" />
+            <End Role="Lookups1" EntitySet="Lookups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Position" Association="Self.FK_Position">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Reminders" EntitySet="Reminders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reminders" Association="Self.FK_Reminders">
+            <End Role="Reminders" EntitySet="Reminders" />
+            <End Role="RemindersGroups" EntitySet="RemindersGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RemindersGroups" Association="Self.FK_RemindersGroups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="RemindersGroups" EntitySet="RemindersGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPermissions" Association="Self.FK_UserPermissions">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserPermissions" EntitySet="UserPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPermissions2" Association="Self.FK_UserPermissions2">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="UserPermissions" EntitySet="UserPermissions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RemindersModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="EmployeesGroups" Relationship="Self.FK_Employee" FromRole="Employees" ToRole="EmployeesGroups" />
+          <NavigationProperty Name="Reminders" Relationship="Self.FK_Employees" FromRole="Employees" ToRole="Reminders" />
+        </EntityType>
+        <EntityType Name="EmployeesGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="GroupID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBY" Type="Int32" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee" FromRole="EmployeesGroups" ToRole="Employees" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_Groups" FromRole="EmployeesGroups" ToRole="Groups" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <NavigationProperty Name="EmployeesGroups" Relationship="Self.FK_Groups" FromRole="Groups" ToRole="EmployeesGroups" />
+          <NavigationProperty Name="RemindersGroups" Relationship="Self.FK_RemindersGroups" FromRole="Groups" ToRole="RemindersGroups" />
+        </EntityType>
+        <EntityType Name="LookUpCategory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NameEn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameAr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="InternalID" Type="Int32" />
+          <Property Name="IsPrivate" Type="Boolean" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Lookups" Relationship="Self.FK_Lookups_LookUpCategories" FromRole="LookUpCategories" ToRole="Lookups" />
+        </EntityType>
+        <EntityType Name="Lookup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NameEn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameAr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="InternalID" Type="Int32" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="Sort" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsPrivate" Type="Boolean" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="LookUpCategory" Relationship="Self.FK_Lookups_LookUpCategories" FromRole="Lookups" ToRole="LookUpCategories" />
+          <NavigationProperty Name="Lookups1" Relationship="Self.FK_Lookups_Lookups" FromRole="Lookups" ToRole="Lookups1" />
+          <NavigationProperty Name="Lookup1" Relationship="Self.FK_Lookups_Lookups" FromRole="Lookups1" ToRole="Lookups" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserPermissions" Relationship="Self.FK_UserPermissions2" FromRole="Permissions" ToRole="UserPermissions" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Reminders" Relationship="Self.FK_Position" FromRole="Positions" ToRole="Reminders" />
+        </EntityType>
+        <EntityType Name="Reminder">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="PositionID" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="Image" Type="Binary" MaxLength="100" FixedLength="true" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="BreifDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Time" Type="Time" Precision="7" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="TypeID" Type="Int32" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employees" FromRole="Reminders" ToRole="Employees" />
+          <NavigationProperty Name="Position" Relationship="Self.FK_Position" FromRole="Reminders" ToRole="Positions" />
+          <NavigationProperty Name="RemindersGroups" Relationship="Self.FK_Reminders" FromRole="Reminders" ToRole="RemindersGroups" />
+        </EntityType>
+        <EntityType Name="RemindersGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReminderID" Type="Int32" Nullable="false" />
+          <Property Name="GroupID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_RemindersGroups" FromRole="RemindersGroups" ToRole="Groups" />
+          <NavigationProperty Name="Reminder" Relationship="Self.FK_Reminders" FromRole="RemindersGroups" ToRole="Reminders" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Key" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Values" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsPrivate" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="UserPermission">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="PermissionID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Permission" Relationship="Self.FK_UserPermissions2" FromRole="UserPermissions" ToRole="Permissions" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserPermissions" FromRole="UserPermissions" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyBy" Type="Int32" />
+          <Property Name="ModifyOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="UserPermissions" Relationship="Self.FK_UserPermissions" FromRole="Users" ToRole="UserPermissions" />
+        </EntityType>
+        <Association Name="FK_Employee">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="1" />
+          <End Role="EmployeesGroups" Type="Self.EmployeesGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmployeesGroups">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees">
+          <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Reminders" Type="Self.Reminder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Reminders">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Groups">
+          <End Role="Groups" Type="Self.Group" Multiplicity="1" />
+          <End Role="EmployeesGroups" Type="Self.EmployeesGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmployeesGroups">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RemindersGroups">
+          <End Role="Groups" Type="Self.Group" Multiplicity="1" />
+          <End Role="RemindersGroups" Type="Self.RemindersGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RemindersGroups">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lookups_LookUpCategories">
+          <End Role="LookUpCategories" Type="Self.LookUpCategory" Multiplicity="1" />
+          <End Role="Lookups" Type="Self.Lookup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookUpCategories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Lookups">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lookups_Lookups">
+          <End Role="Lookups" Type="Self.Lookup" Multiplicity="1" />
+          <End Role="Lookups1" Type="Self.Lookup" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Lookups">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Lookups1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPermissions2">
+          <End Role="Permissions" Type="Self.Permission" Multiplicity="1" />
+          <End Role="UserPermissions" Type="Self.UserPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserPermissions">
+              <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Position">
+          <End Role="Positions" Type="Self.Position" Multiplicity="0..1" />
+          <End Role="Reminders" Type="Self.Reminder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Reminders">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reminders">
+          <End Role="Reminders" Type="Self.Reminder" Multiplicity="1" />
+          <End Role="RemindersGroups" Type="Self.RemindersGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reminders">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RemindersGroups">
+              <PropertyRef Name="ReminderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPermissions">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="UserPermissions" Type="Self.UserPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserPermissions">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RemindersEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="EmployeesGroups" EntityType="Self.EmployeesGroup" />
+          <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="LookUpCategories" EntityType="Self.LookUpCategory" />
+          <EntitySet Name="Lookups" EntityType="Self.Lookup" />
+          <EntitySet Name="Permissions" EntityType="Self.Permission" />
+          <EntitySet Name="Positions" EntityType="Self.Position" />
+          <EntitySet Name="Reminders" EntityType="Self.Reminder" />
+          <EntitySet Name="RemindersGroups" EntityType="Self.RemindersGroup" />
+          <EntitySet Name="Settings" EntityType="Self.Setting" />
+          <EntitySet Name="UserPermissions" EntityType="Self.UserPermission" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Employee" Association="Self.FK_Employee">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="EmployeesGroups" EntitySet="EmployeesGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees" Association="Self.FK_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Reminders" EntitySet="Reminders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Groups" Association="Self.FK_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="EmployeesGroups" EntitySet="EmployeesGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RemindersGroups" Association="Self.FK_RemindersGroups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="RemindersGroups" EntitySet="RemindersGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lookups_LookUpCategories" Association="Self.FK_Lookups_LookUpCategories">
+            <End Role="LookUpCategories" EntitySet="LookUpCategories" />
+            <End Role="Lookups" EntitySet="Lookups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lookups_Lookups" Association="Self.FK_Lookups_Lookups">
+            <End Role="Lookups" EntitySet="Lookups" />
+            <End Role="Lookups1" EntitySet="Lookups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPermissions2" Association="Self.FK_UserPermissions2">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="UserPermissions" EntitySet="UserPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Position" Association="Self.FK_Position">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Reminders" EntitySet="Reminders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reminders" Association="Self.FK_Reminders">
+            <End Role="Reminders" EntitySet="Reminders" />
+            <End Role="RemindersGroups" EntitySet="RemindersGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPermissions" Association="Self.FK_UserPermissions">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserPermissions" EntitySet="UserPermissions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RemindersModelStoreContainer" CdmEntityContainer="RemindersEntities">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="RemindersModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyOn" ColumnName="ModifyOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeesGroups">
+            <EntityTypeMapping TypeName="RemindersModel.EmployeesGroup">
+              <MappingFragment StoreEntitySet="EmployeesGroups">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyOn" ColumnName="ModifyOn" />
+                <ScalarProperty Name="CreatedBY" ColumnName="CreatedBY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="RemindersModel.Group">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyOn" ColumnName="ModifyOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LookUpCategories">
+            <EntityTypeMapping TypeName="RemindersModel.LookUpCategory">
+              <MappingFragment StoreEntitySet="LookUpCategories">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+                <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="InternalID" ColumnName="InternalID" />
+                <ScalarProperty Name="IsPrivate" ColumnName="IsPrivate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyOn" ColumnName="ModifyOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lookups">
+            <EntityTypeMapping TypeName="RemindersModel.Lookup">
+              <MappingFragment StoreEntitySet="Lookups">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="NameEn" ColumnName="NameEn" />
+                <ScalarProperty Name="NameAr" ColumnName="NameAr" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="InternalID" ColumnName="InternalID" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="IsPrivate" ColumnName="IsPrivate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyOn" ColumnName="ModifyOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permissions">
+            <EntityTypeMapping TypeName="RemindersModel.Permission">
+              <MappingFragment StoreEntitySet="Permissions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyOn" ColumnName="ModifyOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="RemindersModel.Position">
+              <MappingFragment StoreEntitySet="Positions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyOn" ColumnName="ModifyOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reminders">
+            <EntityTypeMapping TypeName="RemindersModel.Reminder">
+              <MappingFragment StoreEntitySet="Reminders">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="BreifDescription" ColumnName="BreifDescription" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyOn" ColumnName="ModifyOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RemindersGroups">
+            <EntityTypeMapping TypeName="RemindersModel.RemindersGroup">
+              <MappingFragment StoreEntitySet="RemindersGroups">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ReminderID" ColumnName="ReminderID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyOn" ColumnName="ModifyOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="RemindersModel.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Values" ColumnName="Values" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyOn" ColumnName="ModifyOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsPrivate" ColumnName="IsPrivate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserPermissions">
+            <EntityTypeMapping TypeName="RemindersModel.UserPermission">
+              <MappingFragment StoreEntitySet="UserPermissions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyOn" ColumnName="ModifyOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="RemindersModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyOn" ColumnName="ModifyOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

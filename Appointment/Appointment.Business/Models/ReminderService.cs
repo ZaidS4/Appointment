@@ -1,11 +1,11 @@
-﻿using Appointment.DAL.Models;
-using Appointment.ViewModel.Models;
+﻿using Appointment.ViewModel.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Data.Entity;
 using System.Web.Mvc;
+using Appointment.DAL.Models;
 
 namespace Appointment.Business.Models
 {
@@ -19,7 +19,7 @@ namespace Appointment.Business.Models
         {
             try
             {
-                using (AppointmentContext db = new AppointmentContext())
+                using (RemindersEntities db = new RemindersEntities())
                 {
                     List<EmployeeRemindersViewModel> emp = new List<EmployeeRemindersViewModel>();
                     var list = db.Positions.Select(m => new SelectListItem
@@ -49,7 +49,7 @@ namespace Appointment.Business.Models
         {
             try
             {
-                using (AppointmentContext db = new AppointmentContext())
+                using (RemindersEntities db = new RemindersEntities())
                 {
                     List<EmployeeRemindersViewModel> emp = new List<EmployeeRemindersViewModel>();
                     var list = db.Employees.Select(m => new SelectListItem
@@ -80,9 +80,9 @@ namespace Appointment.Business.Models
         /// <returns>selected item object</returns>
         public static EmployeeRemindersViewModel EmployeeRemindersGetByID(int id)
         {
-            using (AppointmentContext db = new AppointmentContext())
+            using (RemindersEntities db = new RemindersEntities())
             {
-                Reminders reminders = db.Reminders.Where(x => x.ID == id).FirstOrDefault();
+                Reminder reminders = db.Reminders.Where(x => x.ID == id).FirstOrDefault();
 
 
                 EmployeeRemindersViewModel EmployeeReminder = new EmployeeRemindersViewModel()
@@ -93,7 +93,7 @@ namespace Appointment.Business.Models
                     BirthDate = reminders.BirthDate,
                     StartDate = reminders.StartDate,
                     PositionID = reminders.PositionID,
-                    IsActive = reminders.IsActive
+                    IsActive = reminders.IsActive.Value
 
                 };
                 return EmployeeReminder;
@@ -110,9 +110,9 @@ namespace Appointment.Business.Models
         /// <returns>selected item object</returns>
         public static GeneralRemindersViewModel generalRemindersGetByID(int id)
         {
-            using (AppointmentContext db = new AppointmentContext())
+            using (RemindersEntities db = new RemindersEntities())
             {
-                Reminders reminders = db.Reminders.Where(x => x.ID == id).FirstOrDefault();
+                Reminder reminders = db.Reminders.Where(x => x.ID == id).FirstOrDefault();
 
 
                 GeneralRemindersViewModel GeneralReminder = new GeneralRemindersViewModel()
@@ -126,7 +126,7 @@ namespace Appointment.Business.Models
                     CreatedOn = reminders.CreatedOn,
                     //ModifyOn = reminders.ModifyOn,
                     TypeID = reminders.TypeID,
-                    IsActive = reminders.IsActive
+                    IsActive = reminders.IsActive.Value
                 };
                 return GeneralReminder;
 
@@ -143,7 +143,7 @@ namespace Appointment.Business.Models
 
             try
             {
-                using (AppointmentContext db = new AppointmentContext())
+                using (RemindersEntities db = new RemindersEntities())
                 {
                     var reminders = db.Reminders.ToList();
 
@@ -160,9 +160,9 @@ namespace Appointment.Business.Models
                             IsActive = item.IsActive,
                             Image = item.Image,
                             StartDate = item.StartDate,
-                            EndDate = item.EndDate.Value,
-                            BreifDescription = item.BreifDescription,
-                            Time = item.Time,
+                            //EndDate = item.EndDate.Value,
+                            //BreifDescription = item.BreifDescription,
+                            //Time = item.Time,
                             EmployeeID = item.EmployeeID,
                             CreatedOn = item.CreatedOn,
                             ModifyBy = item.ModifyBy,
@@ -203,22 +203,22 @@ namespace Appointment.Business.Models
         {
             try
             {
-                AppointmentContext Entities = new AppointmentContext();
+                RemindersEntities Entities = new RemindersEntities();
 
 
-                Reminders entity = new Reminders();
+                Reminder entity = new Reminder();
 
                 entity.ID = reminder.ID;
                 entity.Name = reminder.Name;
                 entity.IsActive = reminder.IsActive;
                 entity.Image = null;// reminder.Image;
-                entity.StartDate = reminder.StartDate;
+                entity.StartDate = reminder.StartDate.Value;
                 entity.EndDate = reminder.EndDate;
                 entity.BreifDescription = reminder.BreifDescription;
                 entity.Time = reminder.Time;
-                entity.CreatedOn =reminder.CreatedOn;
-                //entity.ModifyBy = 0;// reminder.ModifyBy.Value;
-                //entity.ModifyOn = DateTime.MinValue;
+                entity.CreatedOn =reminder.CreatedOn.Value;
+                entity.ModifyBy = reminder.ModifyBy;
+                entity.ModifyOn = reminder.ModifyOn;
                 entity.CreatedBy = reminder.CreatedBy;
                 entity.TypeID = 2;
 
@@ -244,13 +244,13 @@ namespace Appointment.Business.Models
         {
             try
             {
-                AppointmentContext Entities = new AppointmentContext();
+                RemindersEntities Entities = new RemindersEntities();
 
                 var items = Entities.Reminders.Where(x => x.Email == reminder.Email).ToList();
 
                 if (items.Count < 1)
                 {
-                    var entity = new Reminders();
+                    Reminder entity = new Reminder();
 
                     entity.ID = reminder.ID;
                     entity.Name = reminder.Name;
@@ -259,10 +259,12 @@ namespace Appointment.Business.Models
                     entity.PositionID = reminder.PositionID;
                     entity.IsActive = reminder.IsActive;
                     entity.Image = null;// reminder.Image;
-                    entity.StartDate = reminder.StartDate;
-                    entity.EmployeeID = 4;
+                    entity.StartDate = reminder.StartDate.Value;
+                    entity.EmployeeID = reminder.EmployeeID;
                     entity.ModifyBy = reminder.ModifyBy;
                     entity.CreatedBy = reminder.CreatedBy;
+                    entity.CreatedOn = DateTime.Now;
+                    entity.ModifyOn = DateTime.Now; 
                     entity.TypeID = 1;
 
                     Entities.Reminders.Add(entity);
@@ -287,10 +289,10 @@ namespace Appointment.Business.Models
         {
             try
             {
-                AppointmentContext Entities = new AppointmentContext();
+                RemindersEntities Entities = new RemindersEntities();
 
 
-                Reminders entity = new Reminders();
+                Reminder entity = new Reminder();
 
                 entity.Name = reminder.Name;
                 entity.Email = reminder.Email;
@@ -298,9 +300,9 @@ namespace Appointment.Business.Models
                 entity.PositionID = reminder.PositionID;
                 entity.IsActive = reminder.IsActive;
                 //entity.Image = reminder.Image;
-                entity.StartDate = reminder.StartDate;
+                entity.StartDate = reminder.StartDate.Value;
                 //entity.EmployeeID = reminder.EmployeeID;
-                entity.CreatedOn = reminder.CreatedOn;
+                entity.CreatedOn = reminder.CreatedOn.Value;
                 entity.ModifyBy = reminder.ModifyBy;
                 entity.ModifyOn = reminder.ModifyOn;
                 entity.CreatedBy = reminder.CreatedBy;
@@ -333,19 +335,19 @@ namespace Appointment.Business.Models
         {
             try
             {
-                AppointmentContext Entities = new AppointmentContext();
+                RemindersEntities Entities = new RemindersEntities();
 
 
-                Reminders entity = new Reminders();
+                Reminder entity = new Reminder();
 
                 entity.Name = reminder.Name;
                 entity.IsActive = reminder.IsActive;
                 //entity.Image = reminder.Image;
-                entity.StartDate = reminder.StartDate;
+                entity.StartDate = reminder.StartDate.Value;
                 entity.EndDate = reminder.EndDate;
                 entity.BreifDescription = reminder.BreifDescription;
                 entity.Time = reminder.Time;
-                entity.CreatedOn = reminder.CreatedOn;
+                entity.CreatedOn = reminder.CreatedOn.Value;
                 entity.ModifyBy = reminder.ModifyBy;
                 //entity.ModifyOn = reminder.ModifyOn;
                 entity.CreatedBy = reminder.CreatedBy;
@@ -374,10 +376,10 @@ namespace Appointment.Business.Models
         {
             try
             {
-                AppointmentContext Entities = new AppointmentContext();
+                RemindersEntities Entities = new RemindersEntities();
 
 
-                Reminders entity = new Reminders();
+                Reminder entity = new Reminder();
 
                 entity.ID = reminder.ID;
 
@@ -416,7 +418,7 @@ namespace Appointment.Business.Models
         /// </summary>
         public void Dispose()
         {
-            AppointmentContext Entities = new AppointmentContext();
+            RemindersEntities Entities = new RemindersEntities();
 
             Entities.Dispose();
         }

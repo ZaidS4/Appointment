@@ -145,7 +145,6 @@ C:\Users\Zaid\source\repos\Appointment\Appointment\bin\System.Xml.XPath.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\System.Xml.XPath.XDocument.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Antlr3.Runtime.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Appointment.Business.dll
-C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Appointment.DAL.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Appointment.ViewModel.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\EntityFramework.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\EntityFramework.SqlServer.dll
@@ -260,13 +259,13 @@ C:\Users\Zaid\source\repos\Appointment\Appointment\bin\System.Web.WebPages.Deplo
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\System.Web.WebPages.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\System.Web.WebPages.Razor.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\WebGrease.dll
+C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Appointment.DAL.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Appointment.Resource.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Common.Logging.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Appointment.Business.pdb
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Appointment.Business.dll.config
-C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Appointment.DAL.pdb
-C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Appointment.DAL.dll.config
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Appointment.ViewModel.pdb
+C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Appointment.ViewModel.dll.config
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\EntityFramework.xml
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\EntityFramework.SqlServer.xml
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Microsoft.AspNetCore.Antiforgery.xml
@@ -369,6 +368,8 @@ C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Microsoft.AI.DependencyCo
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Microsoft.AI.Web.xml
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Appointment.DAL.pdb
+C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Appointment.DAL.dll.config
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Appointment.Resource.pdb
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Common.Logging.pdb
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Common.Logging.xml

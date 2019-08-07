@@ -1,5 +1,4 @@
-﻿using Appointment.DAL.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +23,7 @@ namespace Appointment.ViewModel.Models
             //public int ReminderID { get; set; }
 
 
-            public List<Groups> Group { get; set; }
+            public List<GroupsViewModel> Group { get; set; }
 
             public virtual ICollection<EmployeesGroupsViewModel> EmployeesGroups { get; set; }
             public virtual ICollection<RemindersGroupsViewModel> RemindersGroups { get; set; }

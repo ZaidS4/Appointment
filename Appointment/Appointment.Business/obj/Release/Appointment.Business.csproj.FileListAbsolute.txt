@@ -44,3 +44,4 @@ C:\Users\Zaid\source\repos\Appointment\Appointment.Business\bin\Release\System.W
 C:\Users\Zaid\source\repos\Appointment\Appointment.Business\obj\Release\Appointment.Business.csproj.CopyComplete
 C:\Users\Zaid\source\repos\Appointment\Appointment.Business\obj\Release\Appointment.Business.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment.Business\obj\Release\Appointment.Business.pdb
+C:\Users\Zaid\source\repos\Appointment\Appointment.Business\bin\Release\Appointment.ViewModel.dll.config

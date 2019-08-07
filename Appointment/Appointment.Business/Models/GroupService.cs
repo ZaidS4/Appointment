@@ -19,7 +19,7 @@ namespace Appointment.Business.Models
 
             try
             {
-                using (AppointmentContext db = new AppointmentContext())
+                using (RemindersEntities db = new RemindersEntities())
                 {
                     var groups = db.Groups.ToList();
 
@@ -52,18 +52,19 @@ namespace Appointment.Business.Models
         {
             try
             {
-                AppointmentContext Entities = new AppointmentContext();
+                RemindersEntities Entities = new RemindersEntities();
 
-                var entity = new Groups();
+                var entity = new Group();
                 //entity.ID = group.ID;
                 entity.Name = group.Name;
-                //entity.CreatedOn = group.CreatedOn;   
-                //if(group.EmployeeID.HasValue)
-                //   entity.EmployeesGroups.Add(new EmployeesGroups { EmployeeID = group.EmployeeID.Value });
+                entity.ModifyOn = group.ModifyOn;
+                entity.CreatedOn = group.CreatedOn.Value;
+                entity.ModifyBy = group.ModifyBy;
+                entity.CreatedBy = group.CreatedBY;
                 Entities.Groups.Add(entity);
                 Entities.SaveChanges();
                 group.ID = entity.ID;
-                Entities.EmployeesGroups.Add(new EmployeesGroups { EmployeeID = group.EmployeeID.Value, GroupID = entity.ID });
+                Entities.EmployeesGroups.Add(new EmployeesGroup { EmployeeID = group.EmployeeID.Value, GroupID = entity.ID, CreatedOn = DateTime.Now, CreatedBY = 1, ModifyOn = DateTime.Now, ModifyBy = 1 });
                 Entities.SaveChanges();
 
             }
@@ -77,9 +78,9 @@ namespace Appointment.Business.Models
         {
             try
             {
-                AppointmentContext Entities = new AppointmentContext();
+                RemindersEntities Entities = new RemindersEntities();
 
-                var entity = new Groups();
+                Group entity = new Group();
 
                 //entity.ID = group.ID;
                 entity.Name = group.Name;
@@ -100,9 +101,9 @@ namespace Appointment.Business.Models
         {
             try
             {
-                AppointmentContext Entities = new AppointmentContext();
+                RemindersEntities Entities = new RemindersEntities();
 
-                var entity = new Groups();
+                Group entity = new Group();
 
                 entity.ID = group.ID;
                 Entities.Groups.Attach(entity);
@@ -134,7 +135,7 @@ namespace Appointment.Business.Models
         //    try
         //    {
 
-        //        using (AppointmentContext db = new AppointmentContext())
+        //        using (RemindersEntities db = new RemindersEntities())
         //        {
         //            var employees = db.Employees.ToList();
         //            foreach (var item in employees)
@@ -171,7 +172,7 @@ namespace Appointment.Business.Models
         //{
         //    try
         //    {
-        //        AppointmentContext Entities = new AppointmentContext();
+        //        RemindersEntities Entities = new RemindersEntities();
 
         //        return GetAll().FirstOrDefault(predicate);
         //    }
@@ -184,7 +185,7 @@ namespace Appointment.Business.Models
 
         public static List<SelectListItem> GetAllEmployee()
         {
-            using (AppointmentContext db = new AppointmentContext())
+            using (RemindersEntities db = new RemindersEntities())
             {
                 var list = db.Employees.Select(m => new SelectListItem
                 {
@@ -201,7 +202,7 @@ namespace Appointment.Business.Models
         /// </summary>
         public void Dispose()
         {
-            AppointmentContext Entities = new AppointmentContext();
+            RemindersEntities Entities = new RemindersEntities();
 
             Entities.Dispose();
         }

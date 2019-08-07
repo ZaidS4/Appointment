@@ -14,11 +14,11 @@ namespace Appointment.Business.Models
         //        private bool UpdateDatabase = false;
 
         //-------------------------------------Constructor----------------------------------------//
-        private static AppointmentContext _appointmentContext;
+        private static RemindersEntities _remindersEntities;
 
-        public AppointmentRepository(AppointmentContext entities)
+        public AppointmentRepository(RemindersEntities entities)
         {
-            _appointmentContext = entities;
+            _remindersEntities = entities;
         }
 
         //------------------------------Get EmployeesViewModel Data-------------------------------//
@@ -29,7 +29,7 @@ namespace Appointment.Business.Models
 
             try
             {
-                using (AppointmentContext db = new AppointmentContext())
+                using (RemindersEntities db = new RemindersEntities())
                 {
                     var employees = db.Employees.ToList();
 
@@ -71,7 +71,7 @@ namespace Appointment.Business.Models
 
             try
             {
-                using (AppointmentContext db = new AppointmentContext())
+                using (RemindersEntities db = new RemindersEntities())
                 {
                     var employeesGroups = db.EmployeesGroups.ToList();
 
@@ -111,7 +111,7 @@ namespace Appointment.Business.Models
 //        {
 //            try
 //            {
-//                AppointmentContext Entities = new AppointmentContext();
+//                RemindersEntities Entities = new RemindersEntities();
 //                if (UpdateDatabase)
 //                {
 //                    var first = GetAll().OrderByDescending(e => e.Id).FirstOrDefault();
@@ -149,7 +149,7 @@ namespace Appointment.Business.Models
 //        {
 //            try
 //            {
-//                AppointmentContext Entities = new AppointmentContext();
+//                RemindersEntities Entities = new RemindersEntities();
 
 //                if (UpdateDatabase)
 //                {
@@ -196,7 +196,7 @@ namespace Appointment.Business.Models
 //        {
 //            try
 //            {
-//                AppointmentContext Entities = new AppointmentContext();
+//                RemindersEntities Entities = new RemindersEntities();
 
 //                if (UpdateDatabase)
 //                {
@@ -243,7 +243,7 @@ namespace Appointment.Business.Models
 
 //            try
 //            {
-//                AppointmentContext Entities = new AppointmentContext();
+//                RemindersEntities Entities = new RemindersEntities();
 
 //                return GetAll().FirstOrDefault(predicate);
 //            }

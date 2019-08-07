@@ -1,14 +1,16 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <style>
+        img {
+            width: 70px;
+            
+        }
+    </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @*@Styles.Render("~/Content/css")*@
-    @*@Scripts.Render("~/bundles/modernizr")*@
-    <!--This bundle was moved by the Telerik VS Extensions for compatibility reasons-->
-    @*@Scripts.Render("~/bundles/jquery")*@
-    
+    <title>@ViewBag.Title - Reminder</title>
+
     <link href="https://kendo.cdn.telerik.com/2019.2.619/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
     <link href="https://kendo.cdn.telerik.com/2019.2.619/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
@@ -18,23 +20,26 @@
     <script src="https://kendo.cdn.telerik.com/2019.2.619/js/kendo.all.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2019.2.619/js/kendo.aspnetmvc.min.js"></script>
     <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
-    @*<script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>*@
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+   
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:antiquewhite">
+        <img class="navbar-brand" src="~/img/Untitled11.png"  height="90">
+        <div class="container" >
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+
+                @Html.ActionLink("Reminder", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Reminder")</li>
-                    <li>@Html.ActionLink("About", "About", "Reminder")</li>
+                    <li>@Html.ActionLink("Groups", "Groups", "Groups")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Reminder")</li>
                 </ul>
             </div>
@@ -49,7 +54,6 @@
     </div>
 
 
-    @*@Scripts.Render("~/bundles/bootstrap")*@
     @RenderSection("scripts", required: false)
 </body>
 </html>

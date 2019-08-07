@@ -31,9 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -48,24 +56,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Lookups.cs" />
+    <Compile Include="Models\EmployeeRemindersViewModel.cs" />
     <Compile Include="Models\EmployeesGroupsViewModel.cs" />
     <Compile Include="Models\EmployeesViewModel.cs" />
     <Compile Include="Models\GeneralRemindersViewModel.cs" />
-    <Compile Include="Models\RemindersViewModel.cs" />
-    <Compile Include="Models\UserPermissionsViewModel.cs" />
-    <Compile Include="Models\UsersViewModel.cs" />
-    <Compile Include="Models\ViewModels.cs" />
     <Compile Include="Models\GroupsViewModel.cs" />
     <Compile Include="Models\LookupCategoryViewModel.cs" />
     <Compile Include="Models\lookupsViewModel.cs" />
     <Compile Include="Models\PermissionsViewModels.cs" />
     <Compile Include="Models\PositionsViewModel.cs" />
     <Compile Include="Models\RemindersGroupsViewModel.cs" />
-    <Compile Include="Models\EmployeeRemindersViewModel.cs" />
+    <Compile Include="Models\RemindersViewModel.cs" />
     <Compile Include="Models\SettingsViewModel.cs" />
+    <Compile Include="Models\UserPermissionsViewModel.cs" />
+    <Compile Include="Models\UsersViewModel.cs" />
+    <Compile Include="Models\ViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <None Include="Content\bootstrap-theme.css.map" />
     <None Include="Content\bootstrap-theme.min.css.map" />
     <None Include="Content\bootstrap.css.map" />
@@ -93,10 +102,8 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Appointment.DAL\Appointment.DAL.csproj">
-      <Project>{99DB58DA-4798-4809-A2CF-362C1699AF4A}</Project>
-      <Name>Appointment.DAL</Name>
-    </ProjectReference>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

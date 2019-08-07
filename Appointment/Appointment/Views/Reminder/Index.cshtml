@@ -10,7 +10,7 @@
 
                          columns.Command(command =>
                          {
-                             //command.Custom("Details").Click("viewRow").HtmlAttributes(new { id = "viewItem", title = "View", style = "width:30px;", value = "View Details" });
+                             command.Custom("Details").Click("viewRow").HtmlAttributes(new { id = "viewItem", title = "View", style = "width:30px;", value = "View Details" });
                              //command.Custom("Edit").Click("editRow").HtmlAttributes(new { id = "editItem", title = "Edit", value = "View Details" });
                              command.Destroy();
                          }).Width(250);
@@ -50,12 +50,14 @@
 
     function viewRow(e) {
         e.preventDefault();
-        
-        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        debugger;
+        var grid = $("#Grid").data("kendoGrid");
+        var dataItem = grid.dataItem($(this).closest("tr"));
         var idValue = dataItem['ID'];
+        window.location.href = '@Url.Action("Details", "Reminder")/' + idValue;
+         //var id = document.getElementById("nameToFind").value;
         
-            window.location.href = "@Url.Action("Details", "Reminder", "idValue")";
-        
+        @*location.href = '@Url.Action("Details", "Store")?ID=' + id;*@
         }
             
     

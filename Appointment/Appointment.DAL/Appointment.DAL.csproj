@@ -40,6 +40,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,19 +50,57 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\AppointmentContext.cs" />
-    <Compile Include="Models\Employees.cs" />
-    <Compile Include="Models\EmployeesGroups.cs" />
-    <Compile Include="Models\Groups.cs" />
-    <Compile Include="Models\lookups.cs" />
-    <Compile Include="Models\LookupCategories.cs" />
-    <Compile Include="Models\Permissions.cs" />
-    <Compile Include="Models\Positions.cs" />
-    <Compile Include="Models\Reminders.cs" />
-    <Compile Include="Models\RemindersGroups.cs" />
-    <Compile Include="Models\Settings.cs" />
-    <Compile Include="Models\UserPermissions.cs" />
-    <Compile Include="Models\Users.cs" />
+    <Compile Include="Models\Appointment.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Appointment.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Appointment.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Appointment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Appointment.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Appointment.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employee.cs">
+      <DependentUpon>Appointment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmployeesGroup.cs">
+      <DependentUpon>Appointment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Group.cs">
+      <DependentUpon>Appointment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lookup.cs">
+      <DependentUpon>Appointment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LookUpCategory.cs">
+      <DependentUpon>Appointment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Permission.cs">
+      <DependentUpon>Appointment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Position.cs">
+      <DependentUpon>Appointment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Reminder.cs">
+      <DependentUpon>Appointment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RemindersGroup.cs">
+      <DependentUpon>Appointment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Setting.cs">
+      <DependentUpon>Appointment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>Appointment.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserPermission.cs">
+      <DependentUpon>Appointment.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +113,13 @@
     <None Include="fonts\glyphicons-halflings-regular.ttf" />
     <None Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="fonts\glyphicons-halflings-regular.woff2" />
+    <EntityDeploy Include="Models\Appointment.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Appointment.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\Appointment.edmx.diagram">
+      <DependentUpon>Appointment.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Scripts\jquery-3.3.1.min.map" />
     <None Include="Scripts\jquery-3.3.1.slim.min.map" />
@@ -83,6 +130,16 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Models\Appointment.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Appointment.edmx</DependentUpon>
+      <LastGenOutput>Appointment.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Appointment.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Appointment.edmx</DependentUpon>
+      <LastGenOutput>Appointment.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -90,6 +147,9 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

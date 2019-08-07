@@ -60,12 +60,8 @@
             @Html.Label("Employee", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="dropdown">
-                    @Html.DropDownList(" : ", new List<SelectListItem>
-     {
-        new SelectListItem{ Text="kareem", Value = "4" },
-                   new SelectListItem{ Text="zaid", Value = "6" },
+                    @Html.DropDownListFor(m => m.EmployeeID, new SelectList(Model.Employees, "Value", "Text", new { @class = "form-control" }))
 
-     },"Select Employee")
                     @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
                 </div>
             </div>

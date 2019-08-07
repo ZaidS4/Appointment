@@ -23,6 +23,7 @@ C:\Users\Zaid\source\repos\Appointment\Appointment.Business\bin\Debug\Appointmen
 C:\Users\Zaid\source\repos\Appointment\Appointment.Business\bin\Debug\Appointment.DAL.dll.config
 C:\Users\Zaid\source\repos\Appointment\Appointment.Business\bin\Debug\Appointment.Resource.pdb
 C:\Users\Zaid\source\repos\Appointment\Appointment.Business\bin\Debug\Appointment.ViewModel.pdb
+C:\Users\Zaid\source\repos\Appointment\Appointment.Business\bin\Debug\Appointment.ViewModel.dll.config
 C:\Users\Zaid\source\repos\Appointment\Appointment.Business\bin\Debug\Common.Logging.pdb
 C:\Users\Zaid\source\repos\Appointment\Appointment.Business\bin\Debug\Common.Logging.xml
 C:\Users\Zaid\source\repos\Appointment\Appointment.Business\bin\Debug\EntityFramework.xml
