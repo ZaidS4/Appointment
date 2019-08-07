@@ -13,15 +13,15 @@ namespace Appointment.Business.Job
     public class JobScheduler
     {
 
-        public static void Start()
+        public static void Start(int h,int m)
         {
             IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
             scheduler.Start();
 
             IJobDetail job = JobBuilder.Create<MailSender>().Build();
 
-            int hour = Convert.ToInt32(StringResource.SchdulerStartHour24);
-            int minute = Convert.ToInt32(StringResource.SchdulerStartMinute);
+            int hour = h;
+            int minute = m;
             ITrigger trigger = TriggerBuilder.Create()
                 //.StartNow()
                 .WithDailyTimeIntervalSchedule

@@ -15,22 +15,20 @@ namespace Appointment.ViewModel.Models
         public int ID { get; set; }
 
         [StringLength(20)]
-        [Required(ErrorMessage = "Name id is required")]
+        [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Email id is required")]
+        [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
 
-        //[DataType(DataType.Date)]
-        [Required(ErrorMessage = "BirthDate id is required")]
+        [Required(ErrorMessage = "BirthDate is required")]
         public DateTime? BirthDate { get; set; }
 
-        //[DataType(DataType.Date)]
-        [Required(ErrorMessage = "StartDate id is required")]
+        [Required(ErrorMessage = "StartDate is required")]
         public DateTime? StartDate { get; set; }
 
-        [Required(ErrorMessage = "PositionID id is required")]
+        [Required(ErrorMessage = "PositionID is required")]
         public int? PositionID { get; set; }
        
         public bool IsActive { get; set; }

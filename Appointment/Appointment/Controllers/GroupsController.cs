@@ -32,7 +32,7 @@ namespace Appointment.Controllers
         [HttpPost]
 
         public ActionResult Create(EmployeesGroupsViewModel group)
-        {             
+        {
             if (ModelState.IsValid)
             {
                 group.CreatedOn = DateTime.Now;
@@ -41,7 +41,7 @@ namespace Appointment.Controllers
                 group.ModifyBy = 1;
 
                 GroupService.Create(group);
-                
+
 
                 RouteValueDictionary routeValues = this.GridRouteValues();
                 return RedirectToAction("Groups", routeValues);
@@ -54,8 +54,8 @@ namespace Appointment.Controllers
         // function called by index view when click edit on grid 
 
         [HttpGet]
-        public ActionResult Update( )
-        {          
+        public ActionResult Update()
+        {
             return View();
         }
 

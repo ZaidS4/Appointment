@@ -33,13 +33,22 @@ namespace Appointment.Controllers
         /// <param name="id"> reminder id </param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult Update()
+        public ActionResult Update(int id)
         {
-            EmployeeRemindersViewModel obj = new EmployeeRemindersViewModel();
-            obj.Positions = ReminderService.GetPositions();
-            obj.Employees = ReminderService.GetEmployees();
+            
+            var type = ReminderService.GetType(id);
+            if (type == 1)
+            {
+                EmployeeRemindersViewModel obj = new EmployeeRemindersViewModel();
+                obj.Positions = ReminderService.GetPositions();
+                obj.Employees = ReminderService.GetEmployees();
 
-            return View("EmployeeReminderUpdate",obj);
+                return View("EmployeeReminderUpdate", obj);
+            }
+            else
+            {
+                return View("GeneralReminderUpdate");
+            }
         }
 
 
@@ -78,7 +87,11 @@ namespace Appointment.Controllers
         }
 
 
-
+        /// <summary>
+        /// general reminder edit method
+        /// </summary>
+        /// <param name="reminder">gets the changes of the reminder to save it</param>
+        /// <returns>index view</returns>
         public ActionResult GeneralReminderUpdate(GeneralRemindersViewModel reminder)
         {
             try
@@ -105,6 +118,12 @@ namespace Appointment.Controllers
             //The model is invalid - render the current view to show any validation errors
             return View();
         }
+
+        /// <summary>
+        /// reminder remove method
+        /// </summary>
+        /// <param name="reminder">the reminder data that selected to be deleted</param>
+        /// <returns>index view</returns>
         [HttpPost]
         public ActionResult Delete(RemindersViewModel reminder)
         {
@@ -124,20 +143,7 @@ namespace Appointment.Controllers
 
 
 
-        /// <summary>
-        /// function called by index view when click edit on grid 
-        /// </summary>
-        /// <param name="id"> reminder id </param>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult Create()
-        {
-            // passing reminder model to view 
-            //ReminderViewModel model = new ReminderViewModel();
-            return View();
-        }
-
-
+       
         /// <summary>
         /// method called when new general reminder is clicked
         /// </summary>
@@ -236,9 +242,17 @@ namespace Appointment.Controllers
         /// <returns>method employeeremindergetbyid call</returns>
         public ViewResult Details(int id)
         {
+            var type = ReminderService.GetType(id);
+            if (type == 1)
+            {
+                return View("Details", ReminderService.EmployeeRemindersGetByID(id));
+            }
+            else
+            {
+                return View("GeneralDetails", ReminderService.generalRemindersGetByID(id));
+            }
 
             
-            return View(ReminderService.EmployeeRemindersGetByID(id));
         }
 
 
@@ -269,15 +283,3 @@ namespace Appointment.Controllers
 }
 
 
-//private MailSender _mailSender;
-//public ReminderController(MailSender mailSender)
-//{
-//    _mailSender = mailSender;
-//}
-
-//public ActionResult Index()
-//{
-//    _mailSender.SendEmail();
-
-//    return null;
-//}

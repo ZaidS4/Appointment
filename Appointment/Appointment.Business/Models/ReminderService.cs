@@ -12,6 +12,23 @@ namespace Appointment.Business.Models
     public class ReminderService : IDisposable
     {
         /// <summary>
+        /// method to get the type of Reminder by id
+        /// </summary>
+        /// <param name="id">selected reminder id</param>
+        /// <returns>int type</returns>
+        public static int? GetType(int id)
+        {
+            RemindersEntities db = new RemindersEntities();
+
+            Reminder reminders = db.Reminders.Where(x => x.ID == id).FirstOrDefault();
+            var type = reminders.TypeID;
+            return type;
+        }
+
+
+
+
+        /// <summary>
         /// gets positions from DB then set it in dropdownlist
         /// </summary>
         /// <returns>list of positions</returns>
@@ -27,7 +44,7 @@ namespace Appointment.Business.Models
                         Value = m.ID.ToString(),
                         Text = m.Name,
                     }).ToList();
-                   
+
                     return list;
 
                 }
@@ -36,7 +53,7 @@ namespace Appointment.Business.Models
             {
                 throw ex;
             }
-           //return model.Positions;
+
         }
 
 
@@ -67,9 +84,6 @@ namespace Appointment.Business.Models
                 throw ex;
             }
 
-
-
-            //return model.Positions;
         }
 
 
@@ -101,7 +115,7 @@ namespace Appointment.Business.Models
 
         }
 
-        
+
 
         /// <summary>
         /// gets the general details of selected reminder by id
@@ -135,8 +149,11 @@ namespace Appointment.Business.Models
 
         }
 
-        
 
+        /// <summary>
+        /// method that reads all reminder from DB
+        /// </summary>
+        /// <returns>list of remindersViewModel</returns>
         public static List<RemindersViewModel> GetAll()
         {
             List<RemindersViewModel> reminderViews = new List<RemindersViewModel>();
@@ -160,9 +177,9 @@ namespace Appointment.Business.Models
                             IsActive = item.IsActive,
                             Image = item.Image,
                             StartDate = item.StartDate,
-                            //EndDate = item.EndDate.Value,
-                            //BreifDescription = item.BreifDescription,
-                            //Time = item.Time,
+                            EndDate = item.EndDate.Value,
+                            BreifDescription = item.BreifDescription,
+                            Time = item.Time,
                             EmployeeID = item.EmployeeID,
                             CreatedOn = item.CreatedOn,
                             ModifyBy = item.ModifyBy,
@@ -182,23 +199,23 @@ namespace Appointment.Business.Models
             return reminderViews;
         }
 
-        
 
-            /// <summary>
-            /// calls the GetAll method to reads all the reminders
-            /// </summary>
-            /// <returns>getall method call</returns>
+
+        /// <summary>
+        /// calls the GetAll method to reads all the reminders
+        /// </summary>
+        /// <returns>getall method call</returns>
         public static List<RemindersViewModel> Read()
         {
             return GetAll();
         }
 
-        
 
-            /// <summary>
-            /// creates a new reminder of type general
-            /// </summary>
-            /// <param name="reminder">new reminders data</param>
+
+        /// <summary>
+        /// creates a new reminder of type general
+        /// </summary>
+        /// <param name="reminder">new reminders data</param>
         public static void Create(GeneralRemindersViewModel reminder)
         {
             try
@@ -216,7 +233,7 @@ namespace Appointment.Business.Models
                 entity.EndDate = reminder.EndDate;
                 entity.BreifDescription = reminder.BreifDescription;
                 entity.Time = reminder.Time;
-                entity.CreatedOn =reminder.CreatedOn.Value;
+                entity.CreatedOn = reminder.CreatedOn.Value;
                 entity.ModifyBy = reminder.ModifyBy;
                 entity.ModifyOn = reminder.ModifyOn;
                 entity.CreatedBy = reminder.CreatedBy;
@@ -235,7 +252,8 @@ namespace Appointment.Business.Models
             }
         }
 
-        
+
+    
         /// <summary>
         /// creates a new reminder of type employee
         /// </summary>
@@ -264,7 +282,7 @@ namespace Appointment.Business.Models
                     entity.ModifyBy = reminder.ModifyBy;
                     entity.CreatedBy = reminder.CreatedBy;
                     entity.CreatedOn = DateTime.Now;
-                    entity.ModifyOn = DateTime.Now; 
+                    entity.ModifyOn = DateTime.Now;
                     entity.TypeID = 1;
 
                     Entities.Reminders.Add(entity);
@@ -280,7 +298,7 @@ namespace Appointment.Business.Models
             }
         }
 
-       
+
         /// <summary>
         /// method to edit the reminder of type employee
         /// </summary>
@@ -326,7 +344,7 @@ namespace Appointment.Business.Models
             }
         }
 
-        
+
         /// <summary>
         /// method to edit the reminder of type general
         /// </summary>
@@ -357,7 +375,7 @@ namespace Appointment.Business.Models
                 Entities.Reminders.Attach(entity);
                 Entities.Entry(entity).State = EntityState.Modified;
                 Entities.SaveChanges();
-                                                                   
+
             }
 
             catch (Exception ex)
@@ -366,12 +384,12 @@ namespace Appointment.Business.Models
             }
         }
 
-        
 
-            /// <summary>
-            /// Deleting selected reminders
-            /// </summary>
-            /// <param name="reminder">selected reminder</param>
+
+        /// <summary>
+        /// Deleting selected reminders
+        /// </summary>
+        /// <param name="reminder">selected reminder</param>
         public static void Delete(RemindersViewModel reminder)
         {
             try
@@ -409,7 +427,7 @@ namespace Appointment.Business.Models
 
         }
 
-        
+
 
         /// <summary>
         /// Dispose is for releasing "unmanaged" resources ,

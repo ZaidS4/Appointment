@@ -3,7 +3,7 @@
 <head>
     <style>
         img {
-            width: 70px;
+            width: 60px;
             
         }
     </style>
@@ -20,27 +20,30 @@
     <script src="https://kendo.cdn.telerik.com/2019.2.619/js/kendo.all.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2019.2.619/js/kendo.aspnetmvc.min.js"></script>
     <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <link href="~/Content/example-styles.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.multi-select.js"></script>
+    <script src="~/Scripts/jquery.multi-select.min.js"></script>
 </head>
 <body>
    
-    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:antiquewhite">
-        <img class="navbar-brand" src="~/img/Untitled11.png"  height="90">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#f1f1f1">
+        <a href="~/Reminder/Index"><img class="navbar-brand" src="~/img/Untitled11.png"></a>
         <div class="container" >
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" >
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
 
 
-                @Html.ActionLink("Reminder", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Reminder")</li>
                     <li>@Html.ActionLink("Groups", "Groups", "Groups")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Reminder")</li>
+                    @*<li>@Html.ActionLink("Contact", "Contact", "Reminder")</li>*@
                 </ul>
             </div>
         </div>
@@ -49,7 +52,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Reminder</p>
         </footer>
     </div>
 

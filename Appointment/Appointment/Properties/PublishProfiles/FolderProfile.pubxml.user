@@ -22,13 +22,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/23/2019 09:24:13</publishTime>
     </File>
     <File Include="bin/Appointment.Business.dll">
-      <publishTime>08/06/2019 15:15:35</publishTime>
+      <publishTime>08/07/2019 16:11:13</publishTime>
     </File>
     <File Include="bin/Appointment.Business.dll.config">
-      <publishTime>08/06/2019 11:41:39</publishTime>
+      <publishTime>08/07/2019 14:31:22</publishTime>
     </File>
     <File Include="bin/Appointment.Business.pdb">
-      <publishTime>08/06/2019 15:15:35</publishTime>
+      <publishTime>08/07/2019 16:11:13</publishTime>
     </File>
     <File Include="bin/Appointment.DAL.dll">
       <publishTime>08/06/2019 13:53:33</publishTime>
@@ -40,10 +40,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/06/2019 13:53:33</publishTime>
     </File>
     <File Include="bin/Appointment.dll">
-      <publishTime>08/06/2019 15:15:40</publishTime>
+      <publishTime>08/07/2019 16:18:09</publishTime>
     </File>
     <File Include="bin/Appointment.pdb">
-      <publishTime>08/06/2019 15:15:40</publishTime>
+      <publishTime>08/07/2019 16:18:09</publishTime>
     </File>
     <File Include="bin/Appointment.Resource.dll">
       <publishTime>08/05/2019 15:44:33</publishTime>
@@ -52,13 +52,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/05/2019 15:44:33</publishTime>
     </File>
     <File Include="bin/Appointment.ViewModel.dll">
-      <publishTime>08/06/2019 13:53:33</publishTime>
+      <publishTime>08/07/2019 16:11:13</publishTime>
     </File>
     <File Include="bin/Appointment.ViewModel.dll.config">
       <publishTime>08/06/2019 11:41:38</publishTime>
     </File>
     <File Include="bin/Appointment.ViewModel.pdb">
-      <publishTime>08/06/2019 13:53:33</publishTime>
+      <publishTime>08/07/2019 16:11:13</publishTime>
+    </File>
+    <File Include="bin/Common.Logging.Core.dll">
+      <publishTime>01/10/2015 21:28:30</publishTime>
+    </File>
+    <File Include="bin/Common.Logging.Core.pdb">
+      <publishTime>01/10/2015 21:28:30</publishTime>
     </File>
     <File Include="bin/Common.Logging.dll">
       <publishTime>12/13/2012 10:12:30</publishTime>
@@ -313,10 +319,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/13/2017 03:01:30</publishTime>
     </File>
     <File Include="bin/Quartz.dll">
-      <publishTime>10/07/2018 12:27:38</publishTime>
+      <publishTime>07/09/2015 08:36:22</publishTime>
     </File>
     <File Include="bin/Quartz.pdb">
-      <publishTime>10/07/2018 12:27:38</publishTime>
+      <publishTime>07/09/2015 08:36:22</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>05/24/2018 14:38:22</publishTime>
@@ -844,7 +850,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/25/2019 09:59:09</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>07/25/2019 09:59:09</publishTime>
+      <publishTime>08/07/2019 16:10:52</publishTime>
     </File>
     <File Include="Content/bootstrap.css.map">
       <publishTime>07/25/2019 09:59:09</publishTime>
@@ -854,6 +860,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/bootstrap.min.css.map">
       <publishTime>07/25/2019 09:59:09</publishTime>
+    </File>
+    <File Include="Content/example-styles.css">
+      <publishTime>08/07/2019 15:12:31</publishTime>
     </File>
     <File Include="Content/Site.css">
       <publishTime>07/23/2019 09:23:43</publishTime>
@@ -1001,6 +1010,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Global.asax">
       <publishTime>07/23/2019 09:23:43</publishTime>
+    </File>
+    <File Include="img/Untitled11.png">
+      <publishTime>07/23/2019 15:01:09</publishTime>
     </File>
     <File Include="Kendo.Mvc.xml">
       <publishTime>07/24/2019 14:03:48</publishTime>
@@ -1158,6 +1170,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/jquery.dynamiclist.min.js">
       <publishTime>07/15/2019 14:55:14</publishTime>
     </File>
+    <File Include="Scripts/jquery.multi-select.js">
+      <publishTime>08/07/2019 15:07:37</publishTime>
+    </File>
+    <File Include="Scripts/jquery.multi-select.min.js">
+      <publishTime>08/07/2019 15:07:35</publishTime>
+    </File>
     <File Include="Scripts/jquery.validate.js">
       <publishTime>07/09/2019 18:32:52</publishTime>
     </File>
@@ -1231,10 +1249,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/25/2019 09:43:02</publishTime>
     </File>
     <File Include="Views/Groups/Create.cshtml">
-      <publishTime>08/05/2019 13:26:09</publishTime>
+      <publishTime>08/07/2019 16:10:16</publishTime>
     </File>
     <File Include="Views/Groups/Groups.cshtml">
-      <publishTime>08/01/2019 10:45:12</publishTime>
+      <publishTime>08/07/2019 15:34:34</publishTime>
     </File>
     <File Include="Views/Groups/Update.cshtml">
       <publishTime>08/01/2019 11:36:00</publishTime>
@@ -1270,19 +1288,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/05/2019 12:40:23</publishTime>
     </File>
     <File Include="Views/Reminder/Index.cshtml">
-      <publishTime>08/06/2019 13:44:29</publishTime>
+      <publishTime>08/07/2019 15:38:06</publishTime>
     </File>
     <File Include="Views/Reminder/NewEmployeeReminder.cshtml">
-      <publishTime>08/06/2019 12:36:08</publishTime>
+      <publishTime>08/07/2019 15:54:38</publishTime>
     </File>
     <File Include="Views/Reminder/NewGeneralReminder.cshtml">
-      <publishTime>08/05/2019 12:48:43</publishTime>
+      <publishTime>08/07/2019 15:56:40</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>07/23/2019 09:23:43</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>08/06/2019 13:06:20</publishTime>
+      <publishTime>08/07/2019 16:08:36</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>07/24/2019 14:53:20</publishTime>
@@ -1291,7 +1309,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/23/2019 09:23:43</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/06/2019 14:20:08</publishTime>
+      <publishTime>08/07/2019 16:11:19</publishTime>
     </File>
   </ItemGroup>
 </Project>

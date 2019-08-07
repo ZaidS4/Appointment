@@ -1,61 +1,69 @@
 ﻿@model IEnumerable<Appointment.ViewModel.Models.RemindersViewModel>
 
-@(Html.Kendo().Grid(Model)
-                     .Name("Grid")
-                     .Columns(columns =>
-                     {
-                         columns.Bound(p => p.ID).Hidden();
-                         columns.Bound(p => p.Name).ToString();
-                         columns.Bound(p => p.StartDate);
+<br />
+<br />
+<div class="row">
+    <div class="col-md-12">
+        @(Html.Kendo().Grid(Model)
+                                         .Name("Grid")
+                                         
+                                         .Columns(columns =>
+                                         {
+                                             columns.Bound(p => p.ID).Hidden();
+                                             columns.Bound(p => p.Name).ToString();
+                                             columns.Bound(p => p.StartDate);
 
-                         columns.Command(command =>
-                         {
-                             command.Custom("Details").Click("viewRow").HtmlAttributes(new { id = "viewItem", title = "View", style = "width:30px;", value = "View Details" });
-                             //command.Custom("Edit").Click("editRow").HtmlAttributes(new { id = "editItem", title = "Edit", value = "View Details" });
-                             command.Destroy();
-                         }).Width(250);
-                     })
-                       .ToolBar(toolbar => toolbar.Custom()
-                       .Text("New Reminder")
-                       .Action("Create", "Reminder"))
-                     .Editable(editable => editable.Enabled(false).Mode(GridEditMode.InCell))
-                     .Pageable(pageable => pageable
-                              .Refresh(true)
-                              .PageSizes(true)
-                              .ButtonCount(5))
-                     .Sortable()
-                     .Selectable()
-                     .Navigatable()
-                     .Scrollable()
-                     .Groupable()
-                     .ColumnMenu()
-                     .Filterable(filterable => filterable.Mode(GridFilterMode.Row))
-                     .DataSource(dataSource => dataSource
-                         .Server()
-                         .PageSize(20)
-                         .Model(model => model.Id(p => p.ID))
-                         .Read("Index", "Reminder")
-                         .Destroy("Delete", "Reminder")
+                                             columns.Command(command =>
+                                             {
+                                                 command.Custom("Details").Click("viewRow").Action("Details","Reminder").HtmlAttributes(new { id = "viewItem", title = "View", style = "width:30px;", value = "View Details" });
+                                     //command.Custom("Edit").Click("editRow").HtmlAttributes(new { id = "editItem", title = "Edit", value = "View Details" });
+                                     command.Destroy();
+                                             }).Width(250);
+                                         })
+                                           .ToolBar(toolbar => toolbar.Custom()
+                                           .Text("New Employee Reminder")
+                                           .Action("NewEmployeeReminder", "Reminder"))
+                                           .ToolBar(toolbar => toolbar.Custom()
+                                           .Text("New General Reminder")
+                                           .Action("NewGeneralReminder", "Reminder"))
+                                         .Editable(editable => editable.Enabled(false).Mode(GridEditMode.InCell))
+                                         .Pageable(pageable => pageable
+                                                  .Refresh(true)
+                                                  .PageSizes(true)
+                                                  .ButtonCount(5))
+                                         .Sortable()
+                                         .Selectable()
+                                         .Navigatable()
+                                         .Scrollable()
+                                         .Groupable()
+                                         .ColumnMenu()
+                                         .Filterable(filterable => filterable.Mode(GridFilterMode.Row))
+                                         .DataSource(dataSource => dataSource
+                                             .Server()
+                                             .PageSize(20)
+                                             .Model(model => model.Id(p => p.ID))
+                                             .Read("Index", "Reminder")
+                                             .Destroy("Delete", "Reminder")
+                                             
 
 
-
-                     )
-)
-
+                                         )
+        )
 
 
+    </div>
 
-
+</div>
 <script>
 
     function viewRow(e) {
-        e.preventDefault();
+        @*e.preventDefault();
         debugger;
         var grid = $("#Grid").data("kendoGrid");
         var dataItem = grid.dataItem($(this).closest("tr"));
         var idValue = dataItem['ID'];
         window.location.href = '@Url.Action("Details", "Reminder")/' + idValue;
-         //var id = document.getElementById("nameToFind").value;
+         //var id = document.getElementById("nameToFind").value;*@
         
         @*location.href = '@Url.Action("Details", "Store")?ID=' + id;*@
         }

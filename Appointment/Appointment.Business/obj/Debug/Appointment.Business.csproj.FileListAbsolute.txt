@@ -45,3 +45,6 @@ C:\Users\Zaid\source\repos\Appointment\Appointment.Business\obj\Debug\Appointmen
 C:\Users\Zaid\source\repos\Appointment\Appointment.Business\obj\Debug\Appointment.Business.csproj.CopyComplete
 C:\Users\Zaid\source\repos\Appointment\Appointment.Business\obj\Debug\Appointment.Business.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment.Business\obj\Debug\Appointment.Business.pdb
+C:\Users\Zaid\source\repos\Appointment\Appointment.Business\bin\Debug\Common.Logging.Core.dll
+C:\Users\Zaid\source\repos\Appointment\Appointment.Business\bin\Debug\Common.Logging.Core.pdb
+C:\Users\Zaid\source\repos\Appointment\Appointment.Business\bin\Debug\Common.Logging.Core.xml

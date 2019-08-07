@@ -378,3 +378,6 @@ C:\Users\Zaid\source\repos\Appointment\Appointment\obj\Release\Appointment.Web.c
 C:\Users\Zaid\source\repos\Appointment\Appointment\obj\Release\Appointment.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment\obj\Release\Appointment.pdb
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Appointment.ViewModel.dll.config
+C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Common.Logging.Core.dll
+C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Common.Logging.Core.pdb
+C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Common.Logging.Core.xml

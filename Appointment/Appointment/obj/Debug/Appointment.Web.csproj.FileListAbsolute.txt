@@ -378,3 +378,6 @@ C:\Users\Zaid\source\repos\Appointment\Appointment\obj\Debug\Appointment.Web.csp
 C:\Users\Zaid\source\repos\Appointment\Appointment\obj\Debug\Appointment.Web.csproj.CopyComplete
 C:\Users\Zaid\source\repos\Appointment\Appointment\obj\Debug\Appointment.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment\obj\Debug\Appointment.pdb
+C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Common.Logging.Core.dll
+C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Common.Logging.Core.pdb
+C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Common.Logging.Core.xml

@@ -6,17 +6,18 @@ using System.Linq;
 using System.Data.Entity;
 using System.Web.Mvc;
 using Appointment.DAL;
+using Appointment.DAL.Models;
 
 namespace Appointment.Business.Models
 {
-    public class GroupService:IDisposable
+    public class GroupService : IDisposable
     {
         private static bool UpdateDatabase = false;
 
         public static List<GroupsViewModel> GetAll()
         {
             List<GroupsViewModel> groupViews = new List<GroupsViewModel>();
-        
+
             try
             {
                 using (RemindersEntities db = new RemindersEntities())
@@ -24,15 +25,15 @@ namespace Appointment.Business.Models
                     var groups = db.Groups.ToList();
 
                     foreach (var item in groups)
-                    {                       
+                    {
                         groupViews.Add(new GroupsViewModel
                         {
                             ID = item.ID,
-                            Name = item.Name,   
-                            EmployeesNumber = item.EmployeesGroups!=null ?  item.EmployeesGroups.Count() : 0 
-                           // CreatedOn = item.CreatedOn
+                            Name = item.Name,
+                            EmployeesNumber = item.EmployeesGroups != null ? item.EmployeesGroups.Count() : 0
+                            // CreatedOn = item.CreatedOn
                         });
-                
+
                     }
                 }
             }
@@ -66,29 +67,29 @@ namespace Appointment.Business.Models
             }
         }
         /// ////////////////////////////////////////////////
-     
+
         public static void Create(EmployeesGroupsViewModel group)
         {
-                try
+            try
             {
                 RemindersEntities Entities = new RemindersEntities();
-               
-                    var entity = new Groups();
-                    //entity.ID = group.ID;
-                    entity.Name = group.Name;
-                    entity.ModifyOn = group.ModifyOn;
-                    entity.CreatedOn = group.CreatedOn;
-                    entity.ModifyBy = group.ModifyBy;
-                    entity.CreatedBy = group.CreatedBY;
-                    Entities.Groups.Add(entity);
-                    Entities.SaveChanges();
-                    group.ID = entity.ID;
-                    foreach ( var x in group.SelectedEmployeesID)
+
+                var entity = new Group();
+                //entity.ID = group.ID;
+                entity.Name = group.Name;
+                entity.ModifyOn = group.ModifyOn;
+                entity.CreatedOn = group.CreatedOn;
+                entity.ModifyBy = group.ModifyBy;
+                entity.CreatedBy = group.CreatedBY;
+                Entities.Groups.Add(entity);
+                Entities.SaveChanges();
+                group.ID = entity.ID;
+                foreach (var x in group.SelectedEmployeesID)
                 {
-                    Entities.EmployeesGroups.Add(new EmployeesGroups { EmployeeID = x , GroupID = entity.ID, CreatedOn = DateTime.Now, CreatedBY = 1, ModifyOn = DateTime.Now, ModifyBy = 1 });
+                    Entities.EmployeesGroups.Add(new EmployeesGroup { EmployeeID = x, GroupID = entity.ID, CreatedOn = DateTime.Now, CreatedBY = 1, ModifyOn = DateTime.Now, ModifyBy = 1 });
                     Entities.SaveChanges();
                 }
-                   
+
 
             }
             catch (Exception ex)
@@ -102,16 +103,16 @@ namespace Appointment.Business.Models
             try
             {
                 RemindersEntities Entities = new RemindersEntities();
-            
-                    var entity = new Groups();
 
-                    //entity.ID = group.ID;
-                    entity.Name = group.Name;
-                    entity.CreatedOn = group.CreatedOn;
-                    Entities.Groups.Attach(entity);
-                    Entities.Entry(entity).State = EntityState.Modified;
-                    Entities.SaveChanges();
-                
+                var entity = new Group();
+            
+                //entity.ID = group.ID;
+                entity.Name = group.Name;
+                entity.CreatedOn = group.CreatedOn;
+                Entities.Groups.Attach(entity);
+                Entities.Entry(entity).State = EntityState.Modified;
+                Entities.SaveChanges();
+
             }
 
             catch (Exception ex)
@@ -125,12 +126,12 @@ namespace Appointment.Business.Models
             try
             {
                 RemindersEntities Entities = new RemindersEntities();
-              
-                    var entity = new Groups();
 
-                    entity.ID = group.ID;
-                    Entities.Groups.Attach(entity);
-                    Entities.Groups.Remove(entity);
+                var entity = new Group();
+
+                entity.ID = group.ID;
+                Entities.Groups.Attach(entity);
+                Entities.Groups.Remove(entity);
                 var groupDetails = Entities.Groups.Where(pd => pd.ID == entity.ID);
 
                 foreach (var groupDetail in groupDetails)
@@ -140,7 +141,7 @@ namespace Appointment.Business.Models
 
 
                 Entities.SaveChanges();
-             
+
             }
             catch (Exception ex)
             {
@@ -149,7 +150,7 @@ namespace Appointment.Business.Models
         }
 
 
-        
+
         public void Dispose()
         {
             RemindersEntities Entities = new RemindersEntities();

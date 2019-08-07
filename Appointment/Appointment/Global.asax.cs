@@ -1,4 +1,5 @@
-﻿using Ninject;
+﻿using Appointment.Business.Job;
+using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace Appointment
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
+            int h = 14, m = 37;
+            JobScheduler.Start(h, m);
             RegisterServecies();
 
             //  Dependency.Register();

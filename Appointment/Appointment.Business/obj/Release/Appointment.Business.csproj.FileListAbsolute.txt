@@ -45,3 +45,6 @@ C:\Users\Zaid\source\repos\Appointment\Appointment.Business\obj\Release\Appointm
 C:\Users\Zaid\source\repos\Appointment\Appointment.Business\obj\Release\Appointment.Business.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment.Business\obj\Release\Appointment.Business.pdb
 C:\Users\Zaid\source\repos\Appointment\Appointment.Business\bin\Release\Appointment.ViewModel.dll.config
+C:\Users\Zaid\source\repos\Appointment\Appointment.Business\bin\Release\Common.Logging.Core.dll
+C:\Users\Zaid\source\repos\Appointment\Appointment.Business\bin\Release\Common.Logging.Core.pdb
+C:\Users\Zaid\source\repos\Appointment\Appointment.Business\bin\Release\Common.Logging.Core.xml
