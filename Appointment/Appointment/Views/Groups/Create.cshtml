@@ -17,10 +17,11 @@
             @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
         </div>
     </div>
-    ///////////////////////languages///////////////////////////////////////
+///////////////////////languages///////////////////////////////////////
 
     <script src="~/Scripts/jquery-3.3.1.slim.min.js"> </script>
     <script src="~/Scripts/jquery.multi-select.js"></script>
+   <link href = "~/Content/example-styles.css" rel = "stylesheet"/>
     @*<form class="form-group">
         <select id="Employees" name="Employees" multiple>
             <option value="JavaScript">JavaScript</option>
@@ -32,21 +33,28 @@
         </select>
     </form>*@
 
+        @*<div class="form-group">
+            @Html.Label("Employees", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="dropdown">
+                    @Html.DropDownListFor(m => m.EmployeeID, new SelectList(Model.Employees, "Value", "Text", new { name = "Employees", multiple = "multiple" }) , "select", new { id = "Employees" , multiple = "true" })
+                </div>
+                @* @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })*@
+            @*</div>
+        </div>*@
 
 
+    ////////////////////////////////////////////////////
 
     <div class="form-group">
         @Html.Label("Employees", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="dropdown">
-                @Html.DropDownListFor(m => m.EmployeeID, new SelectList(Model.Employees, "Value", "Text", new { @class = "form-control" }),new { @id = "Employees" })
-                @*@Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })*@
+                @Html.DropDownListFor(m => m.SelectedEmployeesID, new SelectList(Model.Employees, "Value", "Text"), "select", new { id = "Employees", multiple = "true" })
             </div>
+            @* @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })*@
         </div>
     </div>
-
-
-
 
     //////////////////////////////////////////////////////
 
@@ -64,11 +72,19 @@
 
 @*/////////////////////////////////////////////*@
 
-
-<script> $('#Employees').multiSelect() </script>
-
-
+@section scripts{
 <script>
+    $(function () {
+        $('#Employees').multiSelect({
+            width: "50%",
+            includeSelectAllOption: "true"
+        });
+    });
+ </script>
+    }
+
+
+@*<script>
 
     $('#Employees').multiSelect({
 
@@ -88,6 +104,8 @@
 
         // Text to show when no option is selected
         'noneText': '-- Select --',
+        ///
+        'selectAllValue': 'multiselect-all',
 
         // Text to show when all options are selected
         'allText': undefined,
@@ -108,5 +126,5 @@
         'menuMinHeight': 200
 
     });
-</script>
+</script>*@
 

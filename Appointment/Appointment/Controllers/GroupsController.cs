@@ -1,4 +1,5 @@
 ﻿using Appointment.Business.Models;
+using Appointment.DAL;
 using Appointment.ViewModel.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -22,41 +23,17 @@ namespace Appointment.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            //return View(GroupService.GetAllEmployee());
-            EmployeesGroupsViewModel obj = new EmployeesGroupsViewModel();
-            obj.Employees = GroupService.GetAllEmployee();
-            return View(obj);
+            //return View(/*GroupService.GetAllEmployee()*/);
+            EmployeesGroupsViewModel group = new EmployeesGroupsViewModel();
+            group.Employees = GroupService.GetAllEmployee();
+            return View(group);
 
         }
 
-        ///this method to add new Group to the database
-        //[AcceptVerbs(HttpVerbs.Post)]
-
-        //[HttpPost]
-
-        //public ActionResult Create(GroupsViewModel group)
-        //{
-
-        //    if (ModelState.IsValid)
-        //    {
-
-        //        GroupService.Create(group);
-        //        group.CreatedOn = DateTime.Now;
-
-        //        RouteValueDictionary routeValues = this.GridRouteValues();
-        //        return RedirectToAction("Groups", routeValues);
-        //    }
-
-        //    //The model is invalid - render the current view to show any validation errors
-        //    return View("Groups", GroupService.Read());
-        //}
-
-        ////////////////////////////////////////////////
         [HttpPost]
 
         public ActionResult Create(EmployeesGroupsViewModel group)
-        {
-
+        {             
             if (ModelState.IsValid)
             {
                 group.CreatedOn = DateTime.Now;
@@ -65,8 +42,6 @@ namespace Appointment.Controllers
                 group.ModifyBy = 1;
 
                 GroupService.Create(group);
-
-               
                 
 
                 RouteValueDictionary routeValues = this.GridRouteValues();
@@ -74,14 +49,14 @@ namespace Appointment.Controllers
             }
 
             //The model is invalid - render the current view to show any validation errors
-            return View("Groups", GroupService.Read());
+            return View(group);
         }
 
         // function called by index view when click edit on grid 
 
         [HttpGet]
-        public ActionResult Update()
-        {
+        public ActionResult Update( )
+        {          
             return View();
         }
 
