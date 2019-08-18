@@ -23,9 +23,11 @@ namespace Appointment.ViewModel.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "BirthDay is required")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime? BirthDate { get; set; }
 
         [Required(ErrorMessage = "Start Date is required")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime? StartDate { get; set; }
 
         [Required(ErrorMessage = "Position is required")]
@@ -54,10 +56,10 @@ namespace Appointment.ViewModel.Models
 
         public int? EmployeeID { get; set; }
 
-        [Required(ErrorMessage = "Position is required")]
+    
         public List<SelectListItem> Employees { get; set; }
 
-        [Required(ErrorMessage = "Position is required")]
+
         public List<SelectListItem> Positions { get; set; }
     }
 }

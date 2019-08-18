@@ -81,6 +81,18 @@ namespace Appointment.Controllers
 
                     return View("Index", ReminderService.Read());
                 }
+                else
+                {
+                    List<string> Errors = new List<string>();
+
+                    foreach (ModelState modelState in ViewData.ModelState.Values)
+                    {
+                        foreach (ModelError error in modelState.Errors)
+                        {
+                            Errors.Add(error.ErrorMessage);
+                        }
+                    }
+                }
 
             }
             catch (Exception ex)
@@ -202,9 +214,6 @@ namespace Appointment.Controllers
             obj.Positions = ReminderService.GetPositions();
             obj.Employees = ReminderService.GetEmployees();
 
-            //ViewModels vm = new ViewModels();
-            //var listreminder = ReminderService.GetAll();
-            //vm.RemindersViewModel = listreminder.Where(x => x.ID.Equals(ID) || ID == null).ToList();
             return View(obj);
         }
 
@@ -236,6 +245,18 @@ namespace Appointment.Controllers
 
                 return RedirectToAction("Index", routeValues);
             }
+            else
+            {
+                List<string> Errors = new List<string>();
+
+                foreach (ModelState modelState in ViewData.ModelState.Values)
+                {
+                    foreach (ModelError error in modelState.Errors)
+                    {
+                        Errors.Add(error.ErrorMessage);
+                    }
+                }
+            }
             TempData["isvalid"] = isvalid;
             
             return View();
@@ -251,6 +272,8 @@ namespace Appointment.Controllers
             var type = ReminderService.GetType(id);
             if (type == 1)
             {
+                //EmployeeRemindersViewModel obj = new EmployeeRemindersViewModel();
+                //obj.Positions = ReminderService.GetPositions();
                 return View("Details", ReminderService.EmployeeRemindersGetByID(id));
             }
             else

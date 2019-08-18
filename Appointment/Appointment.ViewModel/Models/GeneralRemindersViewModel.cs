@@ -19,9 +19,11 @@ namespace Appointment.ViewModel.Models
        
 
         [Required(ErrorMessage = "StartDate is required")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime? StartDate { get; set; }
 
         [Required(ErrorMessage = "EndDate is required")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime? EndDate { get; set; }
 
         [Required(ErrorMessage = "BreifDescription is required")]

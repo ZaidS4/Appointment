@@ -48,8 +48,6 @@ C:\Users\Zaid\source\repos\Appointment\Appointment.Business\obj\Debug\Appointmen
 C:\Users\Zaid\source\repos\Appointment\Appointment.Business\bin\Debug\Common.Logging.Core.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment.Business\bin\Debug\Common.Logging.Core.pdb
 C:\Users\Zaid\source\repos\Appointment\Appointment.Business\bin\Debug\Common.Logging.Core.xml
-C:\Users\Zaid\Appointment.get\Appointment\Appointment.Business\obj\Debug\Appointment.Business.csprojAssemblyReference.cache
-C:\Users\Zaid\Appointment.get\Appointment\Appointment.Business\obj\Debug\Appointment.Business.csproj.CoreCompileInputs.cache
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.Business\bin\Debug\Appointment.Business.dll.config
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.Business\bin\Debug\Appointment.Business.dll
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.Business\bin\Debug\Appointment.Business.pdb
@@ -95,6 +93,8 @@ C:\Users\Zaid\Appointment.get\Appointment\Appointment.Business\bin\Debug\System.
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.Business\bin\Debug\System.Web.WebPages.xml
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.Business\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.Business\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.Business\obj\Debug\Appointment.Business.csprojAssemblyReference.cache
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.Business\obj\Debug\Appointment.Business.csproj.CoreCompileInputs.cache
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.Business\obj\Debug\Appointment.Business.csproj.CopyComplete
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.Business\obj\Debug\Appointment.Business.dll
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.Business\obj\Debug\Appointment.Business.pdb
