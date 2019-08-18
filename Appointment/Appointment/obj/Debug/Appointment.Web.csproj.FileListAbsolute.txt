@@ -381,6 +381,8 @@ C:\Users\Zaid\source\repos\Appointment\Appointment\obj\Debug\Appointment.pdb
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Common.Logging.Core.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Common.Logging.Core.pdb
 C:\Users\Zaid\source\repos\Appointment\Appointment\bin\Common.Logging.Core.xml
+C:\Users\Zaid\Appointment.get\Appointment\Appointment\obj\Debug\Appointment.Web.csprojAssemblyReference.cache
+C:\Users\Zaid\Appointment.get\Appointment\Appointment\obj\Debug\Appointment.Web.csproj.CoreCompileInputs.cache
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\ApplicationInsights.config
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Appointment.dll.config
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Appointment.dll
@@ -759,8 +761,6 @@ C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Microsoft.CodeDom.Prov
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Appointment.DAL.pdb
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Appointment.DAL.dll.config
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Appointment.Resource.pdb
-C:\Users\Zaid\Appointment.get\Appointment\Appointment\obj\Debug\Appointment.Web.csprojAssemblyReference.cache
-C:\Users\Zaid\Appointment.get\Appointment\Appointment\obj\Debug\Appointment.Web.csproj.CoreCompileInputs.cache
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\obj\Debug\Appointment.Web.csproj.CopyComplete
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\obj\Debug\Appointment.dll
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\obj\Debug\Appointment.pdb

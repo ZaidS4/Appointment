@@ -22,13 +22,13 @@ namespace Appointment.ViewModel.Models
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "BirthDate is required")]
+        [Required(ErrorMessage = "BirthDay is required")]
         public DateTime? BirthDate { get; set; }
 
-        [Required(ErrorMessage = "StartDate is required")]
+        [Required(ErrorMessage = "Start Date is required")]
         public DateTime? StartDate { get; set; }
 
-        [Required(ErrorMessage = "PositionID is required")]
+        [Required(ErrorMessage = "Position is required")]
         public int? PositionID { get; set; }
        
         public bool IsActive { get; set; }
@@ -54,9 +54,10 @@ namespace Appointment.ViewModel.Models
 
         public int? EmployeeID { get; set; }
 
-
+        [Required(ErrorMessage = "Position is required")]
         public List<SelectListItem> Employees { get; set; }
 
+        [Required(ErrorMessage = "Position is required")]
         public List<SelectListItem> Positions { get; set; }
     }
 }

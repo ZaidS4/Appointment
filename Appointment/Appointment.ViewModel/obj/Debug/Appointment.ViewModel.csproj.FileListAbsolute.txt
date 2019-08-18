@@ -12,3 +12,17 @@ C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\obj\Debug\Appointme
 C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\obj\Debug\Appointment.ViewModel.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\obj\Debug\Appointment.ViewModel.pdb
 C:\Users\Zaid\source\repos\Appointment\Appointment.ViewModel\obj\Debug\Appointment.ViewModel.csprojAssemblyReference.cache
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.ViewModel\bin\Debug\Appointment.ViewModel.dll.config
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.ViewModel\bin\Debug\Appointment.ViewModel.dll
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.ViewModel\bin\Debug\Appointment.ViewModel.pdb
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.ViewModel\bin\Debug\EntityFramework.dll
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.ViewModel\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.ViewModel\bin\Debug\System.Web.Mvc.dll
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.ViewModel\bin\Debug\EntityFramework.xml
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.ViewModel\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.ViewModel\bin\Debug\System.Web.Mvc.xml
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.ViewModel\obj\Debug\Appointment.ViewModel.csprojAssemblyReference.cache
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.ViewModel\obj\Debug\Appointment.ViewModel.csproj.CoreCompileInputs.cache
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.ViewModel\obj\Debug\Appointment.ViewModel.csproj.CopyComplete
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.ViewModel\obj\Debug\Appointment.ViewModel.dll
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.ViewModel\obj\Debug\Appointment.ViewModel.pdb

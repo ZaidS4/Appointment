@@ -12,12 +12,10 @@
             line-height: 20px;
         }
 
-        .body1 {
-            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-            font-size: 14px;
-            line-height: 5.428571;
-            color: #333;
-            background-color: #fff;
+        
+        .navbar-navEA > li > a {
+            color: black !important;
+            margin-top: 20px;
         }
     </style>
     <meta charset="utf-8" />
@@ -37,9 +35,9 @@
     <script src="~/Scripts/jquery.multi-select.js"></script>
     <script src="~/Scripts/jquery.multi-select.min.js"></script>
 </head>
-<body class="body1">
+<body class="body">
    
-    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#f1f1f1">
+    <div class="navbarEdita navbar navbar-inverse navbar-fixed-top" style="background-color:#f1f1f1">
         <a href="~/Reminder/Index"><img class="img" src="~/img/Untitled11.png"></a>
         <div class="container" >
             <div class="navbar-header">
@@ -53,7 +51,7 @@
                 
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-navEA ">
                     <li>@Html.ActionLink("Home", "Index", "Reminder")</li>
                     <li>@Html.ActionLink("Groups", "Groups", "Groups")</li>
                     @*<li>@Html.ActionLink("Contact", "Contact", "Reminder")</li>*@

@@ -1,91 +1,69 @@
 ﻿@model IEnumerable<Appointment.ViewModel.Models.RemindersViewModel>
 
 <br />
-<br />
 <div class="row">
     <div class="col-md-12">
         @(Html.Kendo().Grid(Model)
-                                         .Name("Grid")
-                                         
-                                         .Columns(columns =>
-                                         {
-                                             columns.Bound(p => p.ID).Hidden();
-                                             columns.Bound(p => p.Name).ToString();
-                                             columns.Bound(p => p.StartDate);
+              .Name("Grid")
 
-                                             columns.Command(command =>
-                                             {
-                                                 command.Custom("Details").Click("viewRow").Action("Details","Reminder").HtmlAttributes(new { id = "viewItem", title = "View", style = "width:30px;", value = "View Details" });
-                                     //command.Custom("Edit").Click("editRow").HtmlAttributes(new { id = "editItem", title = "Edit", value = "View Details" });
-                                     command.Destroy();
-                                             }).Width(250);
-                                         })
-                                           .ToolBar(toolbar => toolbar.Custom()
-                                           .Text("New Employee Reminder")
-                                           .Action("NewEmployeeReminder", "Reminder"))
-                                           .ToolBar(toolbar => toolbar.Custom()
-                                           .Text("New General Reminder")
-                                           .Action("NewGeneralReminder", "Reminder"))
-                                         .Editable(editable => editable.Enabled(false).Mode(GridEditMode.InCell))
-                                         .Pageable(pageable => pageable
-                                                  .Refresh(true)
-                                                  .PageSizes(true)
-                                                  .ButtonCount(5))
-                                         .Sortable()
-                                         .Selectable()
-                                         .Navigatable()
-                                         .Scrollable()
-                                         .Groupable()
-                                         .ColumnMenu()
-                                         .Filterable(filterable => filterable.Mode(GridFilterMode.Row))
-                                         .DataSource(dataSource => dataSource
-                                             .Server()
-                                             .PageSize(20)
-                                             .Model(model => model.Id(p => p.ID))
-                                             .Read("Index", "Reminder")
-                                             .Destroy("Delete", "Reminder")
-                                             
+              .Columns(columns =>
+              {
+                  columns.Bound(p => p.Name).ToString();
+                  columns.Bound(p => p.StartDate).Format("{0:dd/MM/yyyy}");
+                  columns.Bound(p => p.EndDate).Format("{0:dd/MM/yyyy}").Hidden();
+
+                  columns.Command(command =>
+                  {
+                      command.Custom("Details").Action("Details", "Reminder").HtmlAttributes(new { id = "viewItem", title = "View", style = "width:30px;", value = "View Details" });
+                      command.Custom("Edit").Action("Update", "Reminder").HtmlAttributes(new { id = "editItem", title = "Edit", value = "View Details" });
+                      command.Destroy();
+                  }).Width(250);
+              })
+                .ToolBar(toolbar => toolbar.Custom()
+                .Text("New Employee Reminder")
+                .Action("NewEmployeeReminder", "Reminder"))
+                .ToolBar(toolbar => toolbar.Custom()
+                .Text("New General Reminder")
+                .Action("NewGeneralReminder", "Reminder"))
+              .Editable(editable => editable.Enabled(false).Mode(GridEditMode.InCell))
+              .Pageable(pageable => pageable
+                       .Refresh(true)
+                       .PageSizes(true)
+                       .ButtonCount(5))
+              .Sortable()
+              .Navigatable()
+              .Scrollable()
+              .Selectable(selectable => selectable.Enabled(true).Mode(GridSelectionMode.Single).Type(GridSelectionType.Row))
+              .ColumnMenu()
+              .Filterable(filterable => filterable.Mode(GridFilterMode.Row))
+              .DataSource(dataSource => dataSource
+                  .Server()
+                  .PageSize(20)
+                  .Model(model => model.Id(p => p.ID))
+                  .Read("Index", "Reminder")
+                  .Destroy("Delete", "Reminder")
 
 
-                                         )
+
+              )
         )
 
 
     </div>
 
 </div>
-<script>
 
-    function viewRow(e) {
-        @*e.preventDefault();
-        debugger;
-        var grid = $("#Grid").data("kendoGrid");
-        var dataItem = grid.dataItem($(this).closest("tr"));
-        var idValue = dataItem['ID'];
-        window.location.href = '@Url.Action("Details", "Reminder")/' + idValue;
-         //var id = document.getElementById("nameToFind").value;*@
-        
-        @*location.href = '@Url.Action("Details", "Store")?ID=' + id;*@
-        }
-            
-    
+<style>
+    .k-grid .k-state-selected {
+        background: #1cacff;
+        color: #000000;
+    }
 
+    .k-grid tr.k-state-selected:hover {
+        background-color: #c5f1ff;
+    }
+</style>
 
-
-        function editRow(e) {
-            e.preventDefault();
-
-            debugger;
-            window.location.href = "@Url.Action("Update", "Reminder")";
-        }
-
-        function deleteRow(e) {
-            e.preventDefault();
-
-            debugger;
-            window.location.href = "@Url.Action("Delete", "Reminder")";
-        }
-</script>
 
 <script type="text/javascript">
 

@@ -40,6 +40,7 @@ namespace Appointment.Controllers
             if (type == 1)
             {
                 EmployeeRemindersViewModel obj = new EmployeeRemindersViewModel();
+                obj =  ReminderService.EmployeeRemindersGetByID(id);
                 obj.Positions = ReminderService.GetPositions();
                 obj.Employees = ReminderService.GetEmployees();
 
@@ -47,7 +48,9 @@ namespace Appointment.Controllers
             }
             else
             {
-                return View("GeneralReminderUpdate");
+                GeneralRemindersViewModel obj = new GeneralRemindersViewModel();
+                obj = ReminderService.generalRemindersGetByID(id);
+                return View("GeneralReminderUpdate", obj);
             }
         }
 
@@ -64,9 +67,11 @@ namespace Appointment.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    reminder.ModifyOn = DateTime.Now.Date;
                     
-                    
+                    reminder.ModifyOn = DateTime.Now;
+                    reminder.ModifyBy = 1;
+                    reminder.TypeID = 1;
+        
                     //The model is valid - update the reminder and redisplay the grid.
                     ReminderService.EmployeeReminderUpdate(reminder);
 
@@ -74,7 +79,7 @@ namespace Appointment.Controllers
                     //route values defining the grid state - current page, sort expression, filter etc.
                     RouteValueDictionary routeValues = this.GridRouteValues();
 
-                    return RedirectToAction("Index", routeValues);
+                    return View("Index", ReminderService.Read());
                 }
 
             }
@@ -98,16 +103,17 @@ namespace Appointment.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    //reminder.ModifyOn = DateTime.Now.Date;
+                    reminder.ModifyOn = DateTime.Now;
+                    reminder.ModifyBy = 1;
+                    reminder.TypeID = 2;
 
                     //The model is valid - update the reminder and redisplay the grid.
                     ReminderService.GeneralReminderUpdate(reminder);
 
                     //GridRouteValues() is an extension method which returns the 
                     //route values defining the grid state - current page, sort expression, filter etc.
-                    RouteValueDictionary routeValues = this.GridRouteValues();
 
-                    return RedirectToAction("Index", routeValues);
+                    return RedirectToAction("Index", ReminderService.Read());
                 }
 
             }

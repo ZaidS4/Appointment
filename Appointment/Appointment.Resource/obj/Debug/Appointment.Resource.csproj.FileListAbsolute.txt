@@ -6,3 +6,11 @@ C:\Users\Zaid\source\repos\Appointment\Appointment.Resource\obj\Debug\Appointmen
 C:\Users\Zaid\source\repos\Appointment\Appointment.Resource\obj\Debug\Appointment.Resource.csproj.CoreCompileInputs.cache
 C:\Users\Zaid\source\repos\Appointment\Appointment.Resource\obj\Debug\Appointment.Resource.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment.Resource\obj\Debug\Appointment.Resource.pdb
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.Resource\bin\Debug\Appointment.Resource.dll
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.Resource\bin\Debug\Appointment.Resource.pdb
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.Resource\obj\Debug\Appointment.Resource.csprojAssemblyReference.cache
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.Resource\obj\Debug\Appointment.Resource.StringResource.resources
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.Resource\obj\Debug\Appointment.Resource.csproj.GenerateResource.cache
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.Resource\obj\Debug\Appointment.Resource.csproj.CoreCompileInputs.cache
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.Resource\obj\Debug\Appointment.Resource.dll
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.Resource\obj\Debug\Appointment.Resource.pdb

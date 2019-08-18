@@ -1,13 +1,12 @@
 ﻿@model Appointment.ViewModel.Models.EmployeeRemindersViewModel
 
 @{
-    ViewBag.Title = "EmployeeDetails";
+    ViewBag.Title = "Details";
 }
 
 <h2>Details</h2>
 
 <div>
-    <h4>EmployeeRemindersViewModel</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -27,23 +26,23 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.BirthDate)
+            @Html.DisplayName("BirthDay")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.BirthDate)
+            @Html.DisplayFor(model => model.BirthDate.Value.Date)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
+            @Html.DisplayName("Starting Date")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.StartDate)
+            @Html.DisplayFor(model => model.StartDate.Value.Date)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PositionID)
+            @Html.DisplayName("Position")
         </dt>
 
         <dd>
@@ -51,15 +50,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedOn)
+            @Html.DisplayName("Create Date")
         </dt>
 
         <dd>
@@ -67,40 +58,35 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ModifyOn)
+            @Html.DisplayName("Modify Date")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.ModifyOn)
         </dd>
-              
+
         <dt>
-            @Html.DisplayNameFor(model => model.ModifyBy)
+            @Html.DisplayName("Type")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ModifyBy)
+            @Html.Label("Employee Reminder")
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CreatedBy)
+            @Html.DisplayName("Activity")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CreatedBy)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TypeID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TypeID)
+            @Html.DisplayFor(model => model.IsActive)
         </dd>
 
     </dl>
 </div>
 <p>
-    @*@Html.ActionLink("Edit", "Update", new { id = Model.ID }) |*@
-    @Html.ActionLink("Back to List", "Index")
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="button" value="Back" class="btn btn-default" onclick="location.href='@Url.Action("Index", "Reminder")'" />
+        </div>
+    </div>
 </p>
