@@ -361,10 +361,10 @@ namespace Appointment.Business.Models
                 entity.EndDate = reminder.EndDate;
                 entity.BreifDescription = reminder.BreifDescription;
                 entity.Time = reminder.Time;
-                entity.CreatedOn = reminder.CreatedOn.Value;
+          //      entity.CreatedOn = reminder.CreatedOn;//.Value;
                 entity.ModifyBy = reminder.ModifyBy;
                 entity.ModifyOn = reminder.ModifyOn;
-                entity.CreatedBy = reminder.CreatedBy;
+              //  entity.CreatedBy = reminder.CreatedBy;
                 entity.TypeID = reminder.TypeID;
                 
                 Entities.SaveChanges();

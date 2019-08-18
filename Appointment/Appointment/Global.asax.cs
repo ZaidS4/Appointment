@@ -2,6 +2,7 @@
 using Ninject;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -17,10 +18,8 @@ namespace Appointment
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            int h = 14, m = 37;
-            JobScheduler.Start(h, m);
-            RegisterServecies();
-
+            int StartHour = Convert.ToInt32(ConfigurationManager.AppSettings["SendEmailHour"].ToString()), Startmin = Convert.ToInt32(ConfigurationManager.AppSettings["SendEmailmin"].ToString());
+            JobScheduler.Start(StartHour, Startmin);
             //  Dependency.Register();
 
         }

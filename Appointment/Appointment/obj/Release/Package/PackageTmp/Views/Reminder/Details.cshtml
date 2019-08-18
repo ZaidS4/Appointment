@@ -3,7 +3,8 @@
 @{
     ViewBag.Title = "Details";
 }
-
+<br />
+<br />
 <h2>Details</h2>
 
 <div>
@@ -16,7 +17,7 @@
         <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
-
+        <br />
         <dt>
             @Html.DisplayNameFor(model => model.Email)
         </dt>
@@ -24,23 +25,23 @@
         <dd>
             @Html.DisplayFor(model => model.Email)
         </dd>
-
+        <br />
         <dt>
-            @Html.DisplayName("BirthDay")
+            @Html.DisplayName("Birth Date")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.BirthDate.Value.Date)
+            @Html.DisplayFor(model => model.BirthDate)
         </dd>
-
+        <br />
         <dt>
             @Html.DisplayName("Starting Date")
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.StartDate.Value.Date)
+            @Html.DisplayFor(model => model.StartDate)
         </dd>
-
+        <br />
         <dt>
             @Html.DisplayName("Position")
         </dt>
@@ -48,7 +49,7 @@
         <dd>
             @Html.DisplayFor(model => model.PositionID)
         </dd>
-
+        <br />
         <dt>
             @Html.DisplayName("Create Date")
         </dt>
@@ -56,7 +57,7 @@
         <dd>
             @Html.DisplayFor(model => model.CreatedOn)
         </dd>
-
+        <br />
         <dt>
             @Html.DisplayName("Modify Date")
         </dt>
@@ -64,7 +65,7 @@
         <dd>
             @Html.DisplayFor(model => model.ModifyOn)
         </dd>
-
+        <br />
         <dt>
             @Html.DisplayName("Type")
         </dt>
@@ -72,7 +73,7 @@
         <dd>
             @Html.Label("Employee Reminder")
         </dd>
-
+        <br />
         <dt>
             @Html.DisplayName("Activity")
         </dt>

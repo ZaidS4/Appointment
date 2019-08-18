@@ -127,6 +127,18 @@ namespace Appointment.Controllers
 
                     return RedirectToAction("Index", ReminderService.Read());
                 }
+                else
+                {
+                    List<string> Errors = new List<string>();
+
+                    foreach (ModelState modelState in ViewData.ModelState.Values)
+                    {
+                        foreach (ModelError error in modelState.Errors)
+                        {
+                            Errors.Add(error.ErrorMessage);
+                        }
+                    }
+                }
 
             }
             catch (Exception ex)

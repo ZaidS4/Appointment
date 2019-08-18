@@ -1,94 +1,96 @@
 ﻿@model Appointment.ViewModel.Models.EmployeeRemindersViewModel
 
 @{
-    ViewBag.Title = "NewEmployeeReminder";
+    ViewBag.Title = "New Employee Reminder";
 }
 
-<h2>Create Employee Reminder</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<br />
+<br />
+<div>
+    <h2>Create Employee Reminder</h2>
 
-    <div class="form-horizontal">
-        
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.Label("Birthday", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @Id = "datepicker", @class = "form-control", @ReadOnly = "ReadOnly" } })
-                @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.Label("Birthday", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @Id = "datepicker", @class = "form-control", @ReadOnly = "ReadOnly" } })
+                    @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.Label("Starting Date", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @Id = "datepicker2", @class = "form-control", @ReadOnly = "ReadOnly" } })
-                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.Label("Starting Date", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @Id = "datepicker2", @class = "form-control", @ReadOnly = "ReadOnly" } })
+                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.Label("Position", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="dropdown">
-                    @Html.DropDownListFor(m=> m.PositionID, new SelectList(Model.Positions, "Value", "Text", new { @class = "form-control" }))
-                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.Label("Position", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
+                <div class="col-md-10">
+                    <div class="dropdown">
+                        @Html.DropDownListFor(m => m.PositionID, new SelectList(Model.Positions, "Value", "Text", new { @class = "form-control" }))
+                        @Html.ValidationMessageFor(model => model.PositionID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Employee", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
+                <div class="col-md-10">
+                    <div class="dropdown">
+                        @Html.DropDownListFor(m => m.EmployeeID, new SelectList(Model.Employees, "Value", "Text", new { @class = "form-control" }))
+
+                        @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(model => model.IsActive)
+                        @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="button" value="Back" class="btn btn-default" onclick="location.href='@Url.Action("Index", "Reminder")'" />
                 </div>
             </div>
         </div>
+    }
+</div>
 
-        <div class="form-group">
-            @Html.Label("Employee", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="dropdown">
-                    @Html.DropDownListFor(m => m.EmployeeID, new SelectList(Model.Employees, "Value", "Text", new { @class = "form-control" }))
-
-                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.CheckBoxFor(model => model.IsActive)
-                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-                <input type="button" value="Back" class="btn btn-default" onclick="location.href='@Url.Action("Index", "Reminder")'" />
-            </div>
-        </div>
-    </div>
-}
-
-@*<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>*@
 
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">

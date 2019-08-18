@@ -1,5 +1,13 @@
 ﻿@model IEnumerable<Appointment.ViewModel.Models.RemindersViewModel>
 
+@{
+    ViewBag.Title = "All reminders";
+}
+
+
+<br />
+<br />
+<br />
 <br />
 <div class="row">
     <div class="col-md-12">
@@ -10,7 +18,7 @@
               {
                   columns.Bound(p => p.Name).ToString();
                   columns.Bound(p => p.StartDate).Format("{0:dd/MM/yyyy}");
-                  columns.Bound(p => p.EndDate).Format("{0:dd/MM/yyyy}").Hidden();
+                  columns.Bound(p => p.EndDate).Format("{0:dd/MM/yyyy}");
 
                   columns.Command(command =>
                   {
