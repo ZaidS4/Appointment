@@ -18,7 +18,7 @@ namespace Appointment.ViewModel.Models
 
         public List<lookupsViewModel> lookupsViewModel { get; set; }
 
-        public List<PermissionsViewModels> PermissionsViewModels { get; set; }
+        public List<Permissions> PermissionsViewModels { get; set; }
 
         public List<PositionsViewModel> PositionsViewModel { get; set; }
 

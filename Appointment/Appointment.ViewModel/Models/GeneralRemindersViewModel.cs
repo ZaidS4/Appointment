@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Appointment.ViewModel.Models
 {
@@ -27,6 +28,7 @@ namespace Appointment.ViewModel.Models
         public DateTime? EndDate { get; set; }
 
         [Required(ErrorMessage = "BreifDescription is required")]
+        [StringLength(200)]
         public string BreifDescription { get; set; }
 
         [DataType(DataType.Time)]
@@ -50,7 +52,8 @@ namespace Appointment.ViewModel.Models
 
         public Byte[] Image { get; set; }
 
+        //public List<SelectListItem> Groups { get; set; }
 
-        
+
     }
 }

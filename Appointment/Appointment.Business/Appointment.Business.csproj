@@ -94,6 +94,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IUsers.cs" />
     <Compile Include="Job\JobScheduler.cs" />
     <Compile Include="Job\MailSender.cs" />
     <Compile Include="Models\AppointmentRepository.cs" />
@@ -101,6 +102,9 @@
     <Compile Include="Models\GroupService.cs" />
     <Compile Include="Models\NinjectDependencyResolver.cs" />
     <Compile Include="Models\ReminderService.cs" />
+    <Compile Include="Models\SettingService.cs" />
+    <Compile Include="Models\UserRoleAuthorize.cs" />
+    <Compile Include="Models\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

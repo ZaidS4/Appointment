@@ -12,7 +12,7 @@ namespace Appointment.Business.Models
     public class ReminderService : IDisposable
     {
 
-
+        
 
 
         /// <summary>
@@ -59,6 +59,35 @@ namespace Appointment.Business.Models
             }
 
         }
+
+
+        /// <summary>
+        /// gets Groups from DB then set it in dropdownlist
+        /// </summary>
+        /// <returns>list of positions</returns>
+        //public static List<SelectListItem> GetGroups()
+        //{
+        //    try
+        //    {
+        //        using (RemindersEntities db = new RemindersEntities())
+        //        {
+        //            List<EmployeeRemindersViewModel> emp = new List<EmployeeRemindersViewModel>();
+        //            var list = db.Groups.Select(m => new SelectListItem
+        //            {
+        //                Value = m.ID.ToString(),
+        //                Text = m.Name,
+        //            }).ToList();
+
+        //            return list;
+
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+
+        //}
 
 
 
@@ -112,7 +141,8 @@ namespace Appointment.Business.Models
                     PositionID = reminders.PositionID,
                     CreatedOn=reminders.CreatedOn,
                     ModifyOn=reminders.ModifyOn,
-                    IsActive = reminders.IsActive.Value
+                    IsActive = reminders.IsActive.Value,
+                    Position = reminders.PositionID.HasValue ?  reminders.Position.Name :""
 
                 };
                 return EmployeeReminder;

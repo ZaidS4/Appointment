@@ -11,8 +11,9 @@ using System.Web.Routing;
 
 namespace Appointment.Controllers
 {
-    public class ReminderController : Controller
+    public class ReminderController : BaseController
     {
+        [UserRoleAuthorize(Roles = "Admin")]
         /// <summary>
         /// Index method displays data from DB into a grid
         /// </summary>
@@ -25,6 +26,7 @@ namespace Appointment.Controllers
 
 
 
+
         
        
         /// <summary>
@@ -33,6 +35,7 @@ namespace Appointment.Controllers
         /// <param name="id"> reminder id </param>
         /// <returns></returns>
         [HttpGet]
+        [UserRoleAuthorize(Roles = "Admin")]
         public ActionResult Update(int id)
         {
             
@@ -61,6 +64,7 @@ namespace Appointment.Controllers
         /// <param name="reminder">gets the data from the model</param>
         /// <returns>all reminders in DB after the change is done</returns>
         [HttpPost]
+
         public ActionResult EmployeeReminderUpdate(EmployeeRemindersViewModel reminder)
         {
             try
@@ -155,6 +159,7 @@ namespace Appointment.Controllers
         /// <param name="reminder">the reminder data that selected to be deleted</param>
         /// <returns>index view</returns>
         [HttpPost]
+        [UserRoleAuthorize(Roles = "Admin")]
         public ActionResult Delete(RemindersViewModel reminder)
         {
             //RouteValueDictionary routeValues;
@@ -179,8 +184,13 @@ namespace Appointment.Controllers
         /// </summary>
         /// <returns>view</returns>
         [HttpGet]
+        [UserRoleAuthorize(Roles = "Admin")]
         public ActionResult NewGeneralReminder()
         {
+            //EmployeeRemindersViewModel obj = new EmployeeRemindersViewModel();
+            //obj.Employees = ReminderService.GetGroups();
+
+
             return View();
         }
 
@@ -219,12 +229,14 @@ namespace Appointment.Controllers
         /// </summary>
         /// <returns>view</returns>
         [HttpGet]
+        [UserRoleAuthorize(Roles = "Admin")]
         public ActionResult NewEmployeeReminder()
         {
             TempData["isvalid"] = true;
             EmployeeRemindersViewModel obj = new EmployeeRemindersViewModel();
             obj.Positions = ReminderService.GetPositions();
             obj.Employees = ReminderService.GetEmployees();
+            
 
             return View(obj);
         }
@@ -274,19 +286,22 @@ namespace Appointment.Controllers
             return View();
         }
 
+
         /// <summary>
         /// show reminder details of type employee 
         /// </summary>
         /// <param name="id">selected reminder id</param>
         /// <returns>method employeeremindergetbyid call</returns>
+        [UserRoleAuthorize(Roles = "Admin")]
         public ViewResult Details(int id)
         {
             var type = ReminderService.GetType(id);
             if (type == 1)
             {
-                //EmployeeRemindersViewModel obj = new EmployeeRemindersViewModel();
-                //obj.Positions = ReminderService.GetPositions();
-                return View("Details", ReminderService.EmployeeRemindersGetByID(id));
+                EmployeeRemindersViewModel obj = new EmployeeRemindersViewModel();
+                obj = ReminderService.EmployeeRemindersGetByID(id);
+                obj.Positions = ReminderService.GetPositions();
+                return View("Details", obj);
             }
             else
             {

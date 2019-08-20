@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Appointment.ViewModel.Models
 {
-    public class PermissionsViewModels
+    public class Permissions
     {
         public int ID { get; set; }
 
@@ -23,5 +23,10 @@ namespace Appointment.ViewModel.Models
         public DateTime ModifyOn { get; set; }
 
         public int CreatedBy { get; set; }
+
+        public IEnumerable<object> All()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

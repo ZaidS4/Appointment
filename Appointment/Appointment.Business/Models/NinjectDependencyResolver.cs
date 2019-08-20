@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Appointment.Business.Interfaces;
 using Ninject;
 
 
@@ -29,6 +30,7 @@ namespace Appointment.Business.Models
         {
 
             kernel.Bind<IAppointmentRepository>().To<AppointmentRepository>();
+            kernel.Bind<IUsers>().To<UserService>();
         }
 
     }

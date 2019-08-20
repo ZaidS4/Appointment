@@ -11,14 +11,16 @@ using System.Web.Routing;
 
 namespace Appointment.Controllers
 {
-    public class GroupsController : Controller
+    public class GroupsController : BaseController
     {
         // GET: Groups
+        [UserRoleAuthorize(Roles = "Admin")]
         public ActionResult Groups()
         {
             return View(GroupService.Read());
         }
 
+        [UserRoleAuthorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult Create()
         {
@@ -30,7 +32,6 @@ namespace Appointment.Controllers
         }
 
         [HttpPost]
-
         public ActionResult Create(EmployeesGroupsViewModel group)
         {
             if (ModelState.IsValid)
@@ -54,6 +55,7 @@ namespace Appointment.Controllers
         // function called by index view when click edit on grid 
 
         [HttpGet]
+        [UserRoleAuthorize(Roles = "Admin")]
         public ActionResult Update()
         {
             return View();
@@ -88,6 +90,7 @@ namespace Appointment.Controllers
 
         //[AcceptVerbs(HttpVerbs.Post)]
         [HttpPost]
+        [UserRoleAuthorize(Roles = "Admin")]
         public ActionResult Delete(GroupsViewModel group)
         {
             RouteValueDictionary routeValues;

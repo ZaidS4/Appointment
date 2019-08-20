@@ -18,11 +18,13 @@ namespace Appointment.ViewModel.Models
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
+        //[EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [StringLength(30)]
         [Required(ErrorMessage = "Email is required")]
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "BirthDay is required")]
+        [Required(ErrorMessage = "Birthday is required")]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime? BirthDate { get; set; }
 
@@ -32,7 +34,10 @@ namespace Appointment.ViewModel.Models
 
         [Required(ErrorMessage = "Position is required")]
         public int? PositionID { get; set; }
-       
+
+        public string Position { get; set; }
+
+
         public bool IsActive { get; set; }
 
         [DataType(DataType.Date)]
@@ -59,7 +64,8 @@ namespace Appointment.ViewModel.Models
     
         public List<SelectListItem> Employees { get; set; }
 
-
+       
         public List<SelectListItem> Positions { get; set; }
+
     }
 }

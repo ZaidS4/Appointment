@@ -67,6 +67,7 @@
     <Compile Include="Models\PositionsViewModel.cs" />
     <Compile Include="Models\RemindersGroupsViewModel.cs" />
     <Compile Include="Models\RemindersViewModel.cs" />
+    <Compile Include="Models\SettingsView.cs" />
     <Compile Include="Models\SettingsViewModel.cs" />
     <Compile Include="Models\UserPermissionsViewModel.cs" />
     <Compile Include="Models\UsersViewModel.cs" />

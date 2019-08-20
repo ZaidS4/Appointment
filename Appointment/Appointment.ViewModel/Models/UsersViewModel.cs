@@ -12,11 +12,11 @@ namespace Appointment.ViewModel.Models
 
         public string Email { get; set; }
 
-        public string CreatedOn { get; set; }
+        public System.DateTime CreatedOn { get; set; }
 
         public int ModifyBy { get; set; }
 
-        public string ModifyOn { get; set; }
+        public System.DateTime ModifyOn { get; set; }
 
         public int CreatedBy { get; set; }
 
