@@ -16,8 +16,9 @@
             color: black !important;
             margin-top: 20px;
         }
-        .m{
-            margin-top:20px;
+
+        .m {
+            margin-top: 20px;
         }
     </style>
     <meta charset="utf-8" />
@@ -33,37 +34,39 @@
     <script src="https://kendo.cdn.telerik.com/2019.2.619/js/kendo.all.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2019.2.619/js/kendo.aspnetmvc.min.js"></script>
     <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
-    <link href="~/Content/example-styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/example-styles.css" />
+    @*<script src="~/Scripts/jquery-3.3.1.slim.min.js"></script>*@
     <script src="~/Scripts/jquery.multi-select.js"></script>
     <script src="~/Scripts/jquery.multi-select.min.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 </head>
 <body class="body">
-   
+
     <div class="navbarEdita navbar navbar-inverse navbar-fixed-top" style="background-color:#f1f1f1">
         <a href="~/Reminder/Index"><img class="img" src="~/img/Untitled11.png"></a>
-        <div class="container" >
+        <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" >
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
 
 
-                
+
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-navEA ">
                     <li>@Html.ActionLink("Home", "Index", "Reminder")</li>
                     <li>@Html.ActionLink("Groups", "Groups", "Groups")</li>
+                    <li>@Html.ActionLink("Settings", "Index", "Settings")</li>
                     @*<li>@Html.ActionLink("Contact", "Contact", "Reminder")</li>*@
                 </ul>
                 <ul class="m" style="float:right">@HttpContext.Current.User.Identity.Name</ul>
             </div>
         </div>
-        
+
     </div>
     <div class="container body-content">
         @RenderBody()
@@ -73,7 +76,7 @@
         </footer>
     </div>
 
-
+    @*@RenderSection("JavaScript", required: false)*@
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -98,59 +98,110 @@ namespace Appointment.Business.Models
             }
         }
 
-        public static void Update(GroupsViewModel group)
+        ////////////////////////////////////////
+        public static EmployeesGroupsViewModel EmployeeGroupsGetByID(int id)
+        {
+            using (RemindersEntities db = new RemindersEntities())
+            {
+                Group groups = db.Groups.Where(x => x.ID == id).FirstOrDefault();
+
+
+                EmployeesGroupsViewModel EmployeegroupInfo = new EmployeesGroupsViewModel()
+                {
+                    ID = groups.ID,
+                    GroupID=groups.ID,
+                    Name = groups.Name,
+                    SelectedEmployeesID = groups.EmployeesGroups.Select(x=>x.EmployeeID).ToArray()
+                };
+                EmployeegroupInfo.Employeelist = new List<EmployeesViewModel>();
+
+                foreach (var emp in groups.EmployeesGroups)
+                {
+                    EmployeegroupInfo.Employeelist.Add(new EmployeesViewModel
+                    {
+                        Name = emp.Employee.Name
+                    });
+                }
+                return EmployeegroupInfo;
+            }
+        }
+       //////////////////// 
+        public static bool HaveReminders(int id)
+        {
+            using (RemindersEntities Entities = new RemindersEntities())
+            {
+                Group entity = Entities.Groups.Find(id);
+                var list = entity.RemindersGroups.ToList();
+
+                if (list != null)
+                    if(list.Count!=0)
+                    return true;
+                else
+                    return false;
+                else
+                    return false;
+            }
+        } 
+     
+
+        /////////////////////////////////////////////////////
+        public static void Delete(EmployeesGroupsViewModel group)
+        {
+            try
+            {
+                //DeleteEmployeesGroups(group);
+                RemindersEntities Entities = new RemindersEntities();            
+                Group entity = Entities.Groups.Find(group.ID);           
+                var list = entity.EmployeesGroups;
+                
+                Entities.EmployeesGroups.RemoveRange(list);
+                Entities.SaveChanges();
+                Entities.Groups.Remove(entity);
+                Entities.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        /////////////////////////////////////////////////////////
+        public static void EditGroup(EmployeesGroupsViewModel EmpGroup)
         {
             try
             {
                 RemindersEntities Entities = new RemindersEntities();
-
-                var entity = new Group();
-            
-                //entity.ID = group.ID;
-                entity.Name = group.Name;
-                entity.CreatedOn = group.CreatedOn;
+                Group entity = Entities.Groups.Find(EmpGroup.ID);
+                entity.Name = EmpGroup.Name;
+                //entity.ModifyOn = EmpGroup.ModifyOn;
+                //entity.CreatedOn = EmpGroup.CreatedOn;
+                //entity.ModifyBy = EmpGroup.ModifyBy;
+                //entity.CreatedBy = EmpGroup.CreatedBY;
+                //;;
                 Entities.Groups.Attach(entity);
                 Entities.Entry(entity).State = EntityState.Modified;
                 Entities.SaveChanges();
-
-            }
-
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public static void Delete(GroupsViewModel group)
-        {
-            try
-            {
-                RemindersEntities Entities = new RemindersEntities();
-
-                var entity = new Group();
-
-                entity.ID = group.ID;
-                Entities.Groups.Attach(entity);
-                Entities.Groups.Remove(entity);
-                var groupDetails = Entities.Groups.Where(pd => pd.ID == entity.ID);
-
-                foreach (var groupDetail in groupDetails)
+                //;;;;;
+                var list = entity.EmployeesGroups;
+                Entities.EmployeesGroups.RemoveRange(list);
+                Entities.SaveChanges();
+                foreach (var x in EmpGroup.SelectedEmployeesID)
                 {
-                    Entities.Groups.Remove(groupDetail);
+                    Entities.EmployeesGroups.Add(new EmployeesGroup { EmployeeID = x, GroupID = entity.ID, CreatedOn = DateTime.Now, CreatedBY = 1, ModifyOn = DateTime.Now, ModifyBy = 1 });
+                    Entities.SaveChanges();
                 }
 
-
-                Entities.SaveChanges();
-
             }
+
             catch (Exception ex)
             {
                 throw ex;
             }
         }
 
-
-
+        //////////////////////////////////////
         public void Dispose()
         {
             RemindersEntities Entities = new RemindersEntities();

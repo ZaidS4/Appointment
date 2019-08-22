@@ -19,7 +19,7 @@
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
+                @Html.Label("Title", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
@@ -27,15 +27,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.Label("Birthday", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
+                @Html.Label("Birth Date", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @Id = "datepicker", @class = "form-control", @ReadOnly = "ReadOnly" } })
                     @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
@@ -43,7 +35,7 @@
             </div>
 
             <div class="form-group">
-                @Html.Label("Starting Date", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
+                @Html.Label("Start Date", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @Id = "datepicker2", @class = "form-control", @ReadOnly = "ReadOnly" } })
                     @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
@@ -64,10 +56,18 @@
                 @Html.Label("Employee", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
                 <div class="col-md-10">
                     <div class="dropdown">
-                        @Html.DropDownListFor(m => m.EmployeeID, new SelectList(Model.Employees, "Value", "Text", new { @class = "form-control" }))
+                        @Html.DropDownListFor(m => m.EmployeeID, new SelectList(Model.Employees, "Value", "Text", new { @class = "form-control" }), new { @Id = "drop" })
 
                         @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
                     </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2"  })<a style="color:red">*</a>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @id = "Email", @ReadOnly = "ReadOnly" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -93,8 +93,10 @@
 
 
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
@@ -104,6 +106,31 @@
 
     $(function () {
         $("#datepicker2").datepicker();
+    });
+
+    $(document).ready(function () {
+        $('#drop').change(function () {
+            debugger;
+            var EmploeeID = $('#drop').val();
+            $.ajax({
+                url: '@Url.Action("FetchEmail", "Reminder")/?ID=' + EmploeeID ,
+                type: "GET",
+                cache: false,
+                async: false,
+                //data: { ID: EmploeeID },
+                datatype: "json",
+                success: function (response) {
+                    $('#Email').val(response.Email);
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            });
+
+
+
+
+        });
     });
 
 </script>

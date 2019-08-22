@@ -40,7 +40,7 @@ namespace Appointment.ViewModel.Models
 
         [Display(Name = "Send Anniversary Email")]
         public string SendAnniversary { get; set; }
-
+        
 
         [Display(Name = "Send Event Email")]
         public string SendEvent { get; set; }
@@ -71,5 +71,11 @@ namespace Appointment.ViewModel.Models
 
         [Display(Name = "Port Number")]
         public int portnumber { get; set; }
+
+
+
+        [Display(Name = "Admin Email")]
+        [DataType(DataType.EmailAddress)]
+        public String EmailAdmin { get; set; }
     }
 }

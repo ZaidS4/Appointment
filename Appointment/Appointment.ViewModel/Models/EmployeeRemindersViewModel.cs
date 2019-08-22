@@ -67,5 +67,7 @@ namespace Appointment.ViewModel.Models
        
         public List<SelectListItem> Positions { get; set; }
 
+        //public List<SelectListItem> Emails { get; set; }
+
     }
 }

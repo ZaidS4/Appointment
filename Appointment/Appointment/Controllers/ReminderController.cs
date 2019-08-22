@@ -46,13 +46,14 @@ namespace Appointment.Controllers
                 obj =  ReminderService.EmployeeRemindersGetByID(id);
                 obj.Positions = ReminderService.GetPositions();
                 obj.Employees = ReminderService.GetEmployees();
-
+                //obj.Emails=ReminderService.GetEmail();
                 return View("EmployeeReminderUpdate", obj);
             }
             else
             {
                 GeneralRemindersViewModel obj = new GeneralRemindersViewModel();
                 obj = ReminderService.generalRemindersGetByID(id);
+                obj.Groups = ReminderService.GetGroups();
                 return View("GeneralReminderUpdate", obj);
             }
         }
@@ -64,7 +65,6 @@ namespace Appointment.Controllers
         /// <param name="reminder">gets the data from the model</param>
         /// <returns>all reminders in DB after the change is done</returns>
         [HttpPost]
-
         public ActionResult EmployeeReminderUpdate(EmployeeRemindersViewModel reminder)
         {
             try
@@ -163,16 +163,11 @@ namespace Appointment.Controllers
         public ActionResult Delete(RemindersViewModel reminder)
         {
             //RouteValueDictionary routeValues;
-
             //Delete the record
             ReminderService.Delete(reminder);
-
             //routeValues = this.GridRouteValues();
-
             //Redisplay the grid
             RedirectToAction("Index");
-
-
             return View("Index", ReminderService.Read());
         }
 
@@ -187,11 +182,11 @@ namespace Appointment.Controllers
         [UserRoleAuthorize(Roles = "Admin")]
         public ActionResult NewGeneralReminder()
         {
-            //EmployeeRemindersViewModel obj = new EmployeeRemindersViewModel();
-            //obj.Employees = ReminderService.GetGroups();
+            GeneralRemindersViewModel obj = new GeneralRemindersViewModel();
+            obj.Groups = ReminderService.GetGroups();
 
 
-            return View();
+            return View(obj);
         }
 
         /// <summary>
@@ -325,16 +320,25 @@ namespace Appointment.Controllers
             return View(ReminderService.generalRemindersGetByID(id));
         }
 
-        /// <summary>
-        /// method to redirect to contact view
-        /// </summary>
-        /// <returns>view</returns>
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
 
-            return View();
+        [HttpGet]
+        public JsonResult FetchEmail(int ID)
+        {
+            var Email = ReminderService.GetEmail(ID);
+            //return an object
+            return Json(new { Email = Email}, JsonRequestBehavior.AllowGet);
         }
+
+
+        //[HttpGet]
+        //public ActionResult FetchCode(int ID)
+        //{
+        //    var Type = LookupService.GetTypeId(ID);
+        //    //return an object
+        //    return View(Type );
+        //}
+
+
     }
 }
 

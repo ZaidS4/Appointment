@@ -44,6 +44,8 @@ namespace Appointment.ViewModel.Models
         [DataType(DataType.Date)]
         public DateTime? ModifyOn { get; set; }
 
+        public string Group { get; set; }
+
         public int? ModifyBy { get; set; }
 
         public int? CreatedBy { get; set; }
@@ -52,6 +54,9 @@ namespace Appointment.ViewModel.Models
 
         public Byte[] Image { get; set; }
 
+        public List<SelectListItem> Groups { get; set; }
+
+        public int[] SelectedGroupsID { get; set; }
         //public List<SelectListItem> Groups { get; set; }
 
 

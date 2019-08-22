@@ -18,11 +18,14 @@ namespace Appointment.ViewModel.Models
         public Nullable<System.DateTime> ModifyOn { get; set; }
         public Nullable<int> CreatedBY { get; set; }
 
+        //[StringLength(30)]
+        //[Required]
         public string Name { get; set; }
         
         public virtual EmployeesViewModel Employee { get; set; }
         public virtual GroupsViewModel Groups { get; set; }
         public List<SelectListItem> Employees { get; set; }
+        public List<EmployeesViewModel> Employeelist { get; set; }
         public  int[] SelectedEmployeesID { get; set; }
         //public List <EmployeesGrupsViewModel> EmployeesGroupViewModel { get; set; }
 

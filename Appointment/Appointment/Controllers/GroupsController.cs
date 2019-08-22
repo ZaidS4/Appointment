@@ -11,16 +11,14 @@ using System.Web.Routing;
 
 namespace Appointment.Controllers
 {
-    public class GroupsController : BaseController
+    public class GroupsController : Controller
     {
         // GET: Groups
-        [UserRoleAuthorize(Roles = "Admin")]
         public ActionResult Groups()
         {
             return View(GroupService.Read());
         }
 
-        [UserRoleAuthorize(Roles = "Admin")]
         [HttpGet]
         public ActionResult Create()
         {
@@ -32,6 +30,7 @@ namespace Appointment.Controllers
         }
 
         [HttpPost]
+
         public ActionResult Create(EmployeesGroupsViewModel group)
         {
             if (ModelState.IsValid)
@@ -44,8 +43,8 @@ namespace Appointment.Controllers
                 GroupService.Create(group);
 
 
-                RouteValueDictionary routeValues = this.GridRouteValues();
-                return RedirectToAction("Groups", routeValues);
+                RouteValueDictionary GrouprouteValues = this.GridRouteValues();
+                return RedirectToAction("Groups", GrouprouteValues);
             }
 
             //The model is invalid - render the current view to show any validation errors
@@ -55,56 +54,66 @@ namespace Appointment.Controllers
         // function called by index view when click edit on grid 
 
         [HttpGet]
-        [UserRoleAuthorize(Roles = "Admin")]
-        public ActionResult Update()
+        public ActionResult EditInfo(int id)
         {
-            return View();
+            EmployeesGroupsViewModel EmpGroup = GroupService.EmployeeGroupsGetByID(id);
+            EmpGroup.Employees = GroupService.GetAllEmployee();
+            return View(EmpGroup);
         }
 
-        //[AcceptVerbs(HttpVerbs.Post)]
         [HttpPost]
-        public ActionResult Update(GroupsViewModel group)
+        public ActionResult EditInfo(EmployeesGroupsViewModel EmpGroup)
+        {
+
+            EmpGroup.CreatedOn = DateTime.Now;
+            EmpGroup.ModifyOn = DateTime.Now;
+            EmpGroup.CreatedBY = 1;
+            EmpGroup.ModifyBy = 1;
+            GroupService.EditGroup(EmpGroup);
+
+                RouteValueDictionary routeValues = this.GridRouteValues();
+                return RedirectToAction("Groups", routeValues);              
+             
+        }
+
+        /////////////////////////
+        [HttpGet]
+        public ActionResult Delete(int id )
+        {
+            return View(GroupService.EmployeeGroupsGetByID(id));
+        }
+
+        [HttpGet]
+        public JsonResult DeleteCheck(int Id)
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    //The model is valid - update the reminder and redisplay the grid.
-                    GroupService.Update(group);
-
-                    //GridRouteValues() is an extension method which returns the 
-                    //route values defining the grid state - current page, sort expression, filter etc.
-                    RouteValueDictionary routeValues = this.GridRouteValues();
-
-                    return RedirectToAction("Groups", routeValues);
-                }
+                bool haveReminder = GroupService.HaveReminders(Id);
+              
+                return Json(new { canDelete = !haveReminder },JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
+
                 throw ex;
             }
-
-            //The model is invalid - render the current view to show any validation errors
-            return View("Groups", GroupService.Read());
+         
         }
 
         //[AcceptVerbs(HttpVerbs.Post)]
         [HttpPost]
-        [UserRoleAuthorize(Roles = "Admin")]
-        public ActionResult Delete(GroupsViewModel group)
+        public ActionResult Delete(EmployeesGroupsViewModel group)
         {
-            RouteValueDictionary routeValues;
-
+            //DeleteCheck(group.ID);
             //Delete the record
             GroupService.Delete(group);
-
-            routeValues = this.GridRouteValues();
             //Redisplay the grid
-            RedirectToAction("Groups", routeValues);
+            RedirectToAction("Groups");
             //Redisplay the grid
             return View("Groups", GroupService.Read());
 
         }
+        
 
 
     }

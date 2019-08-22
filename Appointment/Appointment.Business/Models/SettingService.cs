@@ -98,25 +98,30 @@ namespace Appointment.Business.Models
                 //set10.CreatedOn = DateTime.Now;
 
 
-                var set11 = Entities.Settings.Where(x => x.Key == ("EmailSender")).FirstOrDefault();
-                set11.Values = settingviewmodel.settingsView.EmailSender.ToString();
-                set11.Description = settingviewmodel.settingsView.EmailSender.ToString();
-                set11.CreatedOn = DateTime.Now;
+                //var set11 = Entities.Settings.Where(x => x.Key == ("EmailSender")).FirstOrDefault();
+                //set11.Values = settingviewmodel.settingsView.EmailSender.ToString();
+                //set11.Description = settingviewmodel.settingsView.EmailSender.ToString();
+                //set11.CreatedOn = DateTime.Now;
 
-                var set12 = Entities.Settings.Where(x => x.Key == ("PasswordSender")).FirstOrDefault();
-                set12.Values = settingviewmodel.settingsView.PasswordSender.ToString();
-                set12.Description = settingviewmodel.settingsView.PasswordSender.ToString();
-                set12.CreatedOn = DateTime.Now;
+                //var set12 = Entities.Settings.Where(x => x.Key == ("PasswordSender")).FirstOrDefault();
+                //set12.Values = settingviewmodel.settingsView.PasswordSender.ToString();
+                //set12.Description = settingviewmodel.settingsView.PasswordSender.ToString();
+                //set12.CreatedOn = DateTime.Now;
 
-                var set13 = Entities.Settings.Where(x => x.Key == ("smtpaddress")).FirstOrDefault();
-                set13.Values = settingviewmodel.settingsView.smtpaddress.ToString();
-                set13.Description = settingviewmodel.settingsView.smtpaddress.ToString();
-                set13.CreatedOn = DateTime.Now;
+                //var set13 = Entities.Settings.Where(x => x.Key == ("smtpaddress")).FirstOrDefault();
+                //set13.Values = settingviewmodel.settingsView.smtpaddress.ToString();
+                //set13.Description = settingviewmodel.settingsView.smtpaddress.ToString();
+                //set13.CreatedOn = DateTime.Now;
 
-                var set14 = Entities.Settings.Where(x => x.Key == ("portnumber")).FirstOrDefault();
-                set14.Values = settingviewmodel.settingsView.portnumber.ToString();
-                set14.Description = settingviewmodel.settingsView.portnumber.ToString();
-                set14.CreatedOn = DateTime.Now;
+                //var set14 = Entities.Settings.Where(x => x.Key == ("portnumber")).FirstOrDefault();
+                //set14.Values = settingviewmodel.settingsView.portnumber.ToString();
+                //set14.Description = settingviewmodel.settingsView.portnumber.ToString();
+                //set14.CreatedOn = DateTime.Now;
+
+                var set15 = Entities.Settings.Where(x => x.Key == ("EmailAdmin")).FirstOrDefault();
+                set15.Values = settingviewmodel.settingsView.EmailAdmin.ToString();
+                set15.Description = settingviewmodel.settingsView.EmailAdmin.ToString();
+                set15.CreatedOn = DateTime.Now;
 
                 Entities.SaveChanges();
 
@@ -251,6 +256,78 @@ namespace Appointment.Business.Models
                 return setting.Description;
             }
         }
+        public static string EmailAdmin()
+        {
+            using (RemindersEntities db = new RemindersEntities())
+            {
+                var setting = db.Settings.Where(x => x.Key == "EmailAdmin").FirstOrDefault();
+                return setting.Description;
+            }
+        }
+
+
+        //----------------------------------------ddl selected item-------------------------------------//
+        public static string BirthdayReminderID()
+        {
+            using (RemindersEntities db = new RemindersEntities())
+            {
+                var setting = db.Settings.Where(x => x.Key == "BirthdayReminder").FirstOrDefault();
+                return setting.Values;
+            }
+        }
+        public static string AnniversaryReminderID()
+        {
+            using (RemindersEntities db = new RemindersEntities())
+            {
+                var setting = db.Settings.Where(x => x.Key == "AnniversaryReminder").FirstOrDefault();
+                return setting.Values;
+            }
+        }
+        public static string EventReminderID()
+        {
+            using (RemindersEntities db = new RemindersEntities())
+            {
+                var setting = db.Settings.Where(x => x.Key == "EventReminder").FirstOrDefault();
+                return setting.Values;
+            }
+        }
+        public static string SendBirthdayID()
+        {
+            using (RemindersEntities db = new RemindersEntities())
+            {
+                var setting = db.Settings.Where(x => x.Key == "SendBirthday").FirstOrDefault();
+                return setting.Values;
+            }
+        }
+        public static string SendAnniversaryID()
+        {
+            using (RemindersEntities db = new RemindersEntities())
+            {
+                var setting = db.Settings.Where(x => x.Key == "SendAnniversary").FirstOrDefault();
+                return setting.Values;
+            }
+        }
+        public static string SendEventID()
+        {
+            using (RemindersEntities db = new RemindersEntities())
+            {
+                var setting = db.Settings.Where(x => x.Key == "SendEvent").FirstOrDefault();
+                return setting.Values;
+            }
+        }
+        public static string UpComingReminderID()
+        {
+            using (RemindersEntities db = new RemindersEntities())
+            {
+                var setting = db.Settings.Where(x => x.Key == "UpComingReminder").FirstOrDefault();
+                return setting.Values;
+            }
+        }
+
+
+
+
+
     }
 }
 //-------------------------------------------CommentArea----------------------------------------//

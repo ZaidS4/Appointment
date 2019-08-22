@@ -14,92 +14,100 @@
     {
         @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+        <div class="form-horizontal">
 
-        <hr />
-        @Html.ValidationSummary(true, "*", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Starting Date", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @Id = "datepicker", @class = "form-control", @ReadOnly = "ReadOnly" } })
-                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("End Date", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @Id = "datepicker2", @class = "form-control", @ReadOnly = "ReadOnly" } })
-                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Breif Description", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.BreifDescription, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.BreifDescription, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Time, htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        @*<div class="form-group">
-            @Html.Label("Groups", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
-            <div class="col-md-10">
-                <div class="dropdown">
-                    @Html.DropDownListFor(m => m.GroupsID, new SelectList(Model.Groups, "Value", "Text", new { @class = "form-control" }))
-                    @Html.ValidationMessageFor(model => model.GroupsID, "", new { @class = "text-danger" })
+            <hr />
+            @Html.ValidationSummary(true, "*", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.Label("Title", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>*@
 
-
-        <div class="form-group">
-            @Html.Label("Active", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.CheckBox("IsActive", true)
-                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.Label("Start Date", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @Id = "datepicker", @class = "form-control", @ReadOnly = "ReadOnly" } })
+                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-                <input type="button" value="Back" class="btn btn-default" onclick="location.href='@Url.Action("Index", "Reminder")'" />
+            <div class="form-group">
+                @Html.Label("End Date", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @Id = "datepicker2", @class = "form-control", @ReadOnly = "ReadOnly" } })
+                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                </div>
             </div>
 
+            <div class="form-group">
+                @Html.Label("Breif Description", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.BreifDescription, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.BreifDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Time, htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.Label("Groups", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
+                <div class="col-md-10">
+                    <div class="dropdown">
+                        @Html.ListBoxFor(m => m.SelectedGroupsID, new MultiSelectList(Model.Groups, "Value", "Text"), new { id = "Group", multiple = "multiple" })
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.Label("Active", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.CheckBox("IsActive", true)
+                        @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="button" value="Back" class="btn btn-default" onclick="location.href='@Url.Action("Index", "Reminder")'" />
+                </div>
+
+            </div>
         </div>
-    </div>
     }
 </div>
+
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-    $(function () {
-        $("#datepicker").datepicker();
-    });
+<link rel="stylesheet" href="~/Content/example-styles.css" />
+<script src="~/Scripts/jquery.multi-select.js"></script>
+<script src="~/Scripts/jquery.multi-select.min.js"></script>
 
-    $(function () {
+
+
+<script>
+    $(document).ready(function () {
+        $("#datepicker").datepicker();
         $("#datepicker2").datepicker();
+        $('#Group').multiSelect({
+            width: "50%",
+            includeSelectAllOption: "true"
+        });
+
     });
 </script>

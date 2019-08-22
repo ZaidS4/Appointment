@@ -100,6 +100,7 @@
     <Compile Include="Models\AppointmentRepository.cs" />
     <Compile Include="Interfaces\IAppointmentRepository.cs" />
     <Compile Include="Models\GroupService.cs" />
+    <Compile Include="Models\LookupService.cs" />
     <Compile Include="Models\NinjectDependencyResolver.cs" />
     <Compile Include="Models\ReminderService.cs" />
     <Compile Include="Models\SettingService.cs" />

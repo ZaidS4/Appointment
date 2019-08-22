@@ -645,7 +645,6 @@ C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\System.Web.WebPages.dl
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\System.Web.WebPages.Razor.dll
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\WebGrease.dll
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Appointment.DAL.dll
-C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Appointment.Resource.dll
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Appointment.Business.pdb
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Appointment.Business.dll.config
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Appointment.ViewModel.pdb
@@ -758,7 +757,6 @@ C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Microsoft.AI.Web.xml
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Appointment.DAL.pdb
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Appointment.DAL.dll.config
-C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Appointment.Resource.pdb
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\obj\Release\Appointment.Web.csprojAssemblyReference.cache
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\obj\Release\Appointment.Web.csproj.CoreCompileInputs.cache
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\obj\Release\Appointment.Web.csproj.CopyComplete

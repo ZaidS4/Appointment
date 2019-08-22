@@ -65,29 +65,52 @@ namespace Appointment.Business.Models
         /// gets Groups from DB then set it in dropdownlist
         /// </summary>
         /// <returns>list of positions</returns>
-        //public static List<SelectListItem> GetGroups()
-        //{
-        //    try
-        //    {
-        //        using (RemindersEntities db = new RemindersEntities())
-        //        {
-        //            List<EmployeeRemindersViewModel> emp = new List<EmployeeRemindersViewModel>();
-        //            var list = db.Groups.Select(m => new SelectListItem
-        //            {
-        //                Value = m.ID.ToString(),
-        //                Text = m.Name,
-        //            }).ToList();
+        public static List<SelectListItem> GetGroups()
+        {
+            try
+            {
+                using (RemindersEntities db = new RemindersEntities())
+                {
+                    List<EmployeeRemindersViewModel> emp = new List<EmployeeRemindersViewModel>();
+                    var list = db.Groups.Select(m => new SelectListItem
+                    {
+                        Value = m.ID.ToString(),
+                        Text = m.Name,
+                    }).ToList();
 
-        //            return list;
+                    return list;
 
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
-        //}
+        }
+
+        /// <summary>
+        /// gets Email from DB then set it in dropdownlist
+        /// </summary>
+        /// <returns>list of Email</returns>
+        public static string GetEmail( int Id)
+        {
+            try
+            {
+                using (RemindersEntities db = new RemindersEntities())
+                {
+
+                    var email = db.Employees.Find(Id).Email;
+                    return email;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
 
 
 
@@ -175,7 +198,8 @@ namespace Appointment.Business.Models
                     CreatedOn = reminders.CreatedOn,
                     ModifyOn = reminders.ModifyOn,
                     TypeID = reminders.TypeID,
-                    IsActive = reminders.IsActive.Value
+                    IsActive = reminders.IsActive.Value,
+
                 };
                 return GeneralReminder;
 
@@ -274,11 +298,18 @@ namespace Appointment.Business.Models
                 entity.ModifyOn = reminder.ModifyOn;
                 entity.CreatedBy = reminder.CreatedBy;
                 entity.TypeID = 2;
-
                 Entities.Reminders.Add(entity);
                 Entities.SaveChanges();
-
                 reminder.ID = entity.ID;
+                foreach (var x in reminder.SelectedGroupsID)
+                {
+                    Entities.RemindersGroups.Add(new RemindersGroup { GroupID = x, ReminderID = entity.ID, CreatedOn = DateTime.Now, CreatedBy = 1, ModifyOn = DateTime.Now, ModifyBy = 1 });
+                    Entities.SaveChanges();
+                }
+
+
+
+
 
 
             }
@@ -417,25 +448,35 @@ namespace Appointment.Business.Models
         {
             try
             {
+                //DeleteEmployeesGroups(group);
                 RemindersEntities Entities = new RemindersEntities();
+                Reminder entity = Entities.Reminders.Find(reminder.ID);
+                var list = entity.RemindersGroups;
 
-
-                Reminder entity = new Reminder();
-
-                entity.ID = reminder.ID;
-
-                Entities.Reminders.Attach(entity);
-
-                Entities.Reminders.Remove(entity);
-
-                var reminderDetails = Entities.Reminders.Where(pd => pd.ID == entity.ID);
-
-                foreach (var reminderDetail in reminderDetails)
-                {
-                    Entities.Reminders.Remove(reminderDetail);
-                }
-
+                Entities.RemindersGroups.RemoveRange(list);
                 Entities.SaveChanges();
+                Entities.Reminders.Remove(entity);
+                Entities.SaveChanges();
+
+
+                //RemindersEntities Entities = new RemindersEntities();
+
+                //Reminder entity = new Reminder();
+
+                //entity.ID = reminder.ID;
+
+                //Entities.Reminders.Attach(entity);
+
+                //Entities.Reminders.Remove(entity);
+
+                //var reminderDetails = Entities.RemindersGroups.Where(x =>x.ID == entity.ID);
+
+                //foreach (var reminderDetail in reminderDetails)
+                //{
+                //    Entities.RemindersGroups.Remove(reminderDetail);
+                //}
+
+                //Entities.SaveChanges();
 
 
 

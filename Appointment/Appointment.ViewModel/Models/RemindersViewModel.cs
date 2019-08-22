@@ -63,6 +63,7 @@ namespace Appointment.ViewModel.Models
 
         public virtual PositionsViewModel Positions { get; set; }
 
+        public virtual ICollection<lookupsViewModel> Lookups { get; set; }
 
     }
 }
