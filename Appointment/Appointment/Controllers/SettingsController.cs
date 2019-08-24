@@ -11,8 +11,35 @@ namespace Appointment.Controllers
 {
     public class SettingsController : Controller
     {
-        // GET: Settings
+
         public ActionResult Index()
+        {
+
+            //JobScheduler.Start();
+            SettingsViewModel obj = new SettingsViewModel();
+            obj.settingsView = new SettingsView();
+
+            ViewBag.AdminEmail = SettingService.EmailAdmin();
+            ViewBag.BirthdayEmailText = SettingService.BirthDayEmailText();
+            ViewBag.AnniversaryEmailText = SettingService.AnniversaryEmailText();
+            ViewBag.BirthdayReminder = SettingService.BirthdayReminderEN();
+            ViewBag.AnniversaryReminder = SettingService.AnniversaryReminderEN();
+            ViewBag.EventReminder = SettingService.EventReminderEN();
+            ViewBag.SendBirthday = SettingService.SendBirthdayEN();
+            ViewBag.SendAnniversary = SettingService.SendAnniversaryEN();
+            ViewBag.SendEvent = SettingService.SendEventEN();
+            ViewBag.UpComingReminder = SettingService.UpComingReminderEN();
+            return View();
+            return null;
+        }
+
+
+
+
+
+        // GET: Settings
+        [HttpGet]
+        public ActionResult Edit()
         {
 
             SettingsViewModel obj = new SettingsViewModel();
@@ -47,7 +74,7 @@ namespace Appointment.Controllers
             //return null;
         }
         [HttpPost]
-        public ActionResult Index(SettingsViewModel sv)
+        public ActionResult Edit(SettingsViewModel sv)
         {
            
                 SettingService.Save(sv);

@@ -1,4 +1,5 @@
 ﻿using Appointment.Business.Job;
+using Appointment.ViewModel.Models;
 using Ninject;
 using System;
 using System.Collections.Generic;
@@ -23,15 +24,37 @@ namespace Appointment
             //  Dependency.Register();
 
         }
+        //protected void Application_Error(object sender, EventArgs e)
+        //{
+        //    var ex = Server.GetLastError().GetBaseException();
+        //}
         protected void Application_Error(object sender, EventArgs e)
         {
-            var ex = Server.GetLastError().GetBaseException();
+            ErrorObject oError = new ErrorObject();
+            Exception oException = Server.GetLastError().GetBaseException();
+            Exception innerException = oException.InnerException;
+            HttpException httpException = oException as HttpException;
+            if (httpException == null && innerException != null)
+            {
+                httpException = innerException as HttpException;
+            }
+            Response.Clear();
+
+            oError.ErrorMessage = oException.Message;
+            //oError.FriendlyMessage = "Ooops!  There was a problem!";
+            oError.HttpCode = (httpException != null) ? httpException.GetHttpCode() : 0;
+
+            Server.ClearError();
+
+            Response.RedirectToRoute("Error", oError);
         }
+
         private static void RegisterServecies()
         {
             Ninject.IKernel kernel = new StandardKernel();
 
             System.Web.Mvc.DependencyResolver.SetResolver(new Appointment.Business.Models.NinjectDependencyResolver(kernel));
         }
+
     }
 }

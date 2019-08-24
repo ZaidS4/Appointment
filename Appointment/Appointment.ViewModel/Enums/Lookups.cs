@@ -8,8 +8,8 @@ namespace Appointment.ViewModel.Enums
 {
     public enum Lookups
     {
-        emplyee = 1,
-        Genral = 2
+        employee = 2,
+        general = 1
 
     }
 }

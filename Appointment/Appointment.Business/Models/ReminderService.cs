@@ -6,6 +6,7 @@ using System.Linq;
 using System.Data.Entity;
 using System.Web.Mvc;
 using Appointment.DAL.Models;
+using Appointment.ViewModel.Enums;
 
 namespace Appointment.Business.Models
 {
@@ -297,7 +298,7 @@ namespace Appointment.Business.Models
                 entity.ModifyBy = reminder.ModifyBy;
                 entity.ModifyOn = reminder.ModifyOn;
                 entity.CreatedBy = reminder.CreatedBy;
-                entity.TypeID = 2;
+                entity.TypeID = LookupService.GetLookupIdByCode((int)Lookups.general);
                 Entities.Reminders.Add(entity);
                 Entities.SaveChanges();
                 reminder.ID = entity.ID;
@@ -350,7 +351,7 @@ namespace Appointment.Business.Models
                     entity.CreatedBy = reminder.CreatedBy;
                     entity.CreatedOn = DateTime.Now;
                     entity.ModifyOn = DateTime.Now;
-                    entity.TypeID = 1;
+                    entity.TypeID = LookupService.GetLookupIdByCode((int)Lookups.employee);
 
                     Entities.Reminders.Add(entity);
                     Entities.SaveChanges();

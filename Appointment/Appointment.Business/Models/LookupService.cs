@@ -11,18 +11,18 @@ namespace Appointment.Business.Models
     public static class LookupService
     {
         /// <summary>
-        /// gets TypeId from DB 
+        /// gets TypeId from DB by code
         /// </summary>
         /// <returns>list of TypeId</returns>
-        public static Lookup GetLookupIdByCode(Reminder reminder)
+        public static int GetLookupIdByCode(int code)
         {
             try
             {
                 using (RemindersEntities db = new RemindersEntities())
                 {
 
-                    var ID = db.Lookups.Where(x => x.Code == reminder.TypeID.ToString()).First(x=>x.ID==reminder.ID);
-                    return ID;
+                    var Id = db.Lookups.Where(x => x.Code == code.ToString()).FirstOrDefault().ID;
+                    return Id;
 
                 }
             }

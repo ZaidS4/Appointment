@@ -18,6 +18,12 @@ namespace Appointment
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Reminder", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+          name: "Error",
+          url: "Errors/DisplayError/{oError}",
+          defaults: new { oError = UrlParameter.Optional }
+      );
         }
     }
 }

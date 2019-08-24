@@ -4,153 +4,97 @@
 
 <h1>Reminders</h1>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit","Settings",FormMethod.Get))
 {
     @Html.AntiForgeryToken()
 
 
-<div class="form-horizontal">
+    <div class="form-horizontal">
 
-    <hr />
+        <hr />
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.settingsView.EmailAdmin, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.settingsView.EmailAdmin, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.settingsView.EmailAdmin, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-
-
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.settingsView.BirthDayEmailText, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextAreaFor(model => model.settingsView.BirthDayEmailText, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.settingsView.BirthDayEmailText, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.settingsView.AnniversaryEmailText, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextAreaFor(model => model.settingsView.AnniversaryEmailText, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.settingsView.AnniversaryEmailText, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.settingsView.BirthdayReminder, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.BirthdayReminderID, new SelectList(Model.BirthdayReminder, "Value", "Text", new { @class = "form-control" }))
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.settingsView.AnniversaryReminder, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.AnniversaryReminderID, new SelectList(Model.AnniversaryReminder, "Value", "Text", new { @class = "form-control" }))
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.settingsView.EventReminder, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.EventReminderID, new SelectList(Model.EventReminder, "Value", "Text", new { @class = "form-control" }))
-        </div>
-    </div>
-
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.settingsView.RemindMeAt, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.settingsView.EmailAdmin, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.settingsView.RemindMeAt, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.settingsView.RemindMeAt, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.settingsView.SendBirthday, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.SendBirthdayID, new SelectList(Model.SendBirthday, "Value", "Text", new { @class = "form-control" }))
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.settingsView.SendAnniversary, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.SendAnniversaryID, new SelectList(Model.SendAnniversary, "Value", "Text", new { @class = "form-control" }))
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.settingsView.SendEvent, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.SendEventID, new SelectList(Model.SendEvent, "Value", "Text", new { @class = "form-control" }))
-        </div>
-    </div>
-
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.settingsView.SendEmailAt, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.settingsView.SendEmailAt, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.settingsView.SendEmailAt, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.settingsView.UpComingReminder, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.UpComingReminderID, new SelectList(Model.UpComingReminder, "Value", "Text", new { @class = "form-control" }))
-        </div>
-    </div>
-
-    @*<div class="form-group">
-            @Html.LabelFor(model => model.settingsView.EmailSender, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.settingsView.EmailSender, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.settingsView.EmailSender, "", new { @class = "text-danger" })
+                @ViewBag.AdminEmail
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.settingsView.PasswordSender, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.settingsView.BirthDayEmailText, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.settingsView.PasswordSender, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.settingsView.PasswordSender, "", new { @class = "text-danger" })
+                @ViewBag.BirthdayEmailText
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.settingsView.AnniversaryEmailText, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @ViewBag.AnniversaryEmailText
             </div>
         </div>
 
 
         <div class="form-group">
-            @Html.LabelFor(model => model.settingsView.smtpaddress, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.settingsView.BirthdayReminder, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.settingsView.smtpaddress, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.settingsView.smtpaddress, "", new { @class = "text-danger" })
+                @ViewBag.BirthdayReminder
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.settingsView.portnumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.settingsView.AnniversaryReminder, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.settingsView.portnumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.settingsView.portnumber, "", new { @class = "text-danger" })
+                @ViewBag.AnniversaryReminder
             </div>
-        </div>*@
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.settingsView.EventReminder, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @ViewBag.EventReminder
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.settingsView.SendBirthday, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @ViewBag.SendBirthday
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.settingsView.SendAnniversary, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @ViewBag.SendAnniversary
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.settingsView.SendEvent, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @ViewBag.SendEvent
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.settingsView.UpComingReminder, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @ViewBag.UpComingReminder
+            </div>
+        </div>
 
 
 
 
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Edit" class="btn btn-default" />
+            </div>
         </div>
     </div>
-</div>
 }
-
-

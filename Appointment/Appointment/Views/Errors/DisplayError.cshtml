@@ -1,0 +1,27 @@
+﻿@model Appointment.ViewModel.Models.ErrorObject
+
+@{
+    ViewBag.Title = "Error";
+}
+
+
+<br />
+<br />
+<br />
+ 
+<h2>Error Occured !</h2>
+
+
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+       
+        <dd>
+            @Html.DisplayFor(model => model.ErrorMessage)
+        </dd>
+    </dl>
+</div>
+<p>
+    <input type="button" value="Home" class="btn btn-default" onclick="location.href='@Url.Action("Index", "Reminder")'" />
+</p>
