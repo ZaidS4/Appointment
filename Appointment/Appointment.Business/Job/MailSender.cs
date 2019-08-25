@@ -12,6 +12,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Appointment.ViewModel.Enums;
 
 namespace Appointment.Business.Job
 {
@@ -34,16 +35,23 @@ namespace Appointment.Business.Job
                 RemindersEntities db = new RemindersEntities();
 
                 //Birthday
+
+
+                var emploeeLookupID = db.Lookups.Where(x => x.Code == ((int)Lookups.employee).ToString()).FirstOrDefault().Code;
+                var generalLookupID = db.Lookups.Where(x => x.Code == ((int)Lookups.general).ToString()).FirstOrDefault().Code;
                 List<RemindersViewModel> BirthDate = new List<RemindersViewModel>();
-                BirthDate = db.Reminders.Where(x => x.TypeID == 1).Select(x => new RemindersViewModel { Name = x.Employee.Name, BirthDate = x.BirthDate, Email = x.Employee.Email }).ToList();
+                var codeEmp = Convert.ToInt32(emploeeLookupID);
+                BirthDate = db.Reminders.Where(x =>  x.TypeID == codeEmp).Select(x => new RemindersViewModel { Name = x.Employee.Name, BirthDate = x.BirthDate, Email = x.Employee.Email }).ToList();
 
                 //Anniversary
                 List<RemindersViewModel> EmployeeStartDate = new List<RemindersViewModel>();
-                EmployeeStartDate = db.Reminders.Where(x => x.TypeID == 1).Select(x => new RemindersViewModel { Name = x.Employee.Name, StartDate = x.StartDate, Email = x.Employee.Email }).ToList();
+                var codeEst = Convert.ToInt32(emploeeLookupID);
+                EmployeeStartDate = db.Reminders.Where(x => x.TypeID == codeEst).Select(x => new RemindersViewModel { Name = x.Employee.Name, StartDate = x.StartDate, Email = x.Employee.Email }).ToList();
 
                 //general
                 List<RemindersViewModel> startDate = new List<RemindersViewModel>();
-                startDate = db.Reminders.Where(x => x.TypeID == 2).Select(x => new RemindersViewModel { StartDate = x.StartDate, Name = x.Name, BreifDescription = x.BreifDescription, ID = x.ID }).ToList();
+                var codeGen = Convert.ToInt32(generalLookupID);
+                startDate = db.Reminders.Where(x => x.TypeID == codeGen).Select(x => new RemindersViewModel { StartDate = x.StartDate, Name = x.Name, BreifDescription = x.BreifDescription, ID = x.ID }).ToList();
 
 
                 //For Send Email

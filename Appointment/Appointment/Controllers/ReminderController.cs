@@ -1,4 +1,5 @@
 ﻿using Appointment.Business.Models;
+using Appointment.ViewModel.Enums;
 using Appointment.ViewModel.Models;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
@@ -8,9 +9,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-
+//test
 namespace Appointment.Controllers
-{
+{//121
     public class ReminderController : BaseController
     {
         [UserRoleAuthorize(Roles = "Admin")]
@@ -20,6 +21,11 @@ namespace Appointment.Controllers
         /// <returns>the reminders in the DB</returns>
         public ActionResult Index()
         {
+            //throw new Exception("HI");
+
+
+
+
 
             return View(ReminderService.Read());
         }
@@ -40,7 +46,7 @@ namespace Appointment.Controllers
         {
             
             var type = ReminderService.GetType(id);
-            if (type == 1)
+            if (type == LookupService.GetLookupIdByCode((int)Lookups.employee))
             {
                 EmployeeRemindersViewModel obj = new EmployeeRemindersViewModel();
                 obj =  ReminderService.EmployeeRemindersGetByID(id);
@@ -291,7 +297,7 @@ namespace Appointment.Controllers
         public ViewResult Details(int id)
         {
             var type = ReminderService.GetType(id);
-            if (type == 1)
+            if (type == LookupService.GetLookupIdByCode((int)Lookups.employee))
             {
                 EmployeeRemindersViewModel obj = new EmployeeRemindersViewModel();
                 obj = ReminderService.EmployeeRemindersGetByID(id);
@@ -330,13 +336,6 @@ namespace Appointment.Controllers
         }
 
 
-        //[HttpGet]
-        //public ActionResult FetchCode(int ID)
-        //{
-        //    var Type = LookupService.GetTypeId(ID);
-        //    //return an object
-        //    return View(Type );
-        //}
 
 
     }

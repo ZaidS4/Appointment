@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Appointment.ViewModel.Enums
 {
-    public enum Lookups
+    public enum LookupCategories
     {
-        employee = 2,
-        general = 1
-
+        ReminderType = 1,
+        DurationToReminder = 2,
+        Months = 3
     }
 }
