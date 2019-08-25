@@ -333,6 +333,7 @@
     <Reference Include="System.Diagnostics.StackTrace, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.StackTrace.4.0.1\lib\net46\System.Diagnostics.StackTrace.dll</HintPath>
     </Reference>
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.FileSystem, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.FileSystem.4.0.1\lib\net46\System.IO.FileSystem.dll</HintPath>
@@ -698,6 +699,10 @@
     <ProjectReference Include="..\Appointment.Business\Appointment.Business.csproj">
       <Project>{8da0b3a0-3b60-4db3-945c-f033f5ca207c}</Project>
       <Name>Appointment.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Appointment.DAL\Appointment.DAL.csproj">
+      <Project>{99DB58DA-4798-4809-A2CF-362C1699AF4A}</Project>
+      <Name>Appointment.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Appointment.ViewModel\Appointment.ViewModel.csproj">
       <Project>{9329b31a-92d4-43c9-8648-7384b39f7f57}</Project>

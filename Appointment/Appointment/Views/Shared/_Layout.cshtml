@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+
 <html>
 <head>
     <style>
@@ -64,6 +65,7 @@
                     @*<li>@Html.ActionLink("Contact", "Contact", "Reminder")</li>*@
                 </ul>
                 <ul class="m" style="float:right">@HttpContext.Current.User.Identity.Name</ul>
+               
             </div>
         </div>
 
@@ -75,6 +77,7 @@
             <p>&copy; @DateTime.Now.Year - Reminder</p>
         </footer>
     </div>
+
 
     @*@RenderSection("JavaScript", required: false)*@
     @RenderSection("scripts", required: false)
