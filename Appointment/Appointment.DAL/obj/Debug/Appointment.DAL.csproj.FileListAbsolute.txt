@@ -22,3 +22,14 @@ C:\Users\Zaid\Appointment.get\Appointment\Appointment.DAL\obj\Debug\Appointment.
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.DAL\obj\Debug\Appointment.DAL.dll
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.DAL\obj\Debug\Appointment.DAL.pdb
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.DAL\obj\Debug\Appointment.DAL.csprojAssemblyReference.cache
+D:\Conected project\Appointment\Appointment.DAL\bin\Debug\Appointment.DAL.dll.config
+D:\Conected project\Appointment\Appointment.DAL\bin\Debug\Appointment.DAL.dll
+D:\Conected project\Appointment\Appointment.DAL\bin\Debug\Appointment.DAL.pdb
+D:\Conected project\Appointment\Appointment.DAL\bin\Debug\EntityFramework.dll
+D:\Conected project\Appointment\Appointment.DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Conected project\Appointment\Appointment.DAL\bin\Debug\EntityFramework.xml
+D:\Conected project\Appointment\Appointment.DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Conected project\Appointment\Appointment.DAL\obj\Debug\Appointment.DAL.csprojResolveAssemblyReference.cache
+D:\Conected project\Appointment\Appointment.DAL\obj\Debug\Appointment.DAL.csproj.CoreCompileInputs.cache
+D:\Conected project\Appointment\Appointment.DAL\obj\Debug\Appointment.DAL.dll
+D:\Conected project\Appointment\Appointment.DAL\obj\Debug\Appointment.DAL.pdb
