@@ -14,3 +14,11 @@ C:\Users\Zaid\Appointment.get\Appointment\Appointment.Resource\obj\Debug\Appoint
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.Resource\obj\Debug\Appointment.Resource.csproj.CoreCompileInputs.cache
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.Resource\obj\Debug\Appointment.Resource.dll
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.Resource\obj\Debug\Appointment.Resource.pdb
+D:\Conected project\Appointment\Appointment.Resource\bin\Debug\Appointment.Resource.dll
+D:\Conected project\Appointment\Appointment.Resource\bin\Debug\Appointment.Resource.pdb
+D:\Conected project\Appointment\Appointment.Resource\obj\Debug\Appointment.Resource.csprojResolveAssemblyReference.cache
+D:\Conected project\Appointment\Appointment.Resource\obj\Debug\Appointment.Resource.StringResource.resources
+D:\Conected project\Appointment\Appointment.Resource\obj\Debug\Appointment.Resource.csproj.GenerateResource.Cache
+D:\Conected project\Appointment\Appointment.Resource\obj\Debug\Appointment.Resource.csproj.CoreCompileInputs.cache
+D:\Conected project\Appointment\Appointment.Resource\obj\Debug\Appointment.Resource.dll
+D:\Conected project\Appointment\Appointment.Resource\obj\Debug\Appointment.Resource.pdb
