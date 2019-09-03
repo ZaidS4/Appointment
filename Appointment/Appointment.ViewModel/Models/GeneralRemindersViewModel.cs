@@ -57,7 +57,6 @@ namespace Appointment.ViewModel.Models
         public List<SelectListItem> Groups { get; set; }
 
         public int[] SelectedGroupsID { get; set; }
-        //public List<SelectListItem> Groups { get; set; }
 
 
     }

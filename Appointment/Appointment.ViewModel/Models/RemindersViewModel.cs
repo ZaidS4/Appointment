@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Appointment.ViewModel.Models;
+using System.Web.Mvc;
 
 namespace Appointment.ViewModel.Models
 {
@@ -13,38 +9,24 @@ namespace Appointment.ViewModel.Models
     {
         public int ID { get; set; }
 
-        [StringLength(50)]
-        [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Email id is required")]
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
 
-        
-        [Required(ErrorMessage = "BirthDate id is required")]
         public DateTime? BirthDate { get; set; }
 
-        [Required(ErrorMessage = "PositionID id is required")]
         public int? PositionID { get; set; }
 
         public bool? IsActive { get; set; }
 
         public Byte[] Image { get; set; }
 
-        
-        [Required(ErrorMessage = "StartDate id is required")]
         public DateTime? StartDate { get; set; }
 
-        
-        [Required(ErrorMessage = "EndDate id is required")]
         public DateTime? EndDate { get; set; } 
 
-        [Required(ErrorMessage = "BreifDescription is required")]
         public string BreifDescription { get; set; }
 
-        
-        [Required(ErrorMessage = "Time is required")]
         public TimeSpan? Time { get; set; }
 
         public int? EmployeeID { get; set; }
@@ -59,11 +41,18 @@ namespace Appointment.ViewModel.Models
 
         public int? CreatedBy { get; set; }
 
+        [Display(Name ="Type")]
         public int? TypeID { get; set; }
+
+        public string TypeName { get; set; }
+
+        public List<SelectListItem> Type { get; set; }
 
         public virtual PositionsViewModel Positions { get; set; }
 
         public virtual ICollection<lookupsViewModel> Lookups { get; set; }
+
+        public string ImagePath { get; set; }
 
     }
 }

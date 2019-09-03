@@ -32,10 +32,10 @@ namespace Appointment.DAL.Models
         public virtual DbSet<Lookup> Lookups { get; set; }
         public virtual DbSet<Permission> Permissions { get; set; }
         public virtual DbSet<Position> Positions { get; set; }
-        public virtual DbSet<Reminder> Reminders { get; set; }
         public virtual DbSet<RemindersGroup> RemindersGroups { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
         public virtual DbSet<UserPermission> UserPermissions { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Reminder> Reminders { get; set; }
     }
 }

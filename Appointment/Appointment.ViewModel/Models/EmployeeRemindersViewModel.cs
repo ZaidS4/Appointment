@@ -11,6 +11,7 @@ namespace Appointment.ViewModel.Models
 {
     public class EmployeeRemindersViewModel
     {
+
         [Key]
         public int ID { get; set; }
 
@@ -18,7 +19,9 @@ namespace Appointment.ViewModel.Models
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
 
-        //[EmailAddress(ErrorMessage = "Invalid Email Address")]
+        
+        public Byte[] Image { get; set; }
+
         [StringLength(30)]
         [Required(ErrorMessage = "Email is required")]
         [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
@@ -55,8 +58,7 @@ namespace Appointment.ViewModel.Models
         public int? TypeID { get; set; }
 
 
-
-        public Byte[] Image { get; set; }
+        public string ImagePath { get; set; }
 
 
         public int? EmployeeID { get; set; }
@@ -67,7 +69,6 @@ namespace Appointment.ViewModel.Models
        
         public List<SelectListItem> Positions { get; set; }
 
-        //public List<SelectListItem> Emails { get; set; }
 
     }
 }

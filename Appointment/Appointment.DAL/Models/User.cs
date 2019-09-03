@@ -24,12 +24,6 @@ namespace Appointment.DAL.Models
         public string Email { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public Nullable<int> ModifyBy { get; set; }
-
-        public IEnumerable<object> All()
-        {
-            throw new NotImplementedException();
-        }
-
         public Nullable<System.DateTime> ModifyOn { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public string Name { get; set; }

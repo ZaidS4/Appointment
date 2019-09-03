@@ -2,6 +2,9 @@
 
 @{
     ViewBag.Title = "Employee Reminder Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
 }
 
 <br />
@@ -9,100 +12,171 @@
 <div>
     <h2>Employee Reminder Edit</h2>
 
-    @using (Html.BeginForm("EmployeeReminderUpdate", "Reminder", FormMethod.Post))
+    @using (Html.BeginForm("EmployeeReminderUpdate", "Reminder", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
     {
         @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+        <div class="form-horizontal">
 
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
 
-        <div class="form-group">
-            @Html.Label("Title", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            <hr />
+            @Html.HiddenFor(model => model.ID)
+
+            <div class="form-group">
+                @Html.Label("Title", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.Label("Birth Date", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @Id = "datepicker", @class = "form-control", @ReadOnly = "ReadOnly" } })
-                @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.Label("Birth Date", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.BirthDate, new { htmlAttributes = new { @Id = "Birth", @class = "form-control" } })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.Label("Start Date", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @Id = "datepicker2", @class = "form-control", @ReadOnly = "ReadOnly" } })
-                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.Label("Start Date", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @Id = "Start", @class = "form-control", value = "{0:dd/MM/yyyy}" } })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.Label("Position", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="dropdown">
-                    @Html.DropDownListFor(m => m.PositionID, new SelectList(Model.Positions, "Value", "Text", new { @class = "form-control" }))
-                    @Html.ValidationMessageFor(model => model.PositionID, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.Label("Position", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="dropdown">
+                        @Html.DropDownListFor(m => m.PositionID, new SelectList(Model.Positions, "Value", "Text"), new { @class = "form-control", @Id = "Position" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Employees", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="dropdown">
+                        @Html.DropDownListFor(m => m.EmployeeID, new SelectList(Model.Employees, "Value", "Text"), new { @Id = "employee" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @ReadOnly = "ReadOnly" } })
+                    <label id="EmailError" style="display:none;color:red;">This Email is already used !</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Image", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="col-md-10">
+                        <input type="file" name="image1" id="image1" class="form-control" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Active", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.IsActive)
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" id="btnSubmit" />
+                    <input type="button" value="Back" class="btn btn-default" onclick="location.href='@Url.Action("Index", "Reminder")'" />
                 </div>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.Label("Employees", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="dropdown">
-                    @Html.DropDownListFor(m => m.EmployeeID, new SelectList(Model.Employees, "Value", "Text", new { @class = "form-control" }))
-                    @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @ReadOnly = "ReadOnly" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsActive)
-                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-                <input type="button" value="Back" class="btn btn-default" onclick="location.href='@Url.Action("Index", "Reminder")'" />
-            </div>
-        </div>
-    </div>
     }
 </div>
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="https://kendo.cdn.telerik.com/2019.2.619/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
+<link href="https://kendo.cdn.telerik.com/2019.2.619/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
+<script src="https://kendo.cdn.telerik.com/2019.2.619/js/jquery.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2019.2.619/js/kendo.all.min.js"></script>
+
+
+<link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-multiselect.js"></script>
 <script>
-    $(function () {
-        $("#datepicker").datepicker();
+    $(document).ready(function () {
+        $('#Position').multiselect({
+            includeSelectAllOption: false,
+            enableCaseInsensitiveFiltering: true,
+            enableFiltering: true,
+            multiselect: false,
+            maxHeight: 200
+        });
+
+
+        $('#employee').multiselect({
+            includeSelectAllOption: false,
+            enableCaseInsensitiveFiltering: true,
+            enableFiltering: true,
+            multiselect: false,
+            maxHeight: 200
+        });
+
+
+        var presentDate = new Date();
+        var varDate = new Date((new Date().getFullYear() - 18), 0, 1);
+            $("#Birth").kendoDatePicker({
+                value: new Date(1980, 01, 01),
+                max: varDate
+        });
+
+        $("#Start").kendoDatePicker({
+            value: presentDate,
+            min: presentDate,
+        });
+        var nowDate = Date.now.toString();
+
+        $('#employee').change(function () {
+            $("#EmailError").hide();
+            $('#btnSubmit').removeAttr('disabled');
+            var EmploeeID = $('#employee').val();
+            $.ajax({
+                url: '@Url.Action("FetchEmail", "Reminder")/?ID=' + EmploeeID ,
+                type: "GET",
+                cache: false,
+                async: false,
+                includeSelectAllOption: true,
+                enableCaseInsensitiveFiltering: true,
+                enableFiltering: true,
+                //data: { ID: EmploeeID },
+                datatype: "json",
+                success: function (response) {
+                    $('#Email').val(response.Email);
+                    var lblEmailValidation = $("#EmailError");
+                    var btnSubmit =          $('#btnSubmit');
+                    if (response.used) {
+                        lblEmailValidation.show();
+                        btnSubmit.attr('disabled', 'true');
+                    } else {
+                        lblEmailValidation.hide();
+                        btnSubmit.removeAttr('disabled');
+                    }
+                },
+                error: function (error) {
+                    debugger;
+                    alert(error);
+                }
+            });
+        });
+
     });
 
-    $(function () {
-        $("#datepicker2").datepicker();
-    });
+
+
 </script>

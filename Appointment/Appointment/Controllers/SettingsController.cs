@@ -30,7 +30,7 @@ namespace Appointment.Controllers
             ViewBag.SendEvent = SettingService.SendEventEN();
             ViewBag.UpComingReminder = SettingService.UpComingReminderEN();
             return View();
-            return null;
+            //return null;
         }
 
 

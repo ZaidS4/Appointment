@@ -5,7 +5,6 @@ C:\Users\Zaid\source\repos\Appointment\Appointment.DAL\bin\Debug\EntityFramework
 C:\Users\Zaid\source\repos\Appointment\Appointment.DAL\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment.DAL\bin\Debug\EntityFramework.xml
 C:\Users\Zaid\source\repos\Appointment\Appointment.DAL\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\Zaid\source\repos\Appointment\Appointment.DAL\obj\Debug\Appointment.DAL.csprojAssemblyReference.cache
 C:\Users\Zaid\source\repos\Appointment\Appointment.DAL\obj\Debug\Appointment.DAL.csproj.CoreCompileInputs.cache
 C:\Users\Zaid\source\repos\Appointment\Appointment.DAL\obj\Debug\Appointment.DAL.csproj.CopyComplete
 C:\Users\Zaid\source\repos\Appointment\Appointment.DAL\obj\Debug\Appointment.DAL.dll
@@ -17,8 +16,8 @@ C:\Users\Zaid\Appointment.get\Appointment\Appointment.DAL\bin\Debug\EntityFramew
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.DAL\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.DAL\bin\Debug\EntityFramework.xml
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.DAL\obj\Debug\Appointment.DAL.csprojAssemblyReference.cache
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.DAL\obj\Debug\Appointment.DAL.csproj.CoreCompileInputs.cache
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.DAL\obj\Debug\Appointment.DAL.csproj.CopyComplete
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.DAL\obj\Debug\Appointment.DAL.dll
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.DAL\obj\Debug\Appointment.DAL.pdb
-C:\Users\Zaid\Appointment.get\Appointment\Appointment.DAL\obj\Debug\Appointment.DAL.csprojAssemblyReference.cache

@@ -27,5 +27,10 @@ namespace Appointment.ViewModel.Models
         public virtual RemindersViewModel RemindersViewModel { get; set; }
 
         public virtual GroupsViewModel GroupsViewModel { get; set; }
+
+        public string Name { get; set; }
+
+        public List<GroupsViewModel> Grouplist { get; set; }
+
     }
 }

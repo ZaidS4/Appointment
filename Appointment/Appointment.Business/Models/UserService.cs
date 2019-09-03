@@ -42,7 +42,7 @@ namespace Appointment.Business.Models
         public List<string> UserPermissions(string userName)
         {
 
-         var user =  Db.Users.Where(x => x.UserName == userName).FirstOrDefault();
+         var user =  Db.Users.Where(x => x.UserName == userName).SingleOrDefault();
           return  user.UserPermissions.Select(x => x.Permission.Name).ToList();
         }
 

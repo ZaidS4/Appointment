@@ -7,15 +7,40 @@ using System.Data.Entity;
 using System.Web.Mvc;
 using Appointment.DAL.Models;
 using Appointment.ViewModel.Enums;
+using System.Web;
+using System.IO;
+using System.DirectoryServices;
 
 namespace Appointment.Business.Models
 {
+    #region testCode
+    //try
+    //{
+    //    string DomainPath = "LDAP://DC=sssprocess,DC=com";
+    //    DirectoryEntry searchRoot = new DirectoryEntry(DomainPath);
+    //    SearchResult sr;
+    //    //changes
+    //    using (searchRoot)
+    //    {
+    //        DirectorySearcher search = new DirectorySearcher
+    //        (
+    //        searchRoot,
+    //        "(&(objectCategory=person)(objectClass=user))" //any user
+    //         );
+    //        search.PageSize = 1000;
+    //        search.ServerPageTimeLimit = TimeSpan.FromSeconds(10);
+    //        using (SearchResultCollection resultCollection = search.FindAll())
+    //        {
+
+    //        }
+    //    }
+    //}
+    //catch (Exception ex)
+    //{
+    //}
+    #endregion
     public class ReminderService : IDisposable
     {
-
-        
-
-
         /// <summary>
         /// method to get the type of Reminder by id
         /// </summary>
@@ -32,6 +57,33 @@ namespace Appointment.Business.Models
 
 
 
+        /// <summary>
+        /// gets Type from DB then set it in dropdownlist
+        /// </summary>
+        /// <returns>list of positions</returns>
+        public static List<SelectListItem> GetTypeName()
+        {
+            try
+            {
+                using (RemindersEntities db = new RemindersEntities())
+                {
+                    var list = db.Lookups.Where(x => x.Code.Equals("1") || x.Code.Equals("2")).Select(m => new SelectListItem
+                    {
+                        Value = m.ID.ToString(),
+                        Text = m.NameEn,
+                    }).ToList();
+
+                    return list;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
 
         /// <summary>
         /// gets positions from DB then set it in dropdownlist
@@ -43,7 +95,6 @@ namespace Appointment.Business.Models
             {
                 using (RemindersEntities db = new RemindersEntities())
                 {
-                    List<EmployeeRemindersViewModel> emp = new List<EmployeeRemindersViewModel>();
                     var list = db.Positions.Select(m => new SelectListItem
                     {
                         Value = m.ID.ToString(),
@@ -72,7 +123,6 @@ namespace Appointment.Business.Models
             {
                 using (RemindersEntities db = new RemindersEntities())
                 {
-                    List<EmployeeRemindersViewModel> emp = new List<EmployeeRemindersViewModel>();
                     var list = db.Groups.Select(m => new SelectListItem
                     {
                         Value = m.ID.ToString(),
@@ -94,7 +144,7 @@ namespace Appointment.Business.Models
         /// gets Email from DB then set it in dropdownlist
         /// </summary>
         /// <returns>list of Email</returns>
-        public static string GetEmail( int Id)
+        public static string GetEmail(int Id)
         {
             try
             {
@@ -113,7 +163,31 @@ namespace Appointment.Business.Models
 
         }
 
+        /// <summary>
+        /// gets Email from DB then set it in dropdownlist
+        /// </summary>
+        /// <returns>list of Email</returns>
+        public static bool CheckUsedEmployee(int Id)
+        {
+            try
+            {
 
+               
+
+                using (RemindersEntities db = new RemindersEntities())
+                {
+
+                    var used = db.Reminders.Any(x => x.EmployeeID == Id);
+                    return used;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
 
         /// <summary>
         /// gets positions from DB then set it in dropdownlist
@@ -149,7 +223,7 @@ namespace Appointment.Business.Models
         /// </summary>
         /// <param name="id">selected reminder</param>
         /// <returns>selected item object</returns>
-        public static EmployeeRemindersViewModel EmployeeRemindersGetByID(int id)
+        public static EmployeeRemindersViewModel EmployeeRemindersGetByID(int? id)
         {
             using (RemindersEntities db = new RemindersEntities())
             {
@@ -162,14 +236,47 @@ namespace Appointment.Business.Models
                     Email = reminders.Email,
                     BirthDate = reminders.BirthDate,
                     StartDate = reminders.StartDate,
+                    Image = reminders.Image,
                     PositionID = reminders.PositionID,
-                    CreatedOn=reminders.CreatedOn,
-                    ModifyOn=reminders.ModifyOn,
+                    CreatedOn = reminders.CreatedOn,
+                    ModifyOn = reminders.ModifyOn,
                     IsActive = reminders.IsActive.Value,
-                    Position = reminders.PositionID.HasValue ?  reminders.Position.Name :""
+                    Position = reminders.PositionID.HasValue ? reminders.Position.Name : ""
 
                 };
                 return EmployeeReminder;
+            }
+
+        }
+
+
+        /// <summary>
+        /// gets the Reminder details of selected reminder by id
+        /// </summary>
+        /// <param name="id">selected reminder</param>
+        /// <returns>selected item object</returns>
+        public static RemindersViewModel RemindersGetByID(int? id)
+        {
+            using (RemindersEntities db = new RemindersEntities())
+            {
+                Reminder reminders = db.Reminders.Where(x => x.ID == id).FirstOrDefault();
+
+                RemindersViewModel Reminder = new RemindersViewModel()
+                {
+                    ID = reminders.ID,
+                    Name = reminders.Name,
+                    Email = reminders.Email,
+                    BirthDate = reminders.BirthDate,
+                    StartDate = reminders.StartDate,
+                    Image = reminders.Image,
+                    PositionID = reminders.PositionID,
+                    CreatedOn = reminders.CreatedOn,
+                    ModifyOn = reminders.ModifyOn,
+                    IsActive = reminders.IsActive.Value
+
+
+                };
+                return Reminder;
             }
 
         }
@@ -186,6 +293,16 @@ namespace Appointment.Business.Models
             using (RemindersEntities db = new RemindersEntities())
             {
                 Reminder reminders = db.Reminders.Where(x => x.ID == id).FirstOrDefault();
+                var groups = db.Groups.ToList();
+                var remGroups = db.RemindersGroups.Where(z => z.ReminderID == reminders.ID).FirstOrDefault();
+
+                string groupName = string.Empty;
+                if (remGroups != null)
+                {
+                    var group = groups.Where(x => x.ID == remGroups.GroupID).FirstOrDefault();
+                    groupName = group == null ? "" : group.Name;
+                }
+
 
 
                 GeneralRemindersViewModel GeneralReminder = new GeneralRemindersViewModel()
@@ -200,8 +317,17 @@ namespace Appointment.Business.Models
                     ModifyOn = reminders.ModifyOn,
                     TypeID = reminders.TypeID,
                     IsActive = reminders.IsActive.Value,
+                    Group = groupName // reminders..HasValue ? reminders.Position.Name : ""
 
                 };
+                List<int> selected = new List<int>();
+
+                foreach (var ReminderGroup in reminders.RemindersGroups)
+                {
+                    selected.Add(ReminderGroup.GroupID);
+                }
+
+                GeneralReminder.SelectedGroupsID = selected.ToArray();
                 return GeneralReminder;
 
 
@@ -220,13 +346,15 @@ namespace Appointment.Business.Models
 
             try
             {
-               
+
                 using (RemindersEntities db = new RemindersEntities())
                 {
-                    var reminders = db.Reminders.ToList();
-
+                    var reminders = db.Reminders.Where(x => x.IsActive == true).ToList();
+                    var remTypes = db.Lookups.Where(z => z.IsActive == true && z.IsDeleted == false && z.CategoryID == 1).ToList();
                     foreach (var item in reminders)
                     {
+                        var remType = remTypes.Where(x => x.ID == item.TypeID).FirstOrDefault();
+                        string TypeName = remType == null ? item.TypeID.ToString() : remType.NameEn;
 
                         reminderViews.Add(new RemindersViewModel
                         {
@@ -238,10 +366,11 @@ namespace Appointment.Business.Models
                             IsActive = item.IsActive,
                             Image = item.Image,
                             StartDate = item.StartDate,
-                            EndDate = item.EndDate ,
+                            EndDate = item.EndDate,
                             BreifDescription = item.BreifDescription,
                             Time = item.Time,
                             EmployeeID = item.EmployeeID,
+                            TypeName = TypeName,
                             CreatedOn = item.CreatedOn,
                             ModifyBy = item.ModifyBy,
                             ModifyOn = item.ModifyOn,
@@ -289,14 +418,12 @@ namespace Appointment.Business.Models
                 entity.ID = reminder.ID;
                 entity.Name = reminder.Name;
                 entity.IsActive = reminder.IsActive;
-                entity.Image = null;// reminder.Image;
+                entity.Image = null;
                 entity.StartDate = reminder.StartDate.Value;
                 entity.EndDate = reminder.EndDate;
                 entity.BreifDescription = reminder.BreifDescription;
                 entity.Time = reminder.Time;
                 entity.CreatedOn = reminder.CreatedOn.Value;
-                entity.ModifyBy = reminder.ModifyBy;
-                entity.ModifyOn = reminder.ModifyOn;
                 entity.CreatedBy = reminder.CreatedBy;
                 entity.TypeID = LookupService.GetLookupIdByCode((int)Lookups.general);
                 Entities.Reminders.Add(entity);
@@ -321,7 +448,7 @@ namespace Appointment.Business.Models
         }
 
 
-    
+
         /// <summary>
         /// creates a new reminder of type employee
         /// </summary>
@@ -344,13 +471,11 @@ namespace Appointment.Business.Models
                     entity.BirthDate = reminder.BirthDate;
                     entity.PositionID = reminder.PositionID;
                     entity.IsActive = reminder.IsActive;
-                    entity.Image = null;// reminder.Image;
+                    entity.Image = null;
                     entity.StartDate = reminder.StartDate.Value;
                     entity.EmployeeID = reminder.EmployeeID;
-                    entity.ModifyBy = reminder.ModifyBy;
                     entity.CreatedBy = reminder.CreatedBy;
                     entity.CreatedOn = DateTime.Now;
-                    entity.ModifyOn = DateTime.Now;
                     entity.TypeID = LookupService.GetLookupIdByCode((int)Lookups.employee);
 
                     Entities.Reminders.Add(entity);
@@ -358,7 +483,10 @@ namespace Appointment.Business.Models
 
                     reminder.ID = entity.ID;
                 }
+                else
+                {
 
+                }
             }
             catch (Exception ex)
             {
@@ -371,7 +499,7 @@ namespace Appointment.Business.Models
         /// method to edit the reminder of type employee
         /// </summary>
         /// <param name="reminder">edited data of reminder</param>
-        public static void EmployeeReminderUpdate(EmployeeRemindersViewModel reminder)
+        public static void EmployeeReminderUpdate(EmployeeRemindersViewModel reminder, HttpPostedFileBase image1)
         {
             try
             {
@@ -385,16 +513,16 @@ namespace Appointment.Business.Models
                 entity.BirthDate = reminder.BirthDate;
                 entity.PositionID = reminder.PositionID;
                 entity.IsActive = reminder.IsActive;
-                //entity.Image = reminder.Image;
+                entity.Image = null;
+                entity.ImagePath = reminder.ImagePath;
                 entity.StartDate = reminder.StartDate.Value;
                 entity.EmployeeID = reminder.EmployeeID;
                 entity.ModifyBy = reminder.ModifyBy;
                 entity.ModifyOn = reminder.ModifyOn;
                 entity.CreatedBy = reminder.CreatedBy;
-                entity.TypeID = reminder.TypeID;
-                                               
+                entity.TypeID = LookupService.GetLookupIdByCode((int)Lookups.employee);
+
                 Entities.SaveChanges();
-                                                                          
             }
 
             catch (Exception ex)
@@ -402,6 +530,10 @@ namespace Appointment.Business.Models
                 throw ex;
             }
         }
+
+
+
+
 
 
         /// <summary>
@@ -413,24 +545,24 @@ namespace Appointment.Business.Models
             try
             {
                 RemindersEntities Entities = new RemindersEntities();
-                
+
                 Reminder entity = Entities.Reminders.Find(reminder.ID);
 
                 entity.Name = reminder.Name;
                 entity.IsActive = reminder.IsActive;
-                //entity.Image = reminder.Image;
                 entity.StartDate = reminder.StartDate.Value;
                 entity.EndDate = reminder.EndDate;
                 entity.BreifDescription = reminder.BreifDescription;
                 entity.Time = reminder.Time;
-          //      entity.CreatedOn = reminder.CreatedOn;//.Value;
                 entity.ModifyBy = reminder.ModifyBy;
                 entity.ModifyOn = reminder.ModifyOn;
-              //  entity.CreatedBy = reminder.CreatedBy;
-                entity.TypeID = reminder.TypeID;
-                
+                entity.TypeID = LookupService.GetLookupIdByCode((int)Lookups.general); ;
                 Entities.SaveChanges();
-
+                foreach (var x in reminder.SelectedGroupsID)//************??????
+                {
+                    Entities.RemindersGroups.Add(new RemindersGroup { GroupID = x, ReminderID = entity.ID, ModifyOn = DateTime.Now, ModifyBy = 1 });
+                    Entities.SaveChanges();
+                }
             }
 
             catch (Exception ex)
@@ -438,60 +570,6 @@ namespace Appointment.Business.Models
                 throw ex;
             }
         }
-
-
-
-        /// <summary>
-        /// Deleting selected reminders
-        /// </summary>
-        /// <param name="reminder">selected reminder</param>
-        public static void Delete(RemindersViewModel reminder)
-        {
-            try
-            {
-                //DeleteEmployeesGroups(group);
-                RemindersEntities Entities = new RemindersEntities();
-                Reminder entity = Entities.Reminders.Find(reminder.ID);
-                var list = entity.RemindersGroups;
-
-                Entities.RemindersGroups.RemoveRange(list);
-                Entities.SaveChanges();
-                Entities.Reminders.Remove(entity);
-                Entities.SaveChanges();
-
-
-                //RemindersEntities Entities = new RemindersEntities();
-
-                //Reminder entity = new Reminder();
-
-                //entity.ID = reminder.ID;
-
-                //Entities.Reminders.Attach(entity);
-
-                //Entities.Reminders.Remove(entity);
-
-                //var reminderDetails = Entities.RemindersGroups.Where(x =>x.ID == entity.ID);
-
-                //foreach (var reminderDetail in reminderDetails)
-                //{
-                //    Entities.RemindersGroups.Remove(reminderDetail);
-                //}
-
-                //Entities.SaveChanges();
-
-
-
-
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
-
-
-        }
-
 
 
         /// <summary>
@@ -505,5 +583,34 @@ namespace Appointment.Business.Models
 
             Entities.Dispose();
         }
+
+        //public static RemindersGroupsViewModel RemindersGroupsGetByID(int id)
+        //{
+        //    using (RemindersEntities db = new RemindersEntities())
+        //    {
+        //        Group groups = db.Groups.Find(id);
+
+
+        //        RemindersGroupsViewModel RemindersgroupInfo = new RemindersGroupsViewModel()
+        //        {
+        //            ID = groups.ID,
+        //            GroupID = groups.ID,
+        //            Name = groups.Name,
+        //            ReminderID = groups.RemindersGroups.Select(x => x.ReminderID).FirstOrDefault()
+        //        };
+        //        RemindersgroupInfo.Grouplist = new List<GroupsViewModel>();
+
+        //        foreach (var emp in groups.RemindersGroups)
+        //        {
+        //            RemindersgroupInfo.Grouplist.Add(new GroupsViewModel
+        //            {
+        //                Name = emp.Group.Name
+        //            });
+        //        }
+        //        return RemindersgroupInfo;
+        //    }
+        //}
+
+
     }
 }

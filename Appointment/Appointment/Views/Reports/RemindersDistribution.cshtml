@@ -1,0 +1,71 @@
+﻿@model Appointment.ViewModel.Models.RemindersViewModel
+
+@{
+    ViewBag.Title = "Reminders Distribution";
+}
+<br />
+<br />
+<br />
+<br />
+<h2>Reminders Distribution</h2>
+<br />
+<hr />
+<div>
+    @using (Html.BeginForm("ReminderReport", "Reports", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <br />
+        <div class="form-horizontal">
+
+
+
+            <div class="form-group">
+                @Html.Label("Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.TypeID, new SelectList(Model.Type, "Value", "Text", new { @class = "form-control" }))
+                    @Html.ValidationMessageFor(model => model.TypeID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Year", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", @id = "txtYear" } })
+                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Run to report" class="btn btn-default" />
+            </div>
+        </div>
+    }
+</div>
+<hr />
+<script>
+    $(document).ready(function () {
+        $("#txtYear").attr('maxlength', '4');
+        $("#txtYear").inputFilter(function (value) {
+            return /^\d*$/.test(value);
+        });
+    });
+
+    (function ($) {
+        $.fn.inputFilter = function (inputFilter) {
+            return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
+                if (inputFilter(this.value)) {
+                    this.oldValue = this.value;
+                    this.oldSelectionStart = this.selectionStart;
+                    this.oldSelectionEnd = this.selectionEnd;
+                } else if (this.hasOwnProperty("oldValue")) {
+                    this.value = this.oldValue;
+                    this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                }
+            });
+        };
+    }(jQuery));
+</script>

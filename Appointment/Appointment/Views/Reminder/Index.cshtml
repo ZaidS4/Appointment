@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "All reminders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 
@@ -16,15 +18,17 @@
 
               .Columns(columns =>
               {
-                  columns.Bound(p => p.Name).ToString();
+                  columns.Bound(p => p.Name).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).Delay(3000)));
                   columns.Bound(p => p.StartDate).Format("{0:dd/MM/yyyy}");
                   columns.Bound(p => p.EndDate).Format("{0:dd/MM/yyyy}");
+                  columns.Bound(p => p.TypeName).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).Delay(3000)));
+                  columns.Bound(p => p.IsActive).ToString();
+
 
                   columns.Command(command =>
                   {
                       command.Custom("Details").Action("Details", "Reminder").HtmlAttributes(new { id = "viewItem", title = "View", style = "width:30px;", value = "View Details" });
                       command.Custom("Edit").Action("Update", "Reminder").HtmlAttributes(new { id = "editItem", title = "Edit", value = "View Details" });
-                      command.Destroy();
                   }).Width(250);
               })
                 .ToolBar(toolbar => toolbar.Custom()
@@ -42,17 +46,13 @@
               .Navigatable()
               .Scrollable()
               .Selectable(selectable => selectable.Enabled(true).Mode(GridSelectionMode.Single).Type(GridSelectionType.Row))
-              .ColumnMenu()
               .Filterable(filterable => filterable.Mode(GridFilterMode.Row))
-              .DataSource(dataSource => dataSource
+              .HtmlAttributes(new { style = "height:400px;" })
+              .DataSource (dataSource => dataSource
                   .Server()
                   .PageSize(20)
                   .Model(model => model.Id(p => p.ID))
                   .Read("Index", "Reminder")
-                  .Destroy("Delete", "Reminder")
-
-
-
               )
         )
 
@@ -66,7 +66,7 @@
         background: #1cacff;
         color: #000000;
     }
-
+   
     .k-grid tr.k-state-selected:hover {
         background-color: #c5f1ff;
     }
@@ -77,6 +77,8 @@
 
     $(document).ready(function () {
         $("form.k-edit-form").kendoValidator();
+       
+
     });
 </script>
 

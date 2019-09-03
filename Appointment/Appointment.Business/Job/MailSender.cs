@@ -40,7 +40,7 @@ namespace Appointment.Business.Job
                 int emploeeLookupID = db.Lookups.Where(x => x.Code == ((int)Lookups.employee).ToString()).FirstOrDefault().ID;
                 int generalLookupID = db.Lookups.Where(x => x.Code == ((int)Lookups.general).ToString()).FirstOrDefault().ID;
                 List<RemindersViewModel> BirthDate = new List<RemindersViewModel>();
-                BirthDate = db.Reminders.Where(x =>  x.TypeID == emploeeLookupID).Select(x => new RemindersViewModel { Name = x.Employee.Name, BirthDate = x.BirthDate, Email = x.Employee.Email }).ToList();
+                BirthDate = db.Reminders.Where(x =>  x.TypeID == emploeeLookupID).Select(x => new RemindersViewModel { Name = x.Employee.Name, BirthDate = x.BirthDate, Email = x.Employee.Email,ImagePath =x.ImagePath }).ToList();
 
                 //Anniversary
                 List<RemindersViewModel> EmployeeStartDate = new List<RemindersViewModel>();
@@ -59,7 +59,7 @@ namespace Appointment.Business.Job
                     {
                         if (t.Day == item.BirthDate.Value.Day && t.Month == item.BirthDate.Value.Month)
                         {
-                            bool res = SendEmailBirthday(item.Name, item.Email);
+                            bool res = SendEmailBirthday(item.Name, item.Email,item.ImagePath);
                         }
                     }
                 }
@@ -138,7 +138,7 @@ namespace Appointment.Business.Job
             }
         }
         //---------------------------------------------Send Email Function Birthday-----------------------------------------//
-        public bool SendEmailBirthday(string name, string email)
+        public bool SendEmailBirthday(string name, string email,string fileName)
         {
             
             using (MailMessage mail = new MailMessage())
@@ -148,9 +148,14 @@ namespace Appointment.Business.Job
                 mail.Subject = name + " birthday";
                 mail.Body = SettingService.BirthDayEmailText();
                 mail.IsBodyHtml = true;
+                if (fileName != null)
+                {
+                    mail.Attachments.Add(new Attachment(fileName));
+                }
+                
 
 
-                //client for email
+                //user sender
                 using (SmtpClient smtp = new SmtpClient(SettingService.smtpaddress(), Convert.ToInt32(SettingService.portnumber())))
                 {
                     smtp.Credentials = new NetworkCredential(SettingService.EmailSender(), SettingService.PasswordSender());

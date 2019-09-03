@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Appointment.ViewModel.Models.CalendarViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<br />
+<br />
+<br />
+<br />
+<div class="row">
+    <div class="col-md-12">
+        @(Html.Kendo().Grid(Model)
+              .Name("CalendarGrid")
+
+              .Columns(columns =>
+              {
+                  columns.Bound(p => p.Name).ToString();
+                  columns.Bound(p => p.TheDate).Format("{0:dd/MM/yyyy}");
+                  // columns.Bound(p => p.BirthDate).Format("{0:dd/MM/yyyy}");
+              })
+              .Editable(editable => editable.Enabled(false).Mode(GridEditMode.InCell))
+              .Pageable(pageable => pageable
+                       .Refresh(true)
+                       .PageSizes(true)
+                       .ButtonCount(5))
+              .Sortable()
+              .Navigatable()
+              .Scrollable()
+              .Selectable(selectable => selectable.Enabled(true).Mode(GridSelectionMode.Single).Type(GridSelectionType.Row))
+              .ColumnMenu()
+              .Filterable(filterable => filterable.Mode(GridFilterMode.Row))
+              .DataSource(dataSource => dataSource
+                  .Server()
+                  .PageSize(20)
+                  .Model(model => model.Id(p => p.ID))
+                  .Read("Index", "Calendar")
+
+              )
+        )
+
+
+    </div>
+
+</div>
+
+<style>
+    .k-grid .k-state-selected {
+        background: #1cacff;
+        color: #000000;
+    }
+
+    .k-grid tr.k-state-selected:hover {
+        background-color: #c5f1ff;
+    }
+</style>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("form.k-edit-form").kendoValidator();
+    });
+</script>

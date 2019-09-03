@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Enums\LookupCategories.cs" />
     <Compile Include="Enums\Lookups.cs" />
+    <Compile Include="Models\CalendarViewModel.cs" />
     <Compile Include="Models\EmployeeRemindersViewModel.cs" />
     <Compile Include="Models\EmployeesGroupsViewModel.cs" />
     <Compile Include="Models\EmployeesViewModel.cs" />

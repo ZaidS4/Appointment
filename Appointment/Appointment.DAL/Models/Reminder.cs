@@ -27,21 +27,21 @@ namespace Appointment.DAL.Models
         public Nullable<int> PositionID { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public byte[] Image { get; set; }
-        public System.DateTime StartDate { get; set; }
+        public Nullable<System.DateTime> StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
         public string BreifDescription { get; set; }
         public Nullable<System.TimeSpan> Time { get; set; }
         public Nullable<int> EmployeeID { get; set; }
-        public System.DateTime CreatedOn { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<int> ModifyBy { get; set; }
         public Nullable<System.DateTime> ModifyOn { get; set; }
         public Nullable<int> CreatedBy { get; set; }
-        public Nullable<int> TypeID { get; set; }
+        public int TypeID { get; set; }
+        public string ImagePath { get; set; }
     
         public virtual Employee Employee { get; set; }
         public virtual Position Position { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RemindersGroup> RemindersGroups { get; set; }
-        public virtual ICollection<Lookup> Lookups { get; set; }
     }
 }

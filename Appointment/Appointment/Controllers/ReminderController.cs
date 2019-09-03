@@ -5,25 +5,22 @@ using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
+
 //test
 namespace Appointment.Controllers
 {//121
-    public class ReminderController : BaseController
+    public class ReminderController : Controller
     {
-        [UserRoleAuthorize(Roles = "Admin")]
         /// <summary>
         /// Index method displays data from DB into a grid
         /// </summary>
         /// <returns>the reminders in the DB</returns>
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            //throw new Exception("HI");
-
 
 
 
@@ -34,26 +31,26 @@ namespace Appointment.Controllers
 
 
 
-        
-       
+
+
+
         /// <summary>
         /// function called by index view when click edit on grid 
         /// </summary>
         /// <param name="id"> reminder id </param>
         /// <returns></returns>
         [HttpGet]
-        [UserRoleAuthorize(Roles = "Admin")]
         public ActionResult Update(int id)
         {
-            
+
             var type = ReminderService.GetType(id);
             if (type == LookupService.GetLookupIdByCode((int)Lookups.employee))
             {
                 EmployeeRemindersViewModel obj = new EmployeeRemindersViewModel();
-                obj =  ReminderService.EmployeeRemindersGetByID(id);
+                obj = ReminderService.EmployeeRemindersGetByID(id);
                 obj.Positions = ReminderService.GetPositions();
                 obj.Employees = ReminderService.GetEmployees();
-                //obj.Emails=ReminderService.GetEmail();
+
                 return View("EmployeeReminderUpdate", obj);
             }
             else
@@ -66,25 +63,27 @@ namespace Appointment.Controllers
         }
 
 
+
         /// <summary>
         /// method gets the changes of reminder that user made then save it in DB
         /// </summary>
         /// <param name="reminder">gets the data from the model</param>
         /// <returns>all reminders in DB after the change is done</returns>
         [HttpPost]
-        public ActionResult EmployeeReminderUpdate(EmployeeRemindersViewModel reminder)
+        public ActionResult EmployeeReminderUpdate(EmployeeRemindersViewModel reminder, HttpPostedFileBase image1)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    
+
                     reminder.ModifyOn = DateTime.Now;
                     reminder.ModifyBy = 1;
-                    reminder.TypeID = 1;
-        
+                    reminder.ImagePath = AppDomain.CurrentDomain.BaseDirectory + "img\\" + DateTime.Now.ToString("yyyyMMddhhmmss") + image1.FileName;
+                    image1.SaveAs(reminder.ImagePath);
+
                     //The model is valid - update the reminder and redisplay the grid.
-                    ReminderService.EmployeeReminderUpdate(reminder);
+                    ReminderService.EmployeeReminderUpdate(reminder, image1);
 
                     //GridRouteValues() is an extension method which returns the 
                     //route values defining the grid state - current page, sort expression, filter etc.
@@ -115,6 +114,12 @@ namespace Appointment.Controllers
         }
 
 
+
+
+
+
+
+
         /// <summary>
         /// general reminder edit method
         /// </summary>
@@ -128,7 +133,7 @@ namespace Appointment.Controllers
                 {
                     reminder.ModifyOn = DateTime.Now;
                     reminder.ModifyBy = 1;
-                    reminder.TypeID = 2;
+
 
                     //The model is valid - update the reminder and redisplay the grid.
                     ReminderService.GeneralReminderUpdate(reminder);
@@ -160,33 +165,18 @@ namespace Appointment.Controllers
             return View();
         }
 
-        /// <summary>
-        /// reminder remove method
-        /// </summary>
-        /// <param name="reminder">the reminder data that selected to be deleted</param>
-        /// <returns>index view</returns>
-        [HttpPost]
-        [UserRoleAuthorize(Roles = "Admin")]
-        public ActionResult Delete(RemindersViewModel reminder)
-        {
-            //RouteValueDictionary routeValues;
-            //Delete the record
-            ReminderService.Delete(reminder);
-            //routeValues = this.GridRouteValues();
-            //Redisplay the grid
-            RedirectToAction("Index");
-            return View("Index", ReminderService.Read());
-        }
 
 
 
-       
+
+
+
+
         /// <summary>
         /// method called when new general reminder is clicked
         /// </summary>
         /// <returns>view</returns>
         [HttpGet]
-        [UserRoleAuthorize(Roles = "Admin")]
         public ActionResult NewGeneralReminder()
         {
             GeneralRemindersViewModel obj = new GeneralRemindersViewModel();
@@ -195,6 +185,7 @@ namespace Appointment.Controllers
 
             return View(obj);
         }
+
 
         /// <summary>
         /// creates a new reminder of type general
@@ -207,15 +198,13 @@ namespace Appointment.Controllers
             if (ModelState.IsValid)
             {
                 //The model is valid - insert the reminder and redisplay the grid.
-                
+
                 reminder.CreatedOn = DateTime.Now;
-                reminder.ModifyOn = DateTime.Now;
-                reminder.ModifyBy = 1;
                 reminder.CreatedBy = 1;
 
                 ReminderService.Create(reminder);
 
-              //GridRouteValues() is an extension method which returns the 
+                //GridRouteValues() is an extension method which returns the 
                 //route values defining the grid state - current page, sort expression, filter etc.
                 RouteValueDictionary routeValues = this.GridRouteValues();
 
@@ -226,22 +215,29 @@ namespace Appointment.Controllers
             return View();
         }
 
+
+
+
+
+
+
+
         /// <summary>
         /// method called when new employee reminder button is clicked
         /// </summary>
         /// <returns>view</returns>
         [HttpGet]
-        [UserRoleAuthorize(Roles = "Admin")]
         public ActionResult NewEmployeeReminder()
         {
             TempData["isvalid"] = true;
             EmployeeRemindersViewModel obj = new EmployeeRemindersViewModel();
             obj.Positions = ReminderService.GetPositions();
             obj.Employees = ReminderService.GetEmployees();
-            
+
 
             return View(obj);
         }
+
 
 
         /// <summary>
@@ -251,16 +247,14 @@ namespace Appointment.Controllers
         /// <returns>view</returns>
         [HttpPost]
         public ActionResult NewEmployeeReminder(EmployeeRemindersViewModel reminder)
-
         {
+            List<string> Errors = new List<string>();
+
             bool isvalid = false;
             if (ModelState.IsValid)
             {
-                //The model is valid - insert the reminder and redisplay the grid.
-
+                
                 reminder.CreatedOn = DateTime.Now;
-                reminder.ModifyOn = DateTime.Now;
-                reminder.ModifyBy = 1;
                 reminder.CreatedBy = 1;
                 ReminderService.Create(reminder);
 
@@ -273,7 +267,6 @@ namespace Appointment.Controllers
             }
             else
             {
-                List<string> Errors = new List<string>();
 
                 foreach (ModelState modelState in ViewData.ModelState.Values)
                 {
@@ -284,9 +277,15 @@ namespace Appointment.Controllers
                 }
             }
             TempData["isvalid"] = isvalid;
-            
+
             return View();
         }
+
+
+
+
+
+
 
 
         /// <summary>
@@ -294,7 +293,6 @@ namespace Appointment.Controllers
         /// </summary>
         /// <param name="id">selected reminder id</param>
         /// <returns>method employeeremindergetbyid call</returns>
-        [UserRoleAuthorize(Roles = "Admin")]
         public ViewResult Details(int id)
         {
             var type = ReminderService.GetType(id);
@@ -307,11 +305,18 @@ namespace Appointment.Controllers
             }
             else
             {
-                return View("GeneralDetails", ReminderService.generalRemindersGetByID(id));
+                GeneralRemindersViewModel obj = new GeneralRemindersViewModel();
+                obj = ReminderService.generalRemindersGetByID(id);
+                return View("GeneralDetails", obj);
             }
 
-            
+
         }
+
+
+
+
+
 
 
 
@@ -323,22 +328,41 @@ namespace Appointment.Controllers
         public ViewResult GeneralDetails(int id)
         {
 
-            
+
             return View(ReminderService.generalRemindersGetByID(id));
         }
 
 
+
+
+
+
+
+        /// <summary>
+        /// Method to bring the employee email in email textbox
+        /// </summary>
+        /// <param name="ID">selected employee id</param>
+        /// <returns>Email</returns>
         [HttpGet]
         public JsonResult FetchEmail(int ID)
         {
             var Email = ReminderService.GetEmail(ID);
+            var used = ReminderService.CheckUsedEmployee(ID);
             //return an object
-            return Json(new { Email = Email}, JsonRequestBehavior.AllowGet);
+            return Json(new { Email = Email, used = used }, JsonRequestBehavior.AllowGet);
         }
 
 
 
 
+        [HttpGet]
+        public JsonResult Read([DataSourceRequest]DataSourceRequest request, int? ID)
+        {
+            if (ID.HasValue)
+                return Json(ReminderService.GetAll(/*ID.Value*/).ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            else
+                return null;
+        }
     }
 }
 
