@@ -11,13 +11,12 @@ namespace Appointment.ViewModel.Models
     {
         public int ID { get; set; }
         public string Name { get; set; }
-
-        [Display(Name = "Reminder Date")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime? TheDate { get; set; }
-
         public int? Day { get; set; }
         public int? Month { get; set; }
         public int? Year { get; set; }
+        public byte[] Image { get; set; }
 
 
     }

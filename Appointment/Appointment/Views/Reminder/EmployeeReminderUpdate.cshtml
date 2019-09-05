@@ -77,7 +77,7 @@
                     <input type="file" name="image1" id="image1" class="form-control" />
                     @if (Model.ImagePath != null)
                     {
-                    <img src="@Url.Content(Model.ImagePath)" />
+                    <img src="@Url.Content(Model.ImagePath)"  height="40px" width="40px"/>
 
                     }
                 </div>
@@ -97,7 +97,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" id="btnSubmit" />
+                <input type="submit" value="Edit" class="btn btn-default" id="btnSubmit" />
                 <input type="button" value="Back" class="btn btn-default" onclick="location.href='@Url.Action("Index", "Reminder")'" />
             </div>
         </div>

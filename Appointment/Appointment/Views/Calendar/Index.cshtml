@@ -1,8 +1,7 @@
 ﻿@model IEnumerable<Appointment.ViewModel.Models.CalendarViewModel>
 
 @{
-    ViewBag.Title = "Calender";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
 }
 
 
@@ -17,10 +16,8 @@
 
               .Columns(columns =>
               {
-                  columns.Bound(p => p.Name).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).Delay(3000)));
-                  columns.Bound(p => p.TheDate).Format("{0:dd/MM/yyyy}");
-
-                  // columns.Bound(p => p.BirthDate).Format("{0:dd/MM/yyyy}");
+                  columns.Bound(p => p.Name).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).Delay(600000)));
+                  columns.Bound(p => p.TheDate).Format("{0:MM/dd/yyyy}");/*.Filterable(f => f.UI());*/
               })
               .Editable(editable => editable.Enabled(false).Mode(GridEditMode.InCell))
               .Pageable(pageable => pageable
@@ -34,10 +31,10 @@
               .ColumnMenu()
               .Filterable(filterable => filterable.Mode(GridFilterMode.Row))
               .DataSource(dataSource => dataSource
-                  .Server()
+              .Ajax()
                   .PageSize(20)
                   .Model(model => model.Id(p => p.ID))
-                  .Read("Index", "Calendar")
+                  .Read(read => read.Action("Read", "Calendar") )
 
 
               )
@@ -58,28 +55,7 @@
         background-color: #c5f1ff;
     }
 </style>
-@*///////////////////////////////////////////////////////////*@
-<style>
-    /*.img {
-        display: inline-block;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        background-size: 32px 35px;
-        background-position: center center;
-        vertical-align: middle;
-        line-height: 32px;
-        box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2);
-        margin-left: 5px;
-    }*/
 
-    .customer-name {
-        display: inline-block;
-        vertical-align: middle;
-        line-height: 32px;
-        padding-left: 3px;
-    }
-</style>
 
 @*///////////////////////////////////////////////////////////*@
 <script type="text/javascript">
@@ -92,9 +68,9 @@
 
 @*/////////////////////////////////////*@
 @*<script >
-function GetImage(image) {
-    var returnString = '<img src="~/img/Untitled11.png" title=\"image\" height=\"24\" alt=\"image\" />';
-    return returnString;
-}
-</script>*@
+    function GetImage(image) {
+        var returnString = '<img src="~/img/Untitled11.png" title=\"image\" height=\"24\" alt=\"image\" />';
+        return returnString;
+    }
+    </script>*@
 

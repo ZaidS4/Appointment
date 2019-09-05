@@ -21,7 +21,7 @@ namespace Appointment
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             int StartHour = Convert.ToInt32(ConfigurationManager.AppSettings["SendEmailHour"].ToString()), Startmin = Convert.ToInt32(ConfigurationManager.AppSettings["SendEmailmin"].ToString());
-            JobScheduler.Start(StartHour, Startmin);
+            JobScheduler.StartM(StartHour, Startmin);
 
             int StartActiveDirectoryHour = Convert.ToInt32(ConfigurationManager.AppSettings["StartActiveDirectoryHour"].ToString()), StartActiveDirectorymin = Convert.ToInt32(ConfigurationManager.AppSettings["StartActiveDirectorymin"].ToString());
             Job.Start(StartActiveDirectoryHour, StartActiveDirectorymin);

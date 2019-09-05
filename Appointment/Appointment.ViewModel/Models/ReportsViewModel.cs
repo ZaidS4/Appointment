@@ -17,7 +17,10 @@ namespace Appointment.ViewModel.Models
         [Display(Name = "Start Date")]
         [Required(ErrorMessage = "Start Date is required.")]
         [DataType(DataType.Date)]
+
+
         public DateTime StartDate { get; set; }
+
 
         [Display(Name = "End Date")]
         [Required(ErrorMessage = "End Date is required.")]
@@ -27,7 +30,9 @@ namespace Appointment.ViewModel.Models
 
         [Display(Name = "Year")]
         [Required(ErrorMessage = "Year is required.")]
-      
+        [RegularExpression(@"^([0-9]){4}$", ErrorMessage = "please enter year.")]
+        [MaxLength(4, ErrorMessage = "Year cant be more than 4 numbers.")]
+        [MinLength(4, ErrorMessage = "Year cant be less than 4 numbers.")]
         public string year { get; set; }
 
 
@@ -39,7 +44,6 @@ namespace Appointment.ViewModel.Models
 
 
 
-
-
+     
     }
 }

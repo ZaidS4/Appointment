@@ -27,19 +27,7 @@ namespace Appointment.Business.Models
         }
 
 
-        //public static List<SelectListItem> GetYearList()
-        //{
-        //    var count = DateTime.Now.Year - 1990;
-        //    var list = new SelectList(Enumerable.Range( 1990, count + 1).Select(x =>
-
-        //     new SelectListItem()
-        //     {
-        //         Text = x.ToString(),
-        //         Value = x.ToString()
-        //     }), "Value", "Text");
-        //    return list.ToList();
-
-        //}
+        
         public static List<SelectListItem> GetTypeID()
         {
             using (RemindersEntities db = new RemindersEntities())

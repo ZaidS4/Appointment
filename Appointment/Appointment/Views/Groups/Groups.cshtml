@@ -16,7 +16,7 @@
              .Name("Kendo")
              .Columns(columns =>
              {
-                 columns.Bound(p => p.Name).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).Delay(3000)));
+                 columns.Bound(p => p.Name).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).Delay(600000)));
                  columns.Bound(p => p.EmployeesNumber);
                  columns.Bound(p => p.ID).Hidden();
                  columns.Command(command =>

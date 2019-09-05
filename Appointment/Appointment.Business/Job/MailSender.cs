@@ -38,7 +38,7 @@ namespace Appointment.Business.Job
                 int emploeeLookupID = db.Lookups.Where(x => x.Code == ((int)Lookups.employee).ToString()).FirstOrDefault().ID;
                 int generalLookupID = db.Lookups.Where(x => x.Code == ((int)Lookups.general).ToString()).FirstOrDefault().ID;
                 List<RemindersViewModel> BirthDate = new List<RemindersViewModel>();
-                BirthDate = db.Reminders.Where(x => x.TypeID == emploeeLookupID).Select(x => new RemindersViewModel { Name = x.Employee.Name, BirthDate = x.BirthDate, Email = x.Employee.Email, Image = x.Image }).ToList();//
+                BirthDate = db.Reminders.Where(x => x.TypeID == emploeeLookupID).Select(x => new RemindersViewModel { Name = x.Employee.Name, BirthDate = x.BirthDate, Email = x.Employee.Email, Image = x.Image,ImagePath=x.ImagePath }).ToList();//
 
                 //Anniversary
                 List<RemindersViewModel> EmployeeStartDate = new List<RemindersViewModel>();
@@ -57,7 +57,7 @@ namespace Appointment.Business.Job
                     {
                         if (t.Day == item.BirthDate.Value.Day && t.Month == item.BirthDate.Value.Month)
                         {
-                            bool res = SendEmailBirthday(item.Name, item.Email, item.Image);//
+                            bool res = SendEmailBirthday(item.Name, item.Email,item.ImagePath);//
                         }
                     }
                 }
@@ -136,23 +136,26 @@ namespace Appointment.Business.Job
             }
         }
         //---------------------------------------------Send Email Function Birthday-----------------------------------------//
-        public bool SendEmailBirthday(string name, string email, byte[] image)//
+        public bool SendEmailBirthday(string name, string email, string ImagePath)//
         {
-
+            string bod = "<html><body>this is a <img src="
+                    + ImagePath + "\"> embedded image.</body></html>";
             using (MailMessage mail = new MailMessage())
             {
                 mail.From = new MailAddress(SettingService.EmailSender());
                 mail.To.Add(email);
                 mail.Subject = "Have a wonderfull Birthday";
-                mail.Body = SettingService.BirthDayEmailText();
+                if (ImagePath == null)
+                {
+                    mail.Body = SettingService.BirthDayEmailText();
+                }
+                else
+                {
+                    mail.Body = SettingService.BirthDayEmailText() + bod;
+                }
                 mail.IsBodyHtml = true;
-                //if (image != null)
-                //{
-                //    var base64 = Convert.ToBase64String(image);
-                //    var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
-                //    mail.Attachments.Add(new Attachment(imgsrc));
 
-                //}
+
 
 
                 using (SmtpClient smtp = new SmtpClient(SettingService.smtpaddress(), Convert.ToInt32(SettingService.portnumber())))
@@ -160,6 +163,7 @@ namespace Appointment.Business.Job
                     smtp.Credentials = new NetworkCredential(SettingService.EmailSender(), SettingService.PasswordSender());
                     smtp.EnableSsl = true;
                     smtp.Send(mail);
+                    
                 }
 
             }

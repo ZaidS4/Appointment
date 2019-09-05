@@ -11,10 +11,12 @@ namespace Appointment.ViewModel.Models
     {
         [Required(ErrorMessage = "Birthday template is required")]
         [Display(Name = "Birthday Email Text")]
+        [MaxLength(500, ErrorMessage = "It shold be at most 500 chars!")]
         public String BirthDayEmailText { get; set; }
 
         [Required(ErrorMessage = "Anniversary template is required")]
         [Display(Name = "Anniversary Email Text")]
+        [MaxLength(500, ErrorMessage = "It shold be at most 500 chars!")]
         public String AnniversaryEmailText { get; set; }
 
 
@@ -30,9 +32,6 @@ namespace Appointment.ViewModel.Models
         public string EventReminder { get; set; }
 
 
-        //[DataType(DataType.Time)]
-        //[Display(Name = "Remind Me At")]
-        //public DateTime RemindMeAt { get; set; }
 
 
         [Display(Name = "Send Birthday Email")]
@@ -47,9 +46,7 @@ namespace Appointment.ViewModel.Models
         public string SendEvent { get; set; }
 
 
-        //[DataType(DataType.Time)]
-        //[Display(Name = "Send Reminder Email At")]
-        //public DateTime SendEmailAt { get; set; }
+        
 
         [Display(Name = "Upcoming Reminders")]
         public string UpComingReminder { get; set; }

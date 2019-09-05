@@ -15,7 +15,7 @@
 <br />
 <br />
 <h1>New Group</h1>
-
+<hr />
 <br />
 <br />
 <br />
@@ -73,5 +73,17 @@
             maxHeight: 200
         });
 
+    });
+
+    jQuery(function () {
+        debugger;
+        $("form").submit(function () {
+            // submit more than once return false
+            $(this).submit(function () {
+                return false;
+            });
+            // submit once return true
+            return true;
+        });
     });
 </script>

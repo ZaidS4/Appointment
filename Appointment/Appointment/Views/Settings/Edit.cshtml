@@ -1,6 +1,10 @@
 ﻿@model Appointment.ViewModel.Models.SettingsViewModel
 
+@{
+    ViewBag.Title = "Settings Edit";
 
+
+}
 <br />
 <br />
 <br />
@@ -66,13 +70,7 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.settingsView.RemindMeAt, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.settingsView.RemindMeAt, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.settingsView.RemindMeAt, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.settingsView.SendBirthday, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -96,13 +94,6 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.settingsView.SendEmailAt, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.settingsView.SendEmailAt, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.settingsView.SendEmailAt, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.settingsView.UpComingReminder, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -111,47 +102,11 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.settingsView.EmailSender, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.settingsView.EmailSender, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.settingsView.EmailSender, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.settingsView.PasswordSender, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.settingsView.PasswordSender, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.settingsView.PasswordSender, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.settingsView.smtpaddress, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.settingsView.smtpaddress, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.settingsView.smtpaddress, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.settingsView.portnumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.settingsView.portnumber, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.settingsView.portnumber, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-
-
-
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
-                <input type="button" value="Cancel" class="btn btn-default" onclick="location.href='@Url.Action("Index", "Settings")'" />
+                <input type="button" value="Cancel" class="btn btn-default" onclick="location.href='@Url.Action(" Index", "Settings" )'" />
 
             </div>
         </div>
@@ -159,3 +114,16 @@
 }
 
 
+<script>
+    jQuery(function () {
+        debugger;
+        $("form").submit(function () {
+            // submit more than once return false
+            $(this).submit(function () {
+                return false;
+            });
+            // submit once return true
+            return true;
+        });
+    });
+</script>

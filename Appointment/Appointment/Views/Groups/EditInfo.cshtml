@@ -1,8 +1,8 @@
-﻿@*////////////////////////////////////////////////////*@
-
+﻿
 <link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
 <script src="~/Scripts/bootstrap-multiselect.js"></script>
-@*////////////////////////////////////////////////////*@
+
+
 @model  Appointment.ViewModel.Models.EmployeesGroupsViewModel
 @{
     ViewBag.Title = "Edit Group Info";
@@ -11,6 +11,8 @@
 <br />
 <br />
 <h1>Edit Group</h1>
+<hr />
+
 <br />
 <br />
 <br />
@@ -54,7 +56,7 @@
 }
 <br />
 <br />
-@*///////////////////////////////////////////////*@
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('#Employees').multiselect({
@@ -65,5 +67,17 @@
         });
 
     });
+
+
+    jQuery(function () {
+        debugger;
+        $("form").submit(function () {
+            // submit more than once return false
+            $(this).submit(function () {
+                return false;
+            });
+            // submit once return true
+            return true;
+        });
+    });
 </script>
-@*//////////////////////////////////////////////////*@

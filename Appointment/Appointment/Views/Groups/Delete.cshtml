@@ -5,13 +5,14 @@
 }
 
 <h2>Delete</h2>
+<hr />
 
 <h3>Are you sure you want to delete this?</h3>
 
 <div>
 
     <hr />
-    <dl class="dl-horizontal">     
+    <dl class="dl-horizontal">
         <dt>
             @Html.DisplayName("Group Name")
         </dt>
@@ -23,27 +24,29 @@
         <dt>
             @Html.DisplayName("Employees")
         </dt>
+        <br />
         @foreach (var em in Model.Employeelist)
         {
             <dd>
-                @Html.DisplayFor(model=>em.Name)
+                @Html.DisplayFor(model => em.Name)
             </dd>
         }
-      
+
+        <br />
 
     </dl>
     <div style="clear: both;"> </div>
- 
-@using (Html.BeginForm("Delete", "groups", FormMethod.Post, new { id = "form", enctype = "multipart/form-data" }))
-  
+
+    @using (Html.BeginForm("Delete", "groups", FormMethod.Post, new { id = "form", enctype = "multipart/form-data" }))
+
     {
         @Html.AntiForgeryToken()
-       
+
         <div class="form-actions no-color">
             <input type="button" value="Back" class="btn btn-default" onclick="location.href='@Url.Action("Groups", "Groups")'" />
-            <input id="btnDelete" type="button"  value="Delete" class="btn btn-default" />
-                
-</div>
+            <input id="btnDelete" type="button" value="Delete" class="btn btn-default" />
+
+        </div>
     }
 </div>
 @section scripts{
@@ -65,9 +68,9 @@
                     {
                         $("#form").submit();
                     }
-                    else 
+                    else
                         alert("you can not be able to delete a group with reminders !");
-                                 
+
                 }
                 , error: function ()
                 {

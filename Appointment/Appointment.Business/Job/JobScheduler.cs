@@ -13,22 +13,21 @@ namespace Appointment.Business.Job
     public class JobScheduler
     {
 
-        public static void Start(int h,int m)
+        public static void StartM(int h,int m)
         {
             IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
             scheduler.Start();
 
             IJobDetail job = JobBuilder.Create<MailSender>().Build();
 
-            int hour = h;
-            int minute = m;
+            
             ITrigger trigger = TriggerBuilder.Create()
                 //.StartNow()
                 .WithDailyTimeIntervalSchedule
                   (s =>
                      s.WithIntervalInHours(24)
                     .OnEveryDay()
-                    .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(hour, minute))
+                    .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(h, m))
                   )
                 .Build();
 

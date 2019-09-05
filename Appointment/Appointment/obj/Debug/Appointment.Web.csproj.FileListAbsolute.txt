@@ -384,7 +384,6 @@ C:\Users\Zaid\source\repos\Appointment\Appointment\obj\Debug\Appointment.Web.csp
 C:\Users\Zaid\source\repos\Appointment\Appointment\obj\Debug\Appointment.Web.csproj.CopyComplete
 C:\Users\Zaid\source\repos\Appointment\Appointment\obj\Debug\Appointment.dll
 C:\Users\Zaid\source\repos\Appointment\Appointment\obj\Debug\Appointment.pdb
-C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Syncfusion.DocIO.Portable.xml
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\SqlServerTypes\x64\msvcr120.dll
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\SqlServerTypes\x64\SqlServerSpatial140.dll
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\SqlServerTypes\x86\msvcr120.dll
@@ -751,6 +750,7 @@ C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Quartz.xml
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Syncfusion.Compression.Base.xml
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Syncfusion.Compression.Portable.xml
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Syncfusion.DocIO.Base.xml
+C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Syncfusion.DocIO.Portable.xml
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Syncfusion.EJ2.Blazor.xml
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Syncfusion.EJ2.DocumentEditor.xml
 C:\Users\Zaid\Appointment.get\Appointment\Appointment\bin\Syncfusion.EJ2.DocumentEditor.Blazor.xml

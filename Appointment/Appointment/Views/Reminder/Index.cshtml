@@ -18,11 +18,11 @@
 
               .Columns(columns =>
               {
-                  columns.Bound(p => p.Name).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).Delay(3000)));
+                  columns.Bound(p => p.Name).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).Delay(600000)));
                   columns.Bound(p => p.StartDate).Format("{0:dd/MM/yyyy}");
                   columns.Bound(p => p.EndDate).Format("{0:dd/MM/yyyy}");
-                  columns.Bound(p => p.TypeName).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).Delay(3000)));
-                  columns.Bound(p => p.IsActive).Template(P=> P.IsActive.HasValue  ? (P.IsActive.Value ? "yes" : "no" ) : "no").ToString();
+                  columns.Bound(p => p.TypeName).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).Delay(600000)));
+                  columns.Bound(p => p.IsActive).Template(P=> P.IsActive.HasValue  ? (P.IsActive.Value ? "Active" : "Inactive") : "Inactive").ToString();
 
 
                   columns.Command(command =>

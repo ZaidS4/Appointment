@@ -14,14 +14,13 @@ using static Appointment.Business.Models.ReportService;
 
 namespace Appointment.Controllers
 {
-    public class ReportsController : BaseController
+    public class ReportsController : Controller
     {
 
         [HttpGet]
         public ActionResult RemindersDistribution()
         {
             ViewBag.Type = ReportService.GetTypeID();
-            //ViewBag.Years = ReportService.GetYearList();
             return View();
         }
 
@@ -33,7 +32,7 @@ namespace Appointment.Controllers
 
         // GET: /Report/
         [HttpPost]
-        public ActionResult RemindersDistribution(ReportsViewModel rvm,string yearpicker)
+        public ActionResult RemindersDistribution(ReportsViewModel rvm, string yearpicker)
         {
 
             List<ReportParameter> p = new List<ReportParameter>();
@@ -54,31 +53,19 @@ namespace Appointment.Controllers
         [HttpPost]
         public ActionResult ReminderReport(ReportsViewModel rvm)
         {
-            if (ModelState.IsValid)
-            {
-                List<ReportParameter> p = new List<ReportParameter>();
-                p.Add(new ReportParameter("P_Name", rvm.Name.ToString(), false));
-                p.Add(new ReportParameter("P_StartDate", rvm.StartDate.Date.ToString("MM/dd/yyyy"), false));
-                p.Add(new ReportParameter("P_EndDate", rvm.EndDate.Date.ToString("MM/dd/yyyy"), false));
 
-                ViewBag.ReportViewer = GetparamReport("RemindersReport", p);
-                return View("Index");
-            }
+            List<ReportParameter> p = new List<ReportParameter>();
+            p.Add(new ReportParameter("P_Name", rvm.Name.ToString(), false));
+            p.Add(new ReportParameter("P_StartDate", rvm.StartDate.Date.ToString("MM/dd/yyyy"), false));
+            p.Add(new ReportParameter("P_EndDate", rvm.EndDate.Date.ToString("MM/dd/yyyy"), false));
+            p.Add(new ReportParameter("P_ID", "", false));
 
-            return RedirectToAction("ReminderReport", "Reports");
+            ViewBag.ReportViewer = GetparamReport("RemindersReport", p);
+            return View("Index");
 
         }
 
-        //public ActionResult test()
-        //{
-        //    List<ReportParameter> p = new List<ReportParameter>();
-        //    p.Add(new ReportParameter("P_TypeID", "1", false));
-        //    p.Add(new ReportParameter("P_Year", "2019", false));//8/28/
-
-        //    ViewBag.ReportViewer = GetparamReport("Reminders Distribution", p);
-        //    return View("Index");
-        //}
-
+       
 
     }
 
