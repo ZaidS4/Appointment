@@ -1,7 +1,12 @@
-﻿
+﻿@*////////////////////////////////////////////////////*@
+
+<link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-multiselect.js"></script>
+@*////////////////////////////////////////////////////*@
 @model  Appointment.ViewModel.Models.EmployeesGroupsViewModel
 @{
     ViewBag.Title = "Edit Group Info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <br />
 <br />
@@ -17,20 +22,20 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })            
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
         </div>
     </div>
-
-    <script src="~/Scripts/jquery-3.3.1.slim.min.js"> </script>
-    <script src="~/Scripts/jquery.multi-select.js"></script>
-    <link href="~/Content/example-styles.css" rel="stylesheet" />
+    <br />
+    <br />
     <br />
     <br />
     <div class="form-group">
         @Html.Label("Employees", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-9">
             <div class="dropdown">
-                @Html.ListBoxFor(m => m.SelectedEmployeesID, new MultiSelectList(Model.Employees, "Value", "Text",  Model.SelectedEmployeesID ), new { id = "Employees", multiple = "multiple" })
+                @Html.ListBoxFor(m => m.SelectedEmployeesID, new MultiSelectList(Model.Employees, "Value", "Text", Model.SelectedEmployeesID), new { id = "Employees", multiple = "multiple" })
+                @Html.ValidationMessageFor(m => m.SelectedEmployeesID, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
@@ -39,11 +44,6 @@
     <br />
     <br />
     <br />
-    <br />
-    <br />
-    <br />
-
-
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Edit" class="btn btn-default" />
@@ -52,15 +52,18 @@
     </div>
 
 }
-@section scripts{
-    <script>
-    $(function () {
-        debugger;
-        $('#Employees').multiSelect({
-            width: "50%",
-            includeSelectAllOption: "true"
+<br />
+<br />
+@*///////////////////////////////////////////////*@
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Employees').multiselect({
+            includeSelectAllOption: true,
+            enableCaseInsensitiveFiltering: true,
+            enableFiltering: true,
+            maxHeight: 200
         });
-    });
-    </script>
-}
 
+    });
+</script>
+@*//////////////////////////////////////////////////*@

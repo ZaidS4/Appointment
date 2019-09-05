@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace Appointment.Controllers
 {
-    public class SettingsController : Controller
+    public class SettingsController : BaseController
     {
 
         public ActionResult Index()
@@ -41,14 +41,14 @@ namespace Appointment.Controllers
         [HttpGet]
         public ActionResult Edit()
         {
-
+            
             SettingsViewModel obj = new SettingsViewModel();
             obj.settingsView = new SettingsView();
             obj.settingsView.BirthDayEmailText = SettingService.BirthDayEmailText();
             obj.settingsView.AnniversaryEmailText = SettingService.AnniversaryEmailText();
             obj.settingsView.EmailAdmin = SettingService.EmailAdmin();
 
-            //get item selected value
+            //-----------------------get item selected value------------------------//
             obj.BirthdayReminderID = Convert.ToInt32(SettingService.BirthdayReminderID());
             obj.AnniversaryReminderID = Convert.ToInt32(SettingService.AnniversaryReminderID());
             obj.EventReminderID = Convert.ToInt32(SettingService.EventReminderID());
@@ -59,7 +59,7 @@ namespace Appointment.Controllers
 
 
 
-            //get list data from database(lookup table)
+            //--------------get list data from database(lookup table)--------------//
 
             obj.BirthdayReminder = SettingService.GetDayBefore();
             obj.AnniversaryReminder = SettingService.GetDayBefore();
@@ -67,17 +67,21 @@ namespace Appointment.Controllers
             obj.SendBirthday = SettingService.GetDayBefore();
             obj.SendAnniversary = SettingService.GetDayBefore();
             obj.SendEvent = SettingService.GetDayBefore();
-            obj.UpComingReminder = SettingService.GetDayBefore();
+            obj.UpComingReminder = SettingService.GetUpcoming();
 
 
             return View(obj);
-            //return null;
+          
         }
         [HttpPost]
         public ActionResult Edit(SettingsViewModel sv)
         {
-           
+            if (ModelState.IsValid)
+            {
                 SettingService.Save(sv);
+            }
+           
+                
            
             return RedirectToAction("Index","Settings");
         }

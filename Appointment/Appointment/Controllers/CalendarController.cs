@@ -8,9 +8,9 @@ using System.Web.Mvc;
 
 namespace Appointment.Controllers
 {
-    public class CalendarController : BaseController
+    public class CalendarController : Controller
     {
-        [UserRoleAuthorize(Roles = "Admin")]
+        
         public ActionResult Index()
         {
             //var type = ReminderService.GetType(id);

@@ -1,103 +1,77 @@
-﻿<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    @*<link href="~/Scripts/bootstrap.min.css" rel="stylesheet" />
-        <script src="~/Scripts/bootstrap.min.js"></script>
-        <script src="~/Scripts/bootstrap-multiselect.js"></script>
-        <link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />*@
-    <link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
-    <script src="~/Scripts/bootstrap-multiselect.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <link href="~/Scripts/bootstrap.min.css" rel="stylesheet" />
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#Employees').multiselect({
-                includeSelectAllOption: true,
-                enableCaseInsensitiveFiltering: true,
-                enableFiltering: true,
-                maxHeight: 200
-            });
+﻿
+<link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-multiselect.js"></script>
+
+
+
+@model  Appointment.ViewModel.Models.EmployeesGroupsViewModel
+
+@{
+    ViewBag.Title = "Create new Group";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<br />
+<br />
+<h1>New Group</h1>
+
+<br />
+<br />
+<br />
+
+@using (Html.BeginForm("Create", "Groups", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="form-group">
+        @Html.Label("Employees", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-9">
+            <div class="dropdown">
+                @Html.DropDownListFor(m => m.SelectedEmployeesID, new SelectList(Model.Employees, "Value", "Text"), new { id = "Employees", multiple = "true" })
+                @Html.ValidationMessageFor(m => m.SelectedEmployeesID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="button" value="Back" class="btn btn-default" onclick="location.href='@Url.Action("Groups", "Groups")'" />
+        </div>
+    </div>
+}
+
+<br />
+<br />
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Employees').multiselect({
+            includeSelectAllOption: true,
+            enableCaseInsensitiveFiltering: true,
+            enableFiltering: true,
+            maxHeight: 200
         });
 
-        function GetSelectedEmployees() {
-            var selectedEmployees = "";
-            $("#Employees option:selected").each(function () {
-            });
-            if (selectedEmployees) {
-                alert(selectedEmployees);
-            }
-            else {
-                alert("Please select at least one Employee");
-            };
-        }
-    </script>
-
-</head>
-
-<body>
-
-    @model  Appointment.ViewModel.Models.EmployeesGroupsViewModel
-
-    @{
-        ViewBag.Title = "Create new Group";
-    }
-
-    <br />
-    <br />
-    <h1>New Group</h1>
-
-    <br />
-    <br />
-    <br />
-    @using (Html.BeginForm("Create", "Groups", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-
-            </div>
-        </div>
-
-        <br />
-        <br />
-
-
-        <div class="form-group">
-            @Html.Label("Employees", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-9">
-                <div class="dropdown">
-                    @Html.DropDownListFor(m => m.SelectedEmployeesID, new SelectList(Model.Employees, "Value", "Text"), new { id = "Employees", multiple = "true" })
-                </div>
-            </div>
-        </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-
-        <form id="form1" runat="server">
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    &nbsp;&nbsp;&nbsp; <input type="submit" value="Create" class="btn btn-default" onclick=GetSelectedEmployees() />
-                    <input type="button" value="Back" class="btn btn-default" onclick="location.href='@Url.Action("Groups", "Groups")'" />
-                </div>
-            </div>
-        </form>
-    }
-
-
-</body>
-
-</html>
-
+    });
+</script>

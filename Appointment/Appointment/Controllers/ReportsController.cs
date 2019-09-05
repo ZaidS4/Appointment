@@ -8,22 +8,21 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using Appointment.Business.Models;
-using Appointment.DAL.Models;
 using Appointment.ViewModel.Models;
 using Microsoft.Reporting.WebForms;
-
+using static Appointment.Business.Models.ReportService;
 
 namespace Appointment.Controllers
 {
-    public class ReportsController : Controller
+    public class ReportsController : BaseController
     {
 
         [HttpGet]
         public ActionResult RemindersDistribution()
         {
-            RemindersViewModel obj = new RemindersViewModel();
-            obj.Type = ReminderService.GetTypeName();
-            return View(obj);
+            ViewBag.Type = ReportService.GetTypeID();
+            //ViewBag.Years = ReportService.GetYearList();
+            return View();
         }
 
         [HttpGet]
@@ -34,42 +33,54 @@ namespace Appointment.Controllers
 
         // GET: /Report/
         [HttpPost]
-        public ActionResult RemindersDistribution(int type, string year)
+        public ActionResult RemindersDistribution(ReportsViewModel rvm,string yearpicker)
         {
-            DateTime startDate = Convert.ToDateTime(year + "-01-01");
-            int nextYear = int.Parse(year) + 1;
-            DateTime endDate = Convert.ToDateTime(nextYear.ToString() + "-01-01");
 
-            using (RemindersEntities db = new RemindersEntities())
-            {
-                var reminders = db.Reminders.Where(x => x.TypeID == type && x.BirthDate >= startDate && x.BirthDate < endDate);
-            }
+            List<ReportParameter> p = new List<ReportParameter>();
 
-            //List<ReportParameter> p = new List<ReportParameter>();
-            //p.Add(new ReportParameter("P_Type", type.ToString(), false));
-            //p.Add(new ReportParameter("P_Year", year.Year.ToString(), false));
-            //r = ReportingService("", "", "", false, "reporting", p.AsEnumerable());
-            //ViewBag.ReportViewer = r.GetparamReport();
+            var b = rvm.SelectedType;
+            var type = ReportService.GetCodeForTypeID(b);
+            p.Add(new ReportParameter("P_TypeID", type.ToString(), false));
+
+
+            p.Add(new ReportParameter("P_Year", yearpicker, false));
+            ViewBag.ReportViewer = GetparamReport("Reminders Distribution", p);
+
 
             return View("Index");
+
+
         }
         [HttpPost]
-        public ActionResult ReminderReport(string title, DateTime startDate, DateTime endDate)
+        public ActionResult ReminderReport(ReportsViewModel rvm)
         {
-            List<ReportParameter> p = new List<ReportParameter>();
-            p.Add(new ReportParameter("P_Title", title.ToString(), false));
-            p.Add(new ReportParameter("P_StartDate", startDate.Date.ToString(), false));
-            p.Add(new ReportParameter("P_EndDate", endDate.Date.ToString(), false));
+            if (ModelState.IsValid)
+            {
+                List<ReportParameter> p = new List<ReportParameter>();
+                p.Add(new ReportParameter("P_Name", rvm.Name.ToString(), false));
+                p.Add(new ReportParameter("P_StartDate", rvm.StartDate.Date.ToString("MM/dd/yyyy"), false));
+                p.Add(new ReportParameter("P_EndDate", rvm.EndDate.Date.ToString("MM/dd/yyyy"), false));
 
-            //r = new ReportingService("", "", "", false, "reporting", p.AsEnumerable());
-            //ViewBag.ReportViewer = r.GetparamReport();
-            return View("Index");
+                ViewBag.ReportViewer = GetparamReport("RemindersReport", p);
+                return View("Index");
+            }
+
+            return RedirectToAction("ReminderReport", "Reports");
+
         }
 
+        //public ActionResult test()
+        //{
+        //    List<ReportParameter> p = new List<ReportParameter>();
+        //    p.Add(new ReportParameter("P_TypeID", "1", false));
+        //    p.Add(new ReportParameter("P_Year", "2019", false));//8/28/
+
+        //    ViewBag.ReportViewer = GetparamReport("Reminders Distribution", p);
+        //    return View("Index");
+        //}
 
 
     }
-
 
 
 }

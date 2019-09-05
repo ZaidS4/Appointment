@@ -26,7 +26,6 @@
         @foreach (var em in Model.Employeelist)
         {
             <dd>
-                @*@Html.Display(em.Name)*@
                 @Html.DisplayFor(model=>em.Name)
             </dd>
         }
@@ -41,14 +40,12 @@
         @Html.AntiForgeryToken()
        
         <div class="form-actions no-color">
-            @*<input type="submit" value="Delete" class="btn btn-default" />*@ 
             <input type="button" value="Back" class="btn btn-default" onclick="location.href='@Url.Action("Groups", "Groups")'" />
             <input id="btnDelete" type="button"  value="Delete" class="btn btn-default" />
                 
 </div>
     }
 </div>
-@*////////////////////////////////////////////////////*@
 @section scripts{
     <script type="text/javascript">
 
@@ -62,7 +59,6 @@
                 async: false,
                 cache: false,
                 dataType: 'json',
-                @*//data:{@Model.ID},*@                
                 success: function (data)
                 {
                     if (data.canDelete)
@@ -83,66 +79,3 @@
     </script>
 }
 
-@*/////////////////////////////////////////////////////////////////*@
-@*@section scripts{
-    <script>
-
-    $(document).ready(function () {
-        $("js-delete-group").click(function (e) {
-            debugger;
-            var link = $(e.target);
-
-            $.ajax({
-                url: "Groups" + link.attr("data-group-id"),
-                method: "DeleteCheck"
-            })
-                .done(function () {
-                    link.parents("li"); fadeOut(function () {
-                        $(this).remove();
-                    });
-                })
-                .fail(function () {
-                    alert("something failed!");
-                });
-
-        )
-    </script>
-}*@
-@*//////////////////////////////////////////////////////////*@
-
-@*@section scripts{
-<script type="text/javascript">
-
-    $(document).ready(function () {
-        $('#btnDelete').click(function (e) {
-            debugger;
-            // prevent the default event behaviour
-            e.preventDefault();
-
-            $.ajax({
-                url: "Groups/DeleteCheck?Id="+@Model.ID,
-                @*url: "Groups?Id=" +@Model.ID,
-                method: Delete,
-                type: "POST",
-                data: JSON.stringify({ 'Options': 'none' }),
-                dataType: "json",
-                traditional: true,
-                contentType: "application/json; charset=utf-8",
-                success: function (Delete) {
-
-                    // perform your save call here
-
-                    if (DeleteCheck.status == "Success") {
-                        $("#form").submit();
-                    } else {
-                        alert("you can not be able to delete a group with reminders !");
-                    }
-                },
-                //error: function () {
-                //    alert("An error has occured!!!");
-                //}
-            });
-        });
-    });
-</script>
-}*@

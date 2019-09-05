@@ -1,0 +1,51 @@
+﻿@model Appointment.ViewModel.Models.EmployeesGroupsViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+<br />
+<br />
+<br />
+<h2>Group Details</h2>
+
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Group Name")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Employees")
+        </dt>
+        @foreach (var em in Model.Employeelist)
+        {
+            <dd>
+                @*@Html.Display(em.Name)*@
+                @Html.DisplayFor(model => em.Name)
+            </dd>
+        }
+
+
+    </dl>
+    <div style="clear: both;"> </div>
+
+    @using (Html.BeginForm())
+
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @*<input type="submit" value="Delete" class="btn btn-default" />*@
+            <input type="button" value="Back" class="btn btn-default" onclick="location.href='@Url.Action("Groups", "Groups")'" />
+            
+
+        </div>
+    }
+</div>

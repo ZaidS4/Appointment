@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Enums\LookupCategories.cs" />
     <Compile Include="Enums\Lookups.cs" />
+    <Compile Include="Models\ActiveDirectoryUsersVM.cs" />
     <Compile Include="Models\CalendarViewModel.cs" />
     <Compile Include="Models\EmployeeRemindersViewModel.cs" />
     <Compile Include="Models\EmployeesGroupsViewModel.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Models\PositionsViewModel.cs" />
     <Compile Include="Models\RemindersGroupsViewModel.cs" />
     <Compile Include="Models\RemindersViewModel.cs" />
+    <Compile Include="Models\ReportsViewModel.cs" />
     <Compile Include="Models\SettingsView.cs" />
     <Compile Include="Models\SettingsViewModel.cs" />
     <Compile Include="Models\UserPermissionsViewModel.cs" />

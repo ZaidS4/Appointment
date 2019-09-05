@@ -104,7 +104,7 @@
 <script type="text/javascript">
 
     function Validate() {
-        debugger;
+        
         var validateMessage = 'you have to select at least one group !';
         var validateLabel = $('#lblGroupValidation');
         var SelectedGroups = $('#Group').val();
@@ -173,20 +173,20 @@
 
         start.max(end.value());
         end.min(start.value());
-        //$("#StartDate").kendoDatePicker({
-        //    // defines the start view
-        //    start: "year",
+        
 
-        //    // defines when the calendar should return date
-        //    depth: "year",
-
-        //    // display month and year in the input
-        //    format: "MMMM yyyy",
-
-        //    // specifies that DateInput is used for masking the input element
-        //    dateInput: true
-        //});
+    });
 
 
+    jQuery(function () {
+        debugger;
+        $("form").submit(function () {
+            // submit more than once return false
+            $(this).submit(function () {
+                return false;
+            });
+            // submit once return true
+            return true;
+        });
     });
 </script>

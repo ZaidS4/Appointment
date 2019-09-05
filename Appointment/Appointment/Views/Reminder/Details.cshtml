@@ -75,6 +75,18 @@
         </dd>
         <br />
         <dt>
+            @Html.DisplayName("Image")
+        </dt>
+
+        <dd>
+            @if (Model.ImagePath != null)
+            {
+                <img src="@Url.Content(Model.ImagePath)" />
+            }
+
+        </dd>
+        <br />
+        <dt>
             @Html.DisplayName("Activity")
         </dt>
 

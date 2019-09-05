@@ -1,0 +1,9 @@
+ <add key="StartActiveDirectoryHour" value="12" />
+    <add key="StartActiveDirectorymin" value="00" />
+
+
+
+global
+
+            int StartActiveDirectoryHour = Convert.ToInt32(ConfigurationManager.AppSettings["StartActiveDirectoryHour"].ToString()), StartActiveDirectorymin = Convert.ToInt32(ConfigurationManager.AppSettings["StartActiveDirectorymin"].ToString());
+            Job.Start(StartActiveDirectoryHour, StartActiveDirectorymin);

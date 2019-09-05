@@ -50,12 +50,16 @@
             @Html.DisplayFor(model => model.Time)
         </dd>
         <br />
+        
+
         <dt>
             @Html.DisplayName("Groups")
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Group)
+            @foreach (var group in Model.SelectedGroups)
+            {
+            <p>@Html.DisplayFor(model => group)  </p>
+            }
         </dd>
         <br />
         <dt>
@@ -99,3 +103,9 @@
         </div>
     </div>
 </p>
+
+<style>
+    p {
+        display: inline;
+    }
+</style>

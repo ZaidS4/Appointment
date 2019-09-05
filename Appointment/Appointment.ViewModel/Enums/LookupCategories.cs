@@ -10,6 +10,7 @@ namespace Appointment.ViewModel.Enums
     {
         ReminderType = 1,
         DurationToReminder = 2,
-        Months = 3
+        Months = 3,
+        DurationToUpComing = 4
     }
 }

@@ -10,6 +10,7 @@ namespace Appointment.ViewModel.Models
 {
     public class EmployeesGroupsViewModel
     {
+        [Key]
         public int ID { get; set; }
         public int? EmployeeID { get; set; }
         public int GroupID { get; set; }
@@ -18,15 +19,19 @@ namespace Appointment.ViewModel.Models
         public Nullable<System.DateTime> ModifyOn { get; set; }
         public Nullable<int> CreatedBY { get; set; }
 
-        //[StringLength(30)]
-        //[Required]
+        [StringLength(20)]
+        [Required(ErrorMessage = "Name is required!!")]
         public string Name { get; set; }
         
         public virtual EmployeesViewModel Employee { get; set; }
         public virtual GroupsViewModel Groups { get; set; }
-        public List<SelectListItem> Employees { get; set; }
+
+       
         public List<EmployeesViewModel> Employeelist { get; set; }
+        //[Required(ErrorMessage = "Select at least one Employee")]
+        [Required(ErrorMessage = " Please Select at least one employee!!")]
         public  int[] SelectedEmployeesID { get; set; }
+        public List<SelectListItem> Employees { get; set; }
         //public List <EmployeesGrupsViewModel> EmployeesGroupViewModel { get; set; }
 
 

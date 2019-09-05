@@ -71,7 +71,6 @@
                 @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @Id = "Email", @ReadOnly = "ReadOnly" } })
-                    @*@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", @id = "EmailError" })*@
                     <label id="EmailError" style="display:none;color:red;">This Email is already used !</label>
                 </div>
 
@@ -158,12 +157,12 @@
                     $('#Email').val(response.Email);
                     var lblEmailValidation = $("#EmailError");
                     var btnSubmit =          $('#btnSubmit');
-                    if (response.used) {
-                        lblEmailValidation.show();
-                        btnSubmit.attr('disabled', 'true');
-                    } else {
+                if (response.CanBeUsed) {
                         lblEmailValidation.hide();
                         btnSubmit.removeAttr('disabled');
+                    } else {
+                        lblEmailValidation.show();
+                        btnSubmit.attr('disabled', 'true');
                     }
                 },
                 error: function (error) {
@@ -176,5 +175,15 @@
     });
 
 
-
+    jQuery(function () {
+        debugger;
+        $("form").submit(function () {
+            // submit more than once return false
+            $(this).submit(function () {
+                return false;
+            });
+            // submit once return true
+            return true;
+        });
+    });
 </script>

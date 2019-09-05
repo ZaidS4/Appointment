@@ -175,4 +175,17 @@
         start.max(end.value());
         end.min(start.value());
     });
+
+
+    jQuery(function () {
+        debugger;
+        $("form").submit(function () {
+            // submit more than once return false
+            $(this).submit(function () {
+                return false;
+            });
+            // submit once return true
+            return true;
+        });
+    });
 </script>

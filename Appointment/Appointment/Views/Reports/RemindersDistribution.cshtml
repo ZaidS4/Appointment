@@ -1,4 +1,5 @@
-﻿@model Appointment.ViewModel.Models.RemindersViewModel
+﻿@model Appointment.ViewModel.Models.ReportsViewModel
+@using Kendo.Mvc.UI;
 
 @{
     ViewBag.Title = "Reminders Distribution";
@@ -11,7 +12,7 @@
 <br />
 <hr />
 <div>
-    @using (Html.BeginForm("ReminderReport", "Reports", FormMethod.Post))
+    @using (Html.BeginForm("RemindersDistribution", "Reports", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
 
@@ -23,49 +24,74 @@
             <div class="form-group">
                 @Html.Label("Type", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownListFor(m => m.TypeID, new SelectList(Model.Type, "Value", "Text", new { @class = "form-control" }))
-                    @Html.ValidationMessageFor(model => model.TypeID, "", new { @class = "text-danger" })
+
+                    @Html.DropDownListFor(model => model.SelectedType, (IEnumerable<SelectListItem>)ViewBag.Type, "Select Type", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SelectedType, "", new { @class = "text-danger" })
+
                 </div>
             </div>
 
+            @*<div class="form-group">
+                    @Html.Label("Year", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.SelectedYear, (IEnumerable<SelectListItem>)ViewBag.Years, new { @class = "form-control" })
+                    </div>
+                </div>*@
             <div class="form-group">
                 @Html.Label("Year", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", @id = "txtYear" } })
-                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                    <input name="year" id="yearpicker" data-role="datepicker" data-start="decade" data-depth="decade" type="number" maxlength="4" minlength="4" data-format="yyyy" />
+                    @Html.HiddenFor(model => model.year, new { @id = "year" })
+                    @Html.ValidationMessageFor(model => model.year, "", new { @class = "text-danger" })
+                    @*<lable id="lblYearValidation" style="color:red;font-weight:bold;display:none;"></lable>*@
+
                 </div>
             </div>
-
         </div>
         <br />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Run to report" class="btn btn-default" />
+                <input type="submit" value="Run to report" class="btn btn-default" onclick="return Validate();" />
             </div>
         </div>
+     
     }
 </div>
-<hr />
-<script>
-    $(document).ready(function () {
-        $("#txtYear").attr('maxlength', '4');
-        $("#txtYear").inputFilter(function (value) {
-            return /^\d*$/.test(value);
-        });
-    });
 
-    (function ($) {
-        $.fn.inputFilter = function (inputFilter) {
-            return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
-                if (inputFilter(this.value)) {
-                    this.oldValue = this.value;
-                    this.oldSelectionStart = this.selectionStart;
-                    this.oldSelectionEnd = this.selectionEnd;
-                } else if (this.hasOwnProperty("oldValue")) {
-                    this.value = this.oldValue;
-                    this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
-                }
-            });
-        };
-    }(jQuery));
+<script src="https://kendo.cdn.telerik.com/2019.2.619/js/jquery.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2019.2.619/js/jszip.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2019.2.619/js/kendo.all.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2019.2.619/js/kendo.aspnetmvc.min.js"></script>
+
+<script>
+    //function Validate() {
+    //    debugger;
+    //    var validateMessage = 'you have to select a year !';
+    //    var validateLabel = $('#lblYearValidation');
+    //    var SelectedGroups = $('#yearpicker').val().toString();
+    //    if (SelectedGroups == "") {
+    //        //alert('please select group !');
+    //        validateLabel.html(validateMessage);
+    //        validateLabel.show();
+    //        return false;
+    //    } else {
+    //        validateLabel.hide();
+    //        return true;
+    //    }
+    //}
+
+
+    $(document).ready(function () {
+        $("#yearpicker").kendoDatePicker({
+            start: "decade",
+            depth: "decade",
+            format: "yyyy",
+            footer: false
+        });
+        $("#yearpicker").change(function () {
+            $("#year").val($("#yearpicker").val());
+        });
+
+    });
 </script>
+

@@ -9,10 +9,11 @@ namespace Appointment.ViewModel.Models
 {
     public class SettingsView
     {
+        [Required(ErrorMessage = "Birthday template is required")]
         [Display(Name = "Birthday Email Text")]
         public String BirthDayEmailText { get; set; }
 
-
+        [Required(ErrorMessage = "Anniversary template is required")]
         [Display(Name = "Anniversary Email Text")]
         public String AnniversaryEmailText { get; set; }
 
@@ -40,7 +41,7 @@ namespace Appointment.ViewModel.Models
 
         [Display(Name = "Send Anniversary Email")]
         public string SendAnniversary { get; set; }
-        
+
 
         [Display(Name = "Send Event Email")]
         public string SendEvent { get; set; }
@@ -73,7 +74,7 @@ namespace Appointment.ViewModel.Models
         public int portnumber { get; set; }
 
 
-
+        [Required(ErrorMessage = "Admin Email is required")]
         [Display(Name = "Admin Email")]
         [DataType(DataType.EmailAddress)]
         public String EmailAdmin { get; set; }

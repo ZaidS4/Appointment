@@ -13,6 +13,7 @@ namespace Appointment.Business.Models
 {
     public class SettingService
     {
+        //--------------------------------------get list data---------------------------------------------//
         public static List<SelectListItem> GetDayBefore()
         {
             using (RemindersEntities db = new RemindersEntities())
@@ -27,11 +28,24 @@ namespace Appointment.Business.Models
             }
         }
 
+        public static List<SelectListItem> GetUpcoming()
+        {
+            using (RemindersEntities db = new RemindersEntities())
+            {
+                var DurationToUpcomingLookupCategoriesID = db.LookUpCategories.Where(x => x.Code == ((int)LookupCategories.DurationToUpComing).ToString()).FirstOrDefault().ID;
+                var list = db.Lookups.Where(m => m.CategoryID == DurationToUpcomingLookupCategoriesID).Select(m => new SelectListItem
+                {
+                    Value = m.ID.ToString(),
+                    Text = m.NameEn,
+                }).ToList();
+                return list;
+            }
+        }
 
-      
 
 
 
+        //---------------------------------save list data after edit--------------------------------------//
         public static void Save(SettingsViewModel settingviewmodel)
         {
             try
@@ -125,21 +139,21 @@ namespace Appointment.Business.Models
                 throw ex;
             }
         }
-        //Retrive Data from Database
+        //---------------------------------Retrive Data from Database-------------------------------------//
         public static string BirthDayEmailText()
         {
             string BirthDayEmailTextKey = SettingsKeys.BirthDayEmailTextKey();
-            
+
             using (RemindersEntities db = new RemindersEntities())
             {
-                var setting = db.Settings.Where(x => x.Key == BirthDayEmailTextKey).FirstOrDefault(); 
+                var setting = db.Settings.Where(x => x.Key == BirthDayEmailTextKey).FirstOrDefault();
                 return setting.Description;
             }
         }
         public static string AnniversaryEmailText()
         {
             string AnniversaryEmailTextKey = SettingsKeys.AnniversaryEmailTextKey();
-            
+
             using (RemindersEntities db = new RemindersEntities())
             {
                 var setting = db.Settings.Where(x => x.Key == AnniversaryEmailTextKey).FirstOrDefault();
@@ -159,7 +173,7 @@ namespace Appointment.Business.Models
         public static string AnniversaryReminder()
         {
             string AnniversaryReminderKey = SettingsKeys.AnniversaryReminderKey();
-            
+
             using (RemindersEntities db = new RemindersEntities())
             {
                 var setting = db.Settings.Where(x => x.Key == AnniversaryReminderKey).FirstOrDefault();
@@ -169,7 +183,7 @@ namespace Appointment.Business.Models
         public static string EventReminder()
         {
             string EventReminderKey = SettingsKeys.EventReminderKey();
-            
+
             using (RemindersEntities db = new RemindersEntities())
             {
                 var setting = db.Settings.Where(x => x.Key == EventReminderKey).FirstOrDefault();
@@ -179,7 +193,7 @@ namespace Appointment.Business.Models
         public static string SendBirthday()
         {
             string SendBirthdayKey = SettingsKeys.SendBirthdayKey();
-            
+
             using (RemindersEntities db = new RemindersEntities())
             {
                 var setting = db.Settings.Where(x => x.Key == SendBirthdayKey).FirstOrDefault();
@@ -189,7 +203,7 @@ namespace Appointment.Business.Models
         public static string SendAnniversary()
         {
             string SendAnniversaryKey = SettingsKeys.SendAnniversaryKey();
-            
+
             using (RemindersEntities db = new RemindersEntities())
             {
                 var setting = db.Settings.Where(x => x.Key == SendAnniversaryKey).FirstOrDefault();
@@ -199,7 +213,7 @@ namespace Appointment.Business.Models
         public static string SendEvent()
         {
             string SendEventKey = SettingsKeys.SendEventKey();
-            
+
             using (RemindersEntities db = new RemindersEntities())
             {
                 var setting = db.Settings.Where(x => x.Key == SendEventKey).FirstOrDefault();
@@ -209,29 +223,27 @@ namespace Appointment.Business.Models
         public static string UpComingReminder()
         {
             string UpComingReminderKey = SettingsKeys.UpComingReminderKey();
-            
+
             using (RemindersEntities db = new RemindersEntities())
             {
                 var setting = db.Settings.Where(x => x.Key == UpComingReminderKey).FirstOrDefault();
                 return setting.Description;
             }
         }
-     
         public static string EmailAdmin()
         {
             string EmailAdminKey = SettingsKeys.EmailAdminKey();
-            
+
             using (RemindersEntities db = new RemindersEntities())
             {
                 var setting = db.Settings.Where(x => x.Key == EmailAdminKey).FirstOrDefault();
                 return setting.Description;
             }
         }
-
         public static string EmailSender()
         {
             string EmailSenderKey = SettingsKeys.EmailSenderKey();
-            
+
             using (RemindersEntities db = new RemindersEntities())
             {
                 var setting = db.Settings.Where(x => x.Key == EmailSenderKey).FirstOrDefault();
@@ -241,25 +253,23 @@ namespace Appointment.Business.Models
         public static string PasswordSender()
         {
             string PasswordSenderKey = SettingsKeys.PasswordSenderKey();
-            
+
             using (RemindersEntities db = new RemindersEntities())
             {
                 var setting = db.Settings.Where(x => x.Key == PasswordSenderKey).FirstOrDefault();
                 return setting.Description;
             }
         }
-
         public static string smtpaddress()
         {
             string smtpaddressKey = SettingsKeys.smtpaddressKey();
-            
+
             using (RemindersEntities db = new RemindersEntities())
             {
                 var setting = db.Settings.Where(x => x.Key == smtpaddressKey).FirstOrDefault();
                 return setting.Description;
             }
         }
-
         public static string portnumber()
         {
             string portnumberKey = SettingsKeys.portnumberKey();
@@ -270,7 +280,7 @@ namespace Appointment.Business.Models
                 return setting.Description;
             }
         }
-        
+
 
         //----------------------------------------ddl selected item-------------------------------------//
         public static string BirthdayReminderID()
@@ -439,32 +449,3 @@ namespace Appointment.Business.Models
 
     }
 }
-//-------------------------------------------CommentArea----------------------------------------//
-//public static List<SettingsViewModel> GetSettings()
-//{
-//    List<SettingsViewModel> settingsViews = new List<SettingsViewModel>();
-
-//    try
-//    {
-//        using (RemindersEntities db = new RemindersEntities())
-//        {
-//            var Settings = db.Settings.ToList();
-
-//            foreach (var item in Settings)
-//            {
-
-//                settingsViews.Add(new SettingsViewModel
-//                {
-//                    ID = item.ID,
-//                    Key = item.Key,
-//                    Description = item.Description
-//                });
-//            }
-//        }
-//    }
-//    catch (Exception ex)
-//    {
-//        throw ex;
-//    }
-//    return settingsViews;
-//}

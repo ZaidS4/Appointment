@@ -141,8 +141,28 @@ namespace Appointment.Business.Models
                 else
                     return false;
             }
-        } 
-     
+        }
+
+        //////////////////////////////////////////////////////
+        public static bool Noselecteditem(EmployeesGroupsViewModel group)
+        {
+
+
+
+            ///////////////////////////////////////////////////
+            //var list = group.SelectedEmployeesID.ToList();
+            var list = group.Employees.ToList();
+
+            if (list != null)
+                if (list.Count != 0)
+                    return true;
+                else
+                    return false;
+            else
+                return false;
+        }
+
+    
 
         /////////////////////////////////////////////////////
         public static void Delete(EmployeesGroupsViewModel group)

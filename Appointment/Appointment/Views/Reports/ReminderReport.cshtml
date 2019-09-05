@@ -1,9 +1,7 @@
-﻿@model Appointment.ViewModel.Models.RemindersViewModel
+﻿@model Appointment.ViewModel.Models.ReportsViewModel
 
 @{
     ViewBag.Title = "Reminder Report";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
 }
 <br />
 <br />
@@ -31,7 +29,7 @@
             <div class="form-group">
                 @Html.Label("Start Date", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @Id = "datepicker1", @class = "form-control", @ReadOnly = "ReadOnly", value = "{0:MM/dd/yyyy}" } })
+                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -39,8 +37,8 @@
             <div class="form-group">
                 @Html.Label("End Date", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @Id = "datepicker2", @class = "form-control", @ReadOnly = "ReadOnly", value = "{0:MM/dd/yyyy}" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -55,15 +53,3 @@
     }
 </div>
 <hr />
-
-<script>
-    $(function () {
-        $("#datepicker1").datepicker({
-            //"setDate": new Date("01/01/2000")
-        });
-        $("#datepicker2").datepicker();
-    });
-
-
-
-</script>

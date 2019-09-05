@@ -1,11 +1,7 @@
 ﻿using Appointment.Business.Models;
 using Appointment.ViewModel.Models;
 using Kendo.Mvc.Extensions;
-using Kendo.Mvc.UI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -28,6 +24,26 @@ namespace Appointment.Controllers
             return View(group);
 
         }
+
+        //[HttpGet]
+        //public JsonResult ListCheck(EmployeesGroupsViewModel group)
+        //{
+        //    group.CreatedOn = DateTime.Now;
+        //    group.ModifyOn = DateTime.Now;
+        //    group.CreatedBY = 1;
+        //    group.ModifyBy = 1;
+        //    try
+        //    {
+        //        bool noselecteditem = GroupService.Noselecteditem(group);
+
+        //        return Json(new { canCreate = !noselecteditem }, JsonRequestBehavior.AllowGet);
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        throw ex;
+        //    }
+        //}
 
         [HttpPost]
 
@@ -76,6 +92,14 @@ namespace Appointment.Controllers
              
         }
 
+        ///////////////////////////
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+            return View(GroupService.EmployeeGroupsGetByID(id));
+        }
+
+
         /////////////////////////
         [HttpGet]
         public ActionResult Delete(int id )
@@ -100,21 +124,13 @@ namespace Appointment.Controllers
          
         }
 
-        //[AcceptVerbs(HttpVerbs.Post)]
         [HttpPost]
         public ActionResult Delete(EmployeesGroupsViewModel group)
-        {
-            //DeleteCheck(group.ID);
-            //Delete the record
+        { 
             GroupService.Delete(group);
-            //Redisplay the grid
             RedirectToAction("Groups");
-            //Redisplay the grid
             return View("Groups", GroupService.Read());
 
         }
-        
-
-
     }
 }

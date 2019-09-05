@@ -30,17 +30,15 @@ namespace Appointment.Business.Job
         //----------------------------------------------------Job Execute----------------------------------------------------//
         public void Execute(IJobExecutionContext context)
         {
+
+
             try
             {
                 RemindersEntities db = new RemindersEntities();
-
-                //Birthday
-
-
                 int emploeeLookupID = db.Lookups.Where(x => x.Code == ((int)Lookups.employee).ToString()).FirstOrDefault().ID;
                 int generalLookupID = db.Lookups.Where(x => x.Code == ((int)Lookups.general).ToString()).FirstOrDefault().ID;
                 List<RemindersViewModel> BirthDate = new List<RemindersViewModel>();
-                BirthDate = db.Reminders.Where(x =>  x.TypeID == emploeeLookupID).Select(x => new RemindersViewModel { Name = x.Employee.Name, BirthDate = x.BirthDate, Email = x.Employee.Email,ImagePath =x.ImagePath }).ToList();
+                BirthDate = db.Reminders.Where(x => x.TypeID == emploeeLookupID).Select(x => new RemindersViewModel { Name = x.Employee.Name, BirthDate = x.BirthDate, Email = x.Employee.Email, Image = x.Image }).ToList();//
 
                 //Anniversary
                 List<RemindersViewModel> EmployeeStartDate = new List<RemindersViewModel>();
@@ -48,7 +46,7 @@ namespace Appointment.Business.Job
 
                 //general
                 List<RemindersViewModel> startDate = new List<RemindersViewModel>();
-                startDate = db.Reminders.Where(x => x.TypeID == generalLookupID).Select(x => new RemindersViewModel { StartDate = x.StartDate, Name = x.Name, BreifDescription = x.BreifDescription, ID = x.ID }).ToList();
+                startDate = db.Reminders.Where(x => x.TypeID == generalLookupID).Select(x => new RemindersViewModel { StartDate = x.StartDate, Name = x.Name, BreifDescription = x.BreifDescription, ID = x.ID, Time = x.Time, EndDate = x.EndDate }).ToList();
 
 
                 //For Send Email
@@ -59,7 +57,7 @@ namespace Appointment.Business.Job
                     {
                         if (t.Day == item.BirthDate.Value.Day && t.Month == item.BirthDate.Value.Month)
                         {
-                            bool res = SendEmailBirthday(item.Name, item.Email,item.ImagePath);
+                            bool res = SendEmailBirthday(item.Name, item.Email, item.Image);//
                         }
                     }
                 }
@@ -84,7 +82,7 @@ namespace Appointment.Business.Job
                     {
                         if (t.Day == item.StartDate.Value.Day && t.Month == item.StartDate.Value.Month)
                         {
-                            bool res = SendEmailGeneral(item.Name, item.BreifDescription, item.ID);
+                            bool res = SendEmailGeneral(item.Name, item.BreifDescription, item.ID, item.Time.Value, item.EndDate.Value, item.StartDate.Value);
                         }
                     }
 
@@ -99,7 +97,7 @@ namespace Appointment.Business.Job
                     {
                         if (t.Day == item.BirthDate.Value.Day && t.Month == item.BirthDate.Value.Month)
                         {
-                            bool res = RemindEmailBirthday(item.Name);
+                            bool res = RemindEmailBirthday(item.Name, item.BirthDate.Value);
                         }
                     }
                 }
@@ -111,7 +109,7 @@ namespace Appointment.Business.Job
                     {
                         if (t.Day == item.StartDate.Value.Day && t.Month == item.StartDate.Value.Month)
                         {
-                            bool res = RemindEmailEmployeeStartDate(item.Name);
+                            bool res = RemindEmailEmployeeStartDate(item.Name, item.StartDate.Value);
                         }
                     }
 
@@ -124,7 +122,7 @@ namespace Appointment.Business.Job
                     {
                         if (t.Day == item.StartDate.Value.Day && t.Month == item.StartDate.Value.Month)
                         {
-                            bool res = RemindEmailGeneral(item.Name, item.BreifDescription);
+                            bool res = RemindEmailGeneral(item.Name, item.BreifDescription, item.StartDate.Value, item.Time.Value);
                         }
                     }
 
@@ -138,24 +136,25 @@ namespace Appointment.Business.Job
             }
         }
         //---------------------------------------------Send Email Function Birthday-----------------------------------------//
-        public bool SendEmailBirthday(string name, string email,string fileName)
+        public bool SendEmailBirthday(string name, string email, byte[] image)//
         {
-            
+
             using (MailMessage mail = new MailMessage())
             {
                 mail.From = new MailAddress(SettingService.EmailSender());
                 mail.To.Add(email);
-                mail.Subject = name + " birthday";
+                mail.Subject = "Have a wonderfull Birthday";
                 mail.Body = SettingService.BirthDayEmailText();
                 mail.IsBodyHtml = true;
-                if (fileName != null)
-                {
-                    mail.Attachments.Add(new Attachment(fileName));
-                }
-                
+                //if (image != null)
+                //{
+                //    var base64 = Convert.ToBase64String(image);
+                //    var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+                //    mail.Attachments.Add(new Attachment(imgsrc));
+
+                //}
 
 
-                //user sender
                 using (SmtpClient smtp = new SmtpClient(SettingService.smtpaddress(), Convert.ToInt32(SettingService.portnumber())))
                 {
                     smtp.Credentials = new NetworkCredential(SettingService.EmailSender(), SettingService.PasswordSender());
@@ -164,20 +163,18 @@ namespace Appointment.Business.Job
                 }
 
             }
-
-            //}
             return true;
         }
         //---------------------------------------------Send Email Function Anniversary--------------------------------------//
         public bool SendEmailEmployeeStartDate(string name, string email)
         {
-            
+
             using (MailMessage mail = new MailMessage())
             {
 
                 mail.From = new MailAddress(SettingService.EmailSender());
                 mail.To.Add(email);
-                mail.Subject = name + " Anniversary Time !!";
+                mail.Subject = name + " Happy Work Anniversary ";
                 mail.Body = SettingService.AnniversaryEmailText();
                 mail.IsBodyHtml = true;
 
@@ -199,7 +196,7 @@ namespace Appointment.Business.Job
 
         }
         //---------------------------------------------Send Email Function General------------------------------------------//
-        public bool SendEmailGeneral(string name, string BreifD, int Id)
+        public bool SendEmailGeneral(string name, string BreifD, int Id, TimeSpan Timespan, DateTime enddate, DateTime startdate)
         {
 
 
@@ -208,7 +205,7 @@ namespace Appointment.Business.Job
             {
                 var filter1 = db2.Reminders.Where(x => x.ID == Id).Select(x => x.ID).ToList();
                 var filter2 = db2.RemindersGroups.Where(x => filter1.Contains(x.ReminderID)).Select(x => x.GroupID).Distinct().ToList();
-                Data = db2.EmployeesGroups.Where(s => filter2.Contains(s.GroupID)).Select(s => s.Employee.Email ).ToList();
+                Data = db2.EmployeesGroups.Where(s => filter2.Contains(s.GroupID)).Select(s => s.Employee.Email).ToList();
             }
 
             foreach (var item in Data)
@@ -218,9 +215,10 @@ namespace Appointment.Business.Job
                 {
                     mail.From = new MailAddress(SettingService.EmailSender());
                     mail.To.Add(item);
-                    mail.Subject = name + " Reminder";
-                    //ask about body for the general Reminder
-                    mail.Body = BreifD;
+                    mail.Subject = name;
+                    DateTime time = DateTime.Today.Add(Timespan);
+                    string displayTime = time.ToString("hh:mm tt");
+                    mail.Body = "Title : " + name + "<br>" + "Start date : " + startdate.Date.ToString("MM/dd/yyyy") + "<br>" + "End date : " + enddate.Date.ToString("MM/dd/yyyy") + "<br>" + "Description : " + BreifD + "<br>" + "Time  : " + displayTime;
                     mail.IsBodyHtml = true;
 
 
@@ -237,18 +235,17 @@ namespace Appointment.Business.Job
 
             return true;
         }
-
         //---//---//---//---//---//---//---//---//---//---//---//---//---//---//---//---//---//---//---//---//---//---//---//---//
 
         //---------------------------------------------Send Reminder Function Birthday-----------------------------------------//
-        public bool RemindEmailBirthday(string name)
+        public bool RemindEmailBirthday(string name, DateTime birthdate)
         {
             using (MailMessage mail = new MailMessage())
             {
                 mail.From = new MailAddress(SettingService.EmailSender());
                 mail.To.Add(SettingService.EmailAdmin());
                 mail.Subject = name + " birthday";
-                mail.Body = " this message is a Birthday Reminder";
+                mail.Body = "This is a Birthday Reminder email for " + name + " at " + birthdate.Date.ToString("MM/dd/yyyy");
                 mail.IsBodyHtml = true;
 
                 using (SmtpClient smtp = new SmtpClient(SettingService.smtpaddress(), Convert.ToInt32(SettingService.portnumber())))
@@ -261,15 +258,15 @@ namespace Appointment.Business.Job
             return true;
         }
         //---------------------------------------------Send Reminder Function Anniversary--------------------------------------//
-        public bool RemindEmailEmployeeStartDate(string name)
+        public bool RemindEmailEmployeeStartDate(string name, DateTime StartDate)
         {
             using (MailMessage mail = new MailMessage())
             {
 
                 mail.From = new MailAddress(SettingService.EmailSender());
                 mail.To.Add(SettingService.EmailAdmin());
-                mail.Subject = "Anniversary Reminder for " + name;
-                mail.Body = "This Email is a reminder";
+                mail.Subject = name + " Anniversary";
+                mail.Body = "This is an Anniversary Reminder email for " + name + " at " + StartDate.Date.ToString("MM/dd/yyyy");
                 mail.IsBodyHtml = true;
 
                 using (SmtpClient smtp = new SmtpClient(SettingService.smtpaddress(), Convert.ToInt32(SettingService.portnumber())))
@@ -280,24 +277,20 @@ namespace Appointment.Business.Job
                 }
 
             }
-
-
             return true;
-
-
-
         }
         //---------------------------------------------Send Reminder Function General------------------------------------------//
-        public bool RemindEmailGeneral(string name, string BreifD)
+        public bool RemindEmailGeneral(string name, string BreifD, DateTime StartDate, TimeSpan Timespan)
         {
 
             using (MailMessage mail = new MailMessage())
             {
                 mail.From = new MailAddress(SettingService.EmailSender());
                 mail.To.Add(SettingService.EmailAdmin());
-                mail.Subject = name + " Reminder";
-                //ask about body for the general Reminder
-                mail.Body = "This Email is a reminder For " + BreifD ;
+                mail.Subject = name;
+                DateTime time = DateTime.Today.Add(Timespan);
+                string displayTime = time.ToString("hh:mm tt");
+                mail.Body = "This is a General Reminder email for " + name + " about " + BreifD + " at " + StartDate.Date.ToString("MM/dd/yyyy") + " " + displayTime;
                 mail.IsBodyHtml = true;
 
 
@@ -314,78 +307,8 @@ namespace Appointment.Business.Job
 
             return true;
         }
+
+
+        
     }
 }
-//-----------------------------------------------Comments Area---------------------------------------------//
-
-//private List<EmployeesViewModel> _employees = RemindersEntities.Employees.Select(m => new EmployeesViewModel { Email = m.Email }).ToList;
-//foreach (var item in EmployeesViewModel)
-//{
-
-//}
-//string emailTo = "ahmad728031@gmail.com";
-//apR = 
-//var m = apR.Read();
-//string fileName = Path.GetFileName(img.FileName);
-//mail.Attachments.Add(new Attachment(img.InputStream, fileName));
-//var dbomy = new dbom();
-//dbomy.movieDetails.Attach();
-
-//-------------For SendEmail()---------------//
-//apR.ReadEmployeeGroup().Where(e => e.GroupID == 1).Select(s => s.Employee.Email).ToList();
-//List<string> to = apR.Read().Select(d => d.Email).ToList();
-//List<string> ToEmployeeGroup = apR.ReadEmployeeGroup().Where(e => e.GroupID == 1).Select(e => e.Employee.Email).ToList();
-//ToEmployeeGroup = db.EmployeesGroups.Where(e => e.GroupID == 1).Select(m => m.Employee.Email).ToList();
-
-//var comp = DateTime.Compare(DateTime.Now.Date, item.AddDays(-3));
-//List<string> ToAllEmployee = apR.Read().Select(d => d.Email).ToList();
-
-//------------------------------//
-//db2.Reminders.Where(x=>x.type.Code ==(int) ViewModel.Enums.Lookups.emplyee)  **LOOKUP**
-//List<string> ToEmployeeGroup = new List<string>();
-
-//List<int> type = new List<int>();
-////send email depend on the typeID
-//type = db2.Reminders.Select(x => x.TypeID).ToList();
-//foreach (var item in type)
-//{
-//    if (item == 1)
-//    {
-
-//    }
-//    else if (item == 2)
-//    {
-
-//    }
-//}
-//var comp = DateTime.Compare(DateTime.Now.Date, item.AddDays(-3));
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//list used to get all employees Email in specific Group
-//List<EmployeesViewModel> filter4 = new List<EmployeesViewModel>();
-//using (RemindersEntities db2 = new RemindersEntities())
-//{
-//    var filter1 = db2.Reminders.Where(x => x.TypeID == 1).Select(x => x.ID).ToList();
-//    var filter2 = db2.RemindersGroups.Where(x => filter1.Contains(x.ReminderID)).Select(x => x.GroupID).Distinct().ToList();
-//    filter4 = db2.EmployeesGroups.Where(s => filter2.Contains(s.GroupID)).Select(s => new EmployeesViewModel { Name = s.Employee.Name, Email = s.Employee.Email }).ToList();
-//}
-
-//used to send the email with  the quartz
-//foreach (var item in filter4)
-//{
-
-//list used to get all employees Email 
-//List<EmployeesViewModel> ToAllEmployee = new List<EmployeesViewModel>();
-//using (RemindersEntities db1 = new RemindersEntities())
-//{
-//    ToAllEmployee = db1.Employees.Select(s => new EmployeesViewModel { Name = s.Name, Email = s.Email }).ToList();
-
-//}
-
-//used to send the email with  the quartz
-
-//foreach (var item in ToAllEmployee)
-//{
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////

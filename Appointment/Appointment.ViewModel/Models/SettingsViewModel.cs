@@ -27,7 +27,7 @@ namespace Appointment.ViewModel.Models
 
         public bool? IsPrivate { get; set; }
 
-        
+
 
         public List<SelectListItem> BirthdayReminder { get; set; }
         public int BirthdayReminderID { get; set; }

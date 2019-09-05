@@ -21,55 +21,63 @@ namespace Appointment.Business.Models
             {
                 using (RemindersEntities db = new RemindersEntities())
                 {
+                    var t = DateTime.Now.Date.AddDays(Convert.ToDouble(SettingService.UpComingReminder()));
+                    var ti = DateTime.Now.Date.AddDays(0);
+
                     var reminders = db.Reminders.ToList();
                     foreach (var item in reminders)
                     {
                         //LookupService.GetLookupIdByCode((int)Lookups.employee);
-                        int tId= ((int)Lookups.employee);
-
-                        if (item.TypeID == tId) /* "Employee"*/
+                        //int tId = ((int)Lookups.employee);
+                        int emploeeLookupID = db.Lookups.Where(x => x.Code == ((int)Lookups.employee).ToString()).FirstOrDefault().ID;
+                        if (item.TypeID == emploeeLookupID) /* "Employee"*/
                         {
-                            reminderViews.Add(new CalendarViewModel
+                            if (item.BirthDate.Value.Month <= t.Month && item.BirthDate.Value.Day <= t.Day && item.BirthDate.Value.Month >= ti.Month && item.BirthDate.Value.Day >= ti.Day)
                             {
-                                ID = item.ID,
-                                Name = item.Name,
-                                TheDate =item.BirthDate
-                                //Day = item.BirthDate.Value.Day,
-                                //Month=item.BirthDate.Value.Month
-                            });
-                            reminderViews.Add(new CalendarViewModel
-                            {
-                                ID = item.ID,
-                                Name = item.Name,
-                                TheDate = item.StartDate
-                                //Day=item.StartDate.Day,
-                                //Month = item.StartDate.Month
+                                reminderViews.Add(new CalendarViewModel
+                                {
+                                    ID = item.ID,
+                                    Name = item.Name + "  Birthday " ,
+                                    TheDate = item.BirthDate
 
-                            });                         
+                                });
+                            }
+                            if (item.StartDate.Value.Month <= t.Month && item.StartDate.Value.Day <= t.Day && item.StartDate.Value.Month >= ti.Month && item.StartDate.Value.Day >= ti.Day)
+                            {
+                                reminderViews.Add(new CalendarViewModel
+                                {
+                                    ID = item.ID,
+                                    Name = item.Name + "  Anniversary ",
+                                    TheDate = item.StartDate
+
+
+                                });
+                            }
                         }
                         else
                         {
-                            reminderViews.Add(new CalendarViewModel
+                            if (item.StartDate.Value.Date <= t.Date && item.StartDate.Value.Date >= ti.Date)
                             {
-                                ID = item.ID,
-                                Name = item.Name,
-                                TheDate = item.StartDate,
+                                reminderViews.Add(new CalendarViewModel
+                                {
+                                    ID = item.ID,
+                                    Name = item.Name,
+                                    TheDate = item.StartDate,
 
-                            });
+                                });
+                            }
                         }
                     }
                 }
-               
+
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return reminderViews/*.Where(x => x.TheDate == DateTime.Today || x.BirthDate == DateTime.Today).*/.ToList();
-            // return reminderViews.FindAll(x => x.TheDate == DateTime.Today || x => x.BirthDate==DateTime.Now);
+            return reminderViews;
         }
-        //////////
-        ////////////////////////////////////////////////////////
+           
 
 
         public static List<CalendarViewModel> DisplayCurrentReminders()
@@ -88,4 +96,31 @@ namespace Appointment.Business.Models
         }
     }
 }
+
+    //for (int i = Convert.ToInt32(SettingService.UpComingReminder()); i >= 0; i--)
+    //{
+
+
+    //}
+    //return reminderViews.Where(x => x.TheDate.Value.Day == t.Day && x.TheDate.Value.Month == t.Month).ToList();
+    // return reminderViews.FindAll(x => x.TheDate == DateTime.Today || x => x.BirthDate==DateTime.Now);
+
+//////////
+////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+//var t = DateTime.Now.Date.AddDays(Convert.ToDouble(SettingService.UpComingReminder()));
+//List<RemindersViewModel> Calendar = new List<RemindersViewModel>();
+//    for (int i = Convert.ToInt32(SettingService.UpComingReminder()); i >= 0; i--)
+//    {
+
+
+//    }
+/*.Where(x => x.TheDate.Value.Day == t.Day && x.TheDate.Value.Month == t.Month).ToList()*/
 
