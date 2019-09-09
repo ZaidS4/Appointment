@@ -17,6 +17,7 @@ namespace Appointment.ViewModel.Models
 
         public int? PositionID { get; set; }
 
+        [Display(Name ="Activity")]
         public bool? IsActive { get; set; }
 
         public Byte[] Image { get; set; }
@@ -44,6 +45,7 @@ namespace Appointment.ViewModel.Models
         [Display(Name ="Type")]
         public int? TypeID { get; set; }
 
+        [Display(Name ="Reminder type")]
         public string TypeName { get; set; }
 
         public List<SelectListItem> Type { get; set; }

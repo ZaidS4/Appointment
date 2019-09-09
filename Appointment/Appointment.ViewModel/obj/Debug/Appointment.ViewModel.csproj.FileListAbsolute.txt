@@ -25,3 +25,4 @@ C:\Users\Zaid\Appointment.get\Appointment\Appointment.ViewModel\obj\Debug\Appoin
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.ViewModel\obj\Debug\Appointment.ViewModel.csproj.CopyComplete
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.ViewModel\obj\Debug\Appointment.ViewModel.dll
 C:\Users\Zaid\Appointment.get\Appointment\Appointment.ViewModel\obj\Debug\Appointment.ViewModel.pdb
+C:\Users\Zaid\Appointment.get\Appointment\Appointment.ViewModel\obj\Debug\Appointment.ViewModel.csprojAssemblyReference.cache

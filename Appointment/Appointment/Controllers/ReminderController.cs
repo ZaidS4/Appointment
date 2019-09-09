@@ -24,6 +24,7 @@ namespace Appointment.Controllers
         /// <returns>the reminders in the DB</returns>
         public ActionResult Index(int? id)
         {
+
             return View(ReminderService.Read());
         }
 
@@ -75,12 +76,13 @@ namespace Appointment.Controllers
             {
                 if (ModelState.IsValid)
                 {
-
-                    string imgname = DateTime.Now.ToString("yyyyMMddhhmmss") + image1.FileName;
                     reminder.ModifyOn = DateTime.Now;
                     reminder.ModifyBy = 1;
                     if (image1 != null)
                     {
+                        string imgname = DateTime.Now.ToString("yyyyMMddhhmmss") + image1.FileName;
+                    
+                    
                        string ImagePathphiscal = AppDomain.CurrentDomain.BaseDirectory + "img\\" + imgname;
                         image1.SaveAs(ImagePathphiscal);
                         reminder.ImagePath = "~/img/" + imgname;

@@ -47,6 +47,8 @@
               .Scrollable()
               .Selectable(selectable => selectable.Enabled(true).Mode(GridSelectionMode.Single).Type(GridSelectionType.Row))
               .Filterable(filterable => filterable.Mode(GridFilterMode.Row))
+              .Filterable(filterable => filterable.Messages(m => m.IsFalse("Inactive"))
+              .Messages(m=>m.IsTrue("Acitve")))
               .HtmlAttributes(new { style = "height:400px;" })
               .DataSource (dataSource => dataSource
                   .Server()

@@ -57,10 +57,11 @@ namespace Appointment.Business.ActiveDirectory
                     {
                        email = de.Properties["mail"].Value.ToString();
                     }
-                    bool isAvaliable = false;
-                    int ID = 0;
                     
                     
+                    
+                    //bool isAvaliable = false;
+                    //int ID = 0;                                        
                     //var EmployeeInfo = SystemUsers.Where(s => s.UserName.Contains(aDuserName));
 
                     //if (EmployeeInfo.Select(s => s.UserName).Any())
@@ -90,7 +91,7 @@ namespace Appointment.Business.ActiveDirectory
 
                     foreach (var item in ADemployees)
                     {
-                        if (!(db.Employees.Any(x => x.Name == item.Name)))
+                        if (!db.Employees.Any(x => x.Name == item.Name))
                         {
                             employees.Add(new Employee
                             {

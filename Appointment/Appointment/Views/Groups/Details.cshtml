@@ -12,7 +12,6 @@
 
 <div>
 
-    <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayName("Group Name")
@@ -21,19 +20,20 @@
         <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
-
+        <br />
         <dt>
             @Html.DisplayName("Employees")
         </dt>
-        @foreach (var em in Model.Employeelist)
-        {
-            <dd>
-                @*@Html.Display(em.Name)*@
-                @Html.DisplayFor(model => em.Name)
-            </dd>
-        }
+        
+        <dd>
+            @foreach (var em in Model.Employeelist)
+            {
 
+                <p>@Html.DisplayFor(model => em.Name)  </p>
 
+            }
+        </dd>
+        <br />
     </dl>
     <div style="clear: both;"> </div>
 
@@ -50,3 +50,9 @@
         </div>
     }
 </div>
+
+<style>
+    p {
+        display: inline;
+    }
+</style>

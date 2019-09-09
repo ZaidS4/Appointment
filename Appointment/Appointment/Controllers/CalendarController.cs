@@ -59,20 +59,32 @@ namespace Appointment.Controllers
                 else
                 {
                     var thisItem = (request.Filters.FirstOrDefault() as FilterDescriptor);
-                 
-                    if (thisItem.Member == "TheDate")
-                        TheDate = thisItem.ConvertedValue.ToString();                
+                    if (thisItem != null)
+                    {
+
+
+                        if (thisItem.Member == "TheDate")
+                            TheDate = thisItem.ConvertedValue.ToString();
+                    }
                 }
             }
-            DateTime CalenderDate = Convert.ToDateTime(TheDate);
-            var data = CalendarService.DisplayFilteredReminders(CalenderDate);
-            var result = new DataSourceResult
+            if (TheDate != "")
             {
-                Data = data,
-                //Total = total
-            };
-            return Json(result, JsonRequestBehavior.AllowGet);
 
+
+                DateTime CalenderDate = Convert.ToDateTime(TheDate);
+
+                var data = CalendarService.DisplayFilteredReminders(CalenderDate);
+
+                var result = new DataSourceResult
+                {
+                    Data = data,
+                    //Total = total
+                };
+
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            return View();
 
         }
     }

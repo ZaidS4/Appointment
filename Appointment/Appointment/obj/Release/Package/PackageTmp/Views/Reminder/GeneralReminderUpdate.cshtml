@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "GeneralReminderUpdate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -29,23 +30,23 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("Start Date", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @Id = "datepicker", @class = "form-control", @ReadOnly = "ReadOnly" } })
+                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @Id = "StartDate", @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("End Date", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @Id = "datepicker2", @class = "form-control", @ReadOnly = "ReadOnly" } })
+                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @Id = "EndDate", @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.BreifDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("Breif Description", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.BreifDescription, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.BreifDescription, "", new { @class = "text-danger" })
@@ -60,17 +61,20 @@
                 </div>
             </div>
 
+
             <div class="form-group">
-                @Html.Label("Groups", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
-                <div class="col-md-10">
+                @Html.Label("Groups", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-9">
                     <div class="dropdown">
-                        @Html.ListBoxFor(m => m.SelectedGroupsID, new MultiSelectList(Model.Groups, "Value", "Text"), new { id = "Group", multiple = "multiple" })
+                        @Html.ListBoxFor(m => m.SelectedGroupsID, new SelectList(Model.Groups, "Value", "Text"), new { id = "Group", multiple = "true" })
+                        <lable id="lblGroupValidation" style="color:red;font-weight:bold;display:none;"></lable><br /><br />
                     </div>
                 </div>
             </div>
 
+
             <div class="form-group">
-                @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("Active", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div class="checkbox">
                         @Html.EditorFor(model => model.IsActive)
@@ -82,27 +86,106 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="submit" value="Edit" class="btn btn-default" onclick="return Validate();" />
                     <input type="button" value="Back" class="btn btn-default" onclick="location.href='@Url.Action("Index", "Reminder")'" />
                 </div>
             </div>
         </div>
     }
 </div>
+<link href="https://kendo.cdn.telerik.com/2019.2.619/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
+<link href="https://kendo.cdn.telerik.com/2019.2.619/styles/kendo.default.min.css" rel="stylesheet" type="text/css" />
+<script src="https://kendo.cdn.telerik.com/2019.2.619/js/jquery.min.js"></script>
+<script src="https://kendo.cdn.telerik.com/2019.2.619/js/kendo.all.min.js"></script>
 
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-multiselect.js"></script>
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="~/Content/example-styles.css" />
-<script src="~/Scripts/jquery.multi-select.js"></script>
-<script src="~/Scripts/jquery.multi-select.min.js"></script>
 <script>
-    $("#datepicker").datepicker();
-    $("#datepicker2").datepicker();
-    $('#Group').multiSelect({
-        width: "50%",
-        includeSelectAllOption: "true"
+    function Validate() {
+        debugger;
+        var validateMessage = 'you have to select at least one group !';
+        var validateLabel = $('#lblGroupValidation');
+        var SelectedGroups = $('#Group').val();
+        if (SelectedGroups == null) {
+            //alert('please select group !');
+            validateLabel.html(validateMessage);
+            validateLabel.show();
+            return false;
+        } else {
+            validateLabel.hide();
+            return true;
+        }
+    }
+
+
+    $(document).ready(function () {
+        $('#Group').multiselect({
+            includeSelectAllOption: true,
+            enableCaseInsensitiveFiltering: true,
+            enableFiltering: true,
+            maxHeight: 200
+        });
+        function startChange() {
+            var startDate = start.value(),
+                endDate = end.value();
+
+            if (startDate) {
+                startDate = new Date(startDate);
+                startDate.setDate(startDate.getDate());
+                end.min(startDate);
+            } else if (endDate) {
+                start.max(new Date(endDate));
+            } else {
+                endDate = new Date();
+                start.max(endDate);
+                end.min(endDate);
+            }
+        }
+
+        function endChange() {
+            var endDate = end.value(),
+                startDate = start.value();
+
+            if (endDate) {
+                endDate = new Date(endDate);
+                endDate.setDate(endDate.getDate());
+                start.max(endDate);
+            } else if (startDate) {
+                end.min(new Date(startDate));
+            } else {
+                endDate = new Date();
+                start.max(endDate);
+                end.min(endDate);
+            }
+        }
+        var today = new Date();
+        var start = $("#StartDate").kendoDatePicker({
+            change: startChange,
+            min: today,
+            format: "{0:MM/dd/yyyy}"
+        }).data("kendoDatePicker");
+
+        var end = $("#EndDate").kendoDatePicker({
+            change: endChange,
+            format: "{0:MM/dd/yyyy}"
+        }).data("kendoDatePicker");
+
+        start.max(end.value());
+        end.min(start.value());
+    });
+
+
+    jQuery(function () {
+        debugger;
+        $("form").submit(function () {
+            // submit more than once return false
+            $(this).submit(function () {
+                return false;
+            });
+            // submit once return true
+            return true;
+        });
     });
 </script>
