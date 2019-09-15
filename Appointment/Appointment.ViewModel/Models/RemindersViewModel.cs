@@ -9,6 +9,7 @@ namespace Appointment.ViewModel.Models
     {
         public int ID { get; set; }
 
+        [Display(Name ="Title")]
         public string Name { get; set; }
 
         public string Email { get; set; }

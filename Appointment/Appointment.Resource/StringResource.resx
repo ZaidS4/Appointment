@@ -118,15 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="EmailSender" xml:space="preserve">
-    <value>shoqpioneer@gmail.com</value>
+    <value>zaids@sssprocess.com</value>
     <comment>email used to send messages</comment>
   </data>
   <data name="EmailSenderPassword" xml:space="preserve">
-    <value>killer@19980</value>
+    <value>P@ssw0rd</value>
     <comment>password for the email sender</comment>
   </data>
   <data name="portnumber" xml:space="preserve">
-    <value>587</value>
+    <value>25</value>
     <comment>port number for email sender</comment>
   </data>
   <data name="SchdulerStartHour24" xml:space="preserve">
@@ -138,7 +138,7 @@
     <comment>start minute for quartz scheduler</comment>
   </data>
   <data name="smtpaddress" xml:space="preserve">
-    <value>smtp.gmail.com</value>
+    <value>mail.sssprocess.com</value>
     <comment>smtp address for sender email</comment>
   </data>
   <data name="RemindeBefore" xml:space="preserve">

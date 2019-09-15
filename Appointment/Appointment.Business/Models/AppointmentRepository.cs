@@ -41,9 +41,9 @@ namespace Appointment.Business.Models
                             ID = item.ID,
                             Name = item.Name,
                             Email = item.Email,
-                            BirthDate = item.BirthDate,
-                            IsActive = item.IsActive,
-                            CreatedOn = item.CreatedOn,
+                            BirthDate = item.BirthDate.HasValue ? item.BirthDate.Value: DateTime.Now,
+                            IsActive = item.IsActive .HasValue ? item.IsActive.Value : false ,
+                            //CreatedOn = item.CreatedOn,
                             ModifyBy = item.ModifyBy,
                             ModifyOn = item.ModifyOn,
                             CreatedBy = item.CreatedBy

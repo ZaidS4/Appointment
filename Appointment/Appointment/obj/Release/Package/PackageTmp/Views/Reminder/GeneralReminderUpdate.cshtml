@@ -23,7 +23,7 @@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class="col-md-5">
                     @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                 </div>
@@ -31,7 +31,7 @@
 
             <div class="form-group">
                 @Html.Label("Start Date", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class="col-md-5">
                     @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @Id = "StartDate", @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
                 </div>
@@ -39,7 +39,7 @@
 
             <div class="form-group">
                 @Html.Label("End Date", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class="col-md-5">
                     @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @Id = "EndDate", @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
                 </div>
@@ -47,7 +47,7 @@
 
             <div class="form-group">
                 @Html.Label("Breif Description", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class="col-md-5">
                     @Html.EditorFor(model => model.BreifDescription, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.BreifDescription, "", new { @class = "text-danger" })
                 </div>
@@ -55,7 +55,7 @@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Time, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class="col-md-5">
                     @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
                 </div>
@@ -64,29 +64,26 @@
 
             <div class="form-group">
                 @Html.Label("Groups", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-9">
-                    <div class="dropdown">
-                        @Html.ListBoxFor(m => m.SelectedGroupsID, new SelectList(Model.Groups, "Value", "Text"), new { id = "Group", multiple = "true" })
-                        <lable id="lblGroupValidation" style="color:red;font-weight:bold;display:none;"></lable><br /><br />
-                    </div>
+                <div class="col-md-5">
+                    @Html.ListBoxFor(m => m.SelectedGroupsID, new SelectList(Model.Groups, "Value", "Text"), new { id = "Group", multiple = "true" })
+                    @Html.ValidationMessageFor(m => m.SelectedGroupsID, "", new { @class = "text-danger" })
+                    @*<lable id="lblGroupValidation" style="color:red;font-weight:bold;display:none;"></lable><br /><br />*@
                 </div>
             </div>
 
 
             <div class="form-group">
                 @Html.Label("Active", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.IsActive)
-                        @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
-                    </div>
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.IsActive)
+                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
                 </div>
             </div>
 
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Edit" class="btn btn-default" onclick="return Validate();" />
+                    <input type="submit" value="Edit" class="btn btn-default" @*onclick="return Validate();"*@ />
                     <input type="button" value="Back" class="btn btn-default" onclick="location.href='@Url.Action("Index", "Reminder")'" />
                 </div>
             </div>
@@ -98,6 +95,9 @@
 <script src="https://kendo.cdn.telerik.com/2019.2.619/js/jquery.min.js"></script>
 <script src="https://kendo.cdn.telerik.com/2019.2.619/js/kendo.all.min.js"></script>
 
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
 <link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
 <script src="~/Scripts/bootstrap-multiselect.js"></script>
@@ -174,18 +174,42 @@
 
         start.max(end.value());
         end.min(start.value());
-    });
 
-
-    jQuery(function () {
-        debugger;
         $("form").submit(function () {
-            // submit more than once return false
-            $(this).submit(function () {
-                return false;
-            });
-            // submit once return true
-            return true;
+            debugger;
+            $('button[type=button], input[type=button]').prop('disabled', true);
+            $('button[type=submit], input[type=submit]').prop('disabled', true);
+            $("form").each(function () { $.data($(this)[0], 'validator', false); });
+            var fom = $("form");
+            $.validator.unobtrusive.parse(fom);
+            if ($("form").valid()) {
+                //fillFieldsForSubmit();
+            }
+            else {
+                $("form").valid();
+                $("form").each(function () { $.data($(this)[0], 'validator', false); });
+                $.validator.unobtrusive.parse("form");
+                $('button[type=button], input[type=button]').removeAttr('disabled');
+                $('button[type=submit], input[type=submit]').removeAttr('disabled');
+            }
         });
     });
+
+//    saving_record = 0; //set variable to show if form is in submission
+//$(document).ready(function () {
+//    $('#form').on('submit', function (e) {
+//        if (saving_record === 0) { //If not submitted yet, submit form
+//            saving_record = 1; //Set variable to show form is in submission
+//            $.ajax({
+//                success: function (data) {
+//                    saving_record = 0; //Reset variable to allow record update
+//                },
+//                error: function (data) {
+//                    saving_record = 0; //Reset variable to allow record update in case of error
+//                }
+//            })
+//        }
+//    });
+//});
+
 </script>

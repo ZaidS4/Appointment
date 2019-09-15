@@ -22,7 +22,7 @@ namespace Appointment.DAL.Models
         public Nullable<System.DateTime> ModifyOn { get; set; }
         public Nullable<int> CreatedBY { get; set; }
     
-        public virtual Employee Employee { get; set; }
         public virtual Group Group { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

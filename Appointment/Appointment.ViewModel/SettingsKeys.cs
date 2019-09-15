@@ -24,7 +24,7 @@ namespace Appointment.ViewModel
         public static string smtpaddressKey() { return "smtpaddress"; }
         public static string portnumberKey() { return "portnumber"; }
 
-
+        public static string UserNameKey() { return "UserName"; }
 
     }
 }

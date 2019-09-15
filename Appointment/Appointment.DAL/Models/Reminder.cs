@@ -39,9 +39,9 @@ namespace Appointment.DAL.Models
         public int TypeID { get; set; }
         public string ImagePath { get; set; }
     
-        public virtual Employee Employee { get; set; }
         public virtual Position Position { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RemindersGroup> RemindersGroups { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

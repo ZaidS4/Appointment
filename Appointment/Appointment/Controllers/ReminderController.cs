@@ -50,7 +50,7 @@ namespace Appointment.Controllers
                 obj = ReminderService.EmployeeRemindersGetByID(id);
                 obj.Positions = ReminderService.GetPositions();
                 obj.Employees = ReminderService.GetEmployees();
-
+                obj.Groups = ReminderService.GetGroups();
                 return View("EmployeeReminderUpdate", obj);
             }
             else
@@ -245,11 +245,11 @@ namespace Appointment.Controllers
         [HttpGet]
         public ActionResult NewEmployeeReminder()
         {
-            TempData["isvalid"] = true;
+            //TempData["isvalid"] = true;
             EmployeeRemindersViewModel obj = new EmployeeRemindersViewModel();
             obj.Positions = ReminderService.GetPositions();
             obj.Employees = ReminderService.GetEmployees();
-
+            obj.Groups = ReminderService.GetGroups();
 
             return View(obj);
         }
@@ -292,7 +292,7 @@ namespace Appointment.Controllers
                     }
                 }
             }
-            TempData["isvalid"] = isvalid;
+            //TempData["isvalid"] = isvalid;
 
             return View();
         }

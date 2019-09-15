@@ -586,6 +586,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\happy-birthday.jpg" />
     <Content Include="img\Untitled11.png" />
     <Content Include="Kendo.Mvc.xml" />
     <Content Include="Reports\ReportTemplate.aspx" />
@@ -726,6 +727,8 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Groups\Details.cshtml" />
     <Content Include="Views\Reminder\Details.cshtml" />
+    <Content Include="Views\Calendar\Details.cshtml" />
+    <Content Include="Views\Calendar\GeneralDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

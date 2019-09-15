@@ -42,7 +42,7 @@ namespace Appointment.Controllers
             p.Add(new ReportParameter("P_TypeID", type.ToString(), false));
 
 
-            p.Add(new ReportParameter("P_Year", yearpicker, false));
+            p.Add(new ReportParameter("P_Year", rvm.year, false));
             ViewBag.ReportViewer = GetparamReport("Reminders Distribution", p);
 
 

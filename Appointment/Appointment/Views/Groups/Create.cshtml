@@ -3,6 +3,9 @@
 <script src="~/Scripts/bootstrap-multiselect.js"></script>
 
 
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
 @model  Appointment.ViewModel.Models.EmployeesGroupsViewModel
 
@@ -73,17 +76,27 @@
             maxHeight: 200
         });
 
-    });
 
-    jQuery(function () {
-        debugger;
+
+
         $("form").submit(function () {
-            // submit more than once return false
-            $(this).submit(function () {
-                return false;
-            });
-            // submit once return true
-            return true;
+            debugger;
+            $('button[type=button], input[type=button]').prop('disabled', true);
+            $('button[type=submit], input[type=submit]').prop('disabled', true);
+            $("form").each(function () { $.data($(this)[0], 'validator', false); });
+            var fom = $("form");
+            $.validator.unobtrusive.parse(fom);
+            if ($("form").valid()) {
+                //fillFieldsForSubmit();
+            }
+            else {
+                $("form").valid();
+                $("form").each(function () { $.data($(this)[0], 'validator', false); });
+                $.validator.unobtrusive.parse("form");
+                $('button[type=button], input[type=button]').removeAttr('disabled');
+                $('button[type=submit], input[type=submit]').removeAttr('disabled');
+            }
         });
-    });
+    })
+
 </script>

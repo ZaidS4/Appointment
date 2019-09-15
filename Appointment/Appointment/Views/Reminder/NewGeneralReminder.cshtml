@@ -11,81 +11,83 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <br />
-    <br />
-    <h2>Create General Reminder</h2>
+    <div class="form-horizontal">
+        <br />
+        <br />
+        <h2>Create General Reminder</h2>
 
-    <hr />
-    @Html.ValidationSummary(true, "*", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.Label("Title", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.Label("Start Date", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @Id = "StartDate", @class = "form-control", Value = DateTime.Now.Date.ToString() } })
-            @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.Label("End Date", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @Id = "EndDate", @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.Label("Breif Description", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
-        <div class="col-md-10">
-            @Html.TextAreaFor(model => model.BreifDescription, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.BreifDescription, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Time, htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.Label("Groups", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-9">
-            <div class="dropdown">
-                @Html.ListBoxFor(m => m.SelectedGroupsID, new SelectList(Model.Groups, "Value", "Text"), new { id = "Group", multiple = "true" })
-                <lable id="lblGroupValidation" style="color:red;font-weight:bold;display:none;"></lable>
+        <hr />
+        <div class="form-group required">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.Label("Active", htmlAttributes: new { @class = "control-label col-md-2" })<a style="color:red">*</a>
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.CheckBox("IsActive", true)
+        <div class="form-group required">
+            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.StartDate, new
+                {
+                    htmlAttributes = new
+                    {
+                        @Id = "StartDate",
+                        @class = "form-control"@*, Value = DateTime.Now.Date.ToString()*@}
+})
+                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @Id = "EndDate", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            @Html.LabelFor(model => model.BreifDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.TextAreaFor(model => model.BreifDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BreifDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            @Html.LabelFor(model => model.Time, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            @Html.Label("Groups", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.ListBoxFor(m => m.SelectedGroupsID, new SelectList(Model.Groups, "Value", "Text"), new { id = "Group", multiple = "true" })
+                @Html.ValidationMessageFor(m => m.SelectedGroupsID, "", new { @class = "text-danger" })
+                @*<lable id="lblGroupValidation" style="color:red;font-weight:bold;display:none;"></lable>*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Active", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.IsActive)
                 @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" onclick="return Validate();" />
-            <input type="button" value="Back" class="btn btn-default" onclick="location.href='@Url.Action("Index", "Reminder")'" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" id="btnSubmit" @*onclick="return Validate();"*@ />
+                <input type="button" value="Back" class="btn btn-default" onclick="location.href='@Url.Action("Index", "Reminder")'" />
+            </div>
         </div>
 
     </div>
-</div>
 }
 
 
@@ -98,26 +100,14 @@
 <script src="https://kendo.cdn.telerik.com/2019.2.619/js/jquery.min.js"></script>
 <script src="https://kendo.cdn.telerik.com/2019.2.619/js/kendo.all.min.js"></script>
 
-
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <link href="~/Scripts/bootstrap-multiselect.css" rel="stylesheet" />
 <script src="~/Scripts/bootstrap-multiselect.js"></script>
 <script type="text/javascript">
 
-    function Validate() {
-        
-        var validateMessage = 'you have to select at least one group !';
-        var validateLabel = $('#lblGroupValidation');
-        var SelectedGroups = $('#Group').val();
-        if (SelectedGroups == null) {
-            //alert('please select group !');
-            validateLabel.html(validateMessage);
-            validateLabel.show();
-            return false;
-        } else {
-            validateLabel.hide();
-            return true;
-        }
-    }
+
 
     $(document).ready(function () {
         $('#Group').multiselect({
@@ -163,6 +153,7 @@
         var start = $("#StartDate").kendoDatePicker({
             change: startChange,
             min: today,
+            value: today,
             format: "MM-dd-yyyy"
         }).data("kendoDatePicker");
 
@@ -173,20 +164,28 @@
 
         start.max(end.value());
         end.min(start.value());
-        
 
-    });
-
-
-    jQuery(function () {
-        debugger;
         $("form").submit(function () {
-            // submit more than once return false
-            $(this).submit(function () {
-                return false;
-            });
-            // submit once return true
-            return true;
-        });
+            debugger;
+            $('button[type=button], input[type=button]').prop('disabled', true);
+            $('button[type=submit], input[type=submit]').prop('disabled', true);
+            $("form").each(function () { $.data($(this)[0], 'validator', false); });
+            var fom = $("form");
+            $.validator.unobtrusive.parse(fom);
+            if ($("form").valid()) {
+                //fillFieldsForSubmit();
+            }
+            else {
+                $("form").valid();
+                $("form").each(function () { $.data($(this)[0], 'validator', false); });
+                $.validator.unobtrusive.parse("form");
+                $('button[type=button], input[type=button]').removeAttr('disabled');
+                $('button[type=submit], input[type=submit]').removeAttr('disabled');
+            }
+        })
+
     });
+
+
+
 </script>

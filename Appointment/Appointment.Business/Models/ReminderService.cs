@@ -266,9 +266,28 @@ namespace Appointment.Business.Models
                     CreatedOn = reminders.CreatedOn,
                     ModifyOn = reminders.ModifyOn,
                     IsActive = reminders.IsActive.Value,
-                    Position = reminders.PositionID.HasValue ? reminders.Position.Name : ""
+                    Position = reminders.PositionID.HasValue ? reminders.Position.Name : "",
+                    //Group = reminders.RemindersGroups.Where(x=>x.GroupID== reminders.Group.ID) ? reminders.Group.Name : ""
 
                 };
+                List<int> selected = new List<int>();
+
+                foreach (var ReminderGroup in reminders.RemindersGroups)
+                {
+                    selected.Add(ReminderGroup.GroupID);
+                }
+
+                EmployeeReminder.SelectedGroupsID = selected.ToArray();
+
+                var reminderGroups = reminders.RemindersGroups;
+                EmployeeReminder.SelectedGroups = new List<string>();
+                if (reminderGroups != null)
+                {
+                    foreach (var RMG in reminderGroups)
+                    {
+                        EmployeeReminder.SelectedGroups.Add(RMG.Group == null ? "" : RMG.Group.Name);
+                    }
+                }
                 return EmployeeReminder;
             }
 
@@ -377,7 +396,7 @@ namespace Appointment.Business.Models
                 using (RemindersEntities db = new RemindersEntities())
                 {
                     var reminders = db.Reminders.ToList();
-                    var remTypes = db.Lookups.Where(z => z.IsActive == true && z.IsDeleted == false && z.CategoryID == 1).ToList();
+                    var remTypes = db.Lookups.Where(z => z.IsDeleted == false && z.CategoryID == 1).ToList();
                     foreach (var item in reminders)
                     {
                         var remType = remTypes.Where(x => x.ID == item.TypeID).FirstOrDefault();
@@ -485,11 +504,11 @@ namespace Appointment.Business.Models
             try
             {
                 RemindersEntities Entities = new RemindersEntities();
+                //.Where(x => x.Email == reminder.Email)
+                var items = Entities.Reminders.ToList();
 
-                var items = Entities.Reminders.Where(x => x.Email == reminder.Email).ToList();
-
-                if (items.Count < 1)
-                {
+                //if (items.Count < 1)
+                //{
                     Reminder entity = new Reminder();
 
                     entity.ID = reminder.ID;
@@ -504,16 +523,19 @@ namespace Appointment.Business.Models
                     entity.CreatedBy = reminder.CreatedBy;
                     entity.CreatedOn = DateTime.Now;
                     entity.TypeID = LookupService.GetLookupIdByCode((int)Lookups.employee);
-
                     Entities.Reminders.Add(entity);
                     Entities.SaveChanges();
-
                     reminder.ID = entity.ID;
-                }
-                else
-                {
+                    foreach (var x in reminder.SelectedGroupsID)
+                    {
+                        Entities.RemindersGroups.Add(new RemindersGroup { GroupID = x, ReminderID = entity.ID, CreatedOn = DateTime.Now, CreatedBy = 1, ModifyOn = DateTime.Now, ModifyBy = 1 });
+                        Entities.SaveChanges();
+                    }
+                //}
+                //else
+                //{
 
-                }
+                //}
             }
             catch (Exception ex)
             {
@@ -541,17 +563,23 @@ namespace Appointment.Business.Models
                 entity.PositionID = reminder.PositionID;
                 entity.IsActive = reminder.IsActive;
                 entity.Image = null;
-                entity.ImagePath = reminder.ImagePath;
+                if (reminder.ImagePath != null)
+                {
+                    entity.ImagePath = reminder.ImagePath;
+                }
                 entity.StartDate = reminder.StartDate.Value;
                 entity.EmployeeID = reminder.EmployeeID;
                 entity.ModifyBy = reminder.ModifyBy;
                 entity.ModifyOn = reminder.ModifyOn;
                 entity.CreatedBy = reminder.CreatedBy;
                 entity.TypeID = LookupService.GetLookupIdByCode((int)Lookups.employee);
-
                 Entities.SaveChanges();
+                foreach (var x in reminder.SelectedGroupsID)//************??????
+                {
+                    Entities.RemindersGroups.Add(new RemindersGroup { GroupID = x, ReminderID = entity.ID, ModifyOn = DateTime.Now, ModifyBy = 1, CreatedOn = DateTime.Now, CreatedBy = 1 });
+                    Entities.SaveChanges();
+                }
             }
-
             catch (Exception ex)
             {
                 throw ex;

@@ -13,7 +13,7 @@ namespace Appointment.Business.Models
 {
     public class CalendarService : IDisposable
     {
-        public static List<CalendarViewModel> GetCurrentReminders()
+        public static List<CalendarViewModel> DisplayCurrentReminders()
         {
             List<CalendarViewModel> reminderViews = new List<CalendarViewModel>();
 
@@ -24,7 +24,7 @@ namespace Appointment.Business.Models
                     var t = DateTime.Now.Date.AddDays(Convert.ToDouble(SettingService.UpComingReminder()));
                     var ti = DateTime.Now.Date.AddDays(0);
 
-                    var reminders = db.Reminders.ToList();
+                    var reminders = db.Reminders.Where(x => x.IsActive == true).ToList();
                     foreach (var item in reminders)
                     {
                         //LookupService.GetLookupIdByCode((int)Lookups.employee);
@@ -38,7 +38,7 @@ namespace Appointment.Business.Models
                                 {
                                     ID = item.ID,
                                     Name = item.Name + "  Birthday ",
-                                    TheDate = item.BirthDate
+                                    TheDate = item.BirthDate.HasValue ? item.BirthDate.Value.ToString("MM/dd/yyyy") : ""
 
                                 });
                             }
@@ -48,7 +48,7 @@ namespace Appointment.Business.Models
                                 {
                                     ID = item.ID,
                                     Name = item.Name + "  Anniversary ",
-                                    TheDate = item.StartDate
+                                    TheDate = item.StartDate.HasValue ? item.StartDate.Value.ToString("MM/dd/yyyy") : ""
 
 
                                 });
@@ -62,7 +62,7 @@ namespace Appointment.Business.Models
                                 {
                                     ID = item.ID,
                                     Name = item.Name,
-                                    TheDate = item.StartDate,
+                                    TheDate = item.StartDate.HasValue ? item.StartDate.Value.ToString("MM/dd/yyyy") : ""
 
                                 });
                             }
@@ -80,13 +80,9 @@ namespace Appointment.Business.Models
 
 
 
-        public static List<CalendarViewModel> DisplayCurrentReminders()
-        {
-            return GetCurrentReminders();
-        }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////
-        public static List<CalendarViewModel> GetFilteredReminders(DateTime date)
+        public static List<CalendarViewModel> DisplayFilteredReminders(DateTime? date, String Name)
         {
             List<CalendarViewModel> reminderViews = new List<CalendarViewModel>();
 
@@ -94,50 +90,145 @@ namespace Appointment.Business.Models
             {
                 using (RemindersEntities db = new RemindersEntities())
                 {
-                  
-                    var reminders = db.Reminders.ToList();
-                    foreach (var item in reminders)
-                    {
-                      
-                        int emploeeLookupID = db.Lookups.Where(x => x.Code == ((int)Lookups.employee).ToString()).FirstOrDefault().ID;
-                        if (item.TypeID == emploeeLookupID) 
+
+                    var reminders = db.Reminders.Where(x => x.IsActive == true).ToList();
+                    
+                        foreach (var item in reminders)
                         {
-                            if (item.BirthDate.Value.Month == date.Month && item.BirthDate.Value.Day == date.Day && item.BirthDate.Value.Month == date.Month && item.BirthDate.Value.Day == date.Day)
+
+                            int emploeeLookupID = db.Lookups.Where(x => x.Code == ((int)Lookups.employee).ToString()).FirstOrDefault().ID;
+                            //if (item.TypeID == emploeeLookupID) 
+                            if (date != null && Name == "")
                             {
-                                reminderViews.Add(new CalendarViewModel
+                                if (item.TypeID == emploeeLookupID)
                                 {
-                                    ID = item.ID,
-                                    Name = item.Name + "  Birthday ",
-                                    TheDate = item.BirthDate
+                                    if (item.BirthDate.Value.Month == date.Value.Month && item.BirthDate.Value.Day == date.Value.Day)
+                                    {
+                                        reminderViews.Add(new CalendarViewModel
+                                        {
+                                            ID = item.ID,
+                                            Name = item.Name + "  Birthday ",
+                                            TheDate = item.BirthDate.HasValue ? item.BirthDate.Value.ToString("MM/dd/yyyy") : ""
 
-                                });
+                                        });
+                                    }
+                                    if (item.StartDate.Value.Month == date.Value.Month && item.StartDate.Value.Day == date.Value.Day)
+                                    {
+                                        reminderViews.Add(new CalendarViewModel
+                                        {
+                                            ID = item.ID,
+                                            Name = item.Name + "  Anniversary ",
+                                            TheDate = item.StartDate.HasValue ? item.StartDate.Value.ToString("MM/dd/yyyy") : ""
+
+
+                                        });
+                                    }
+                                }
+                                else
+                                {
+                                    if (item.StartDate.Value.Date == date.Value.Date)
+                                    {
+                                        reminderViews.Add(new CalendarViewModel
+                                        {
+                                            ID = item.ID,
+                                            Name = item.Name,
+                                            TheDate = item.StartDate.HasValue ? item.StartDate.Value.ToString("MM/dd/yyyy") : ""
+
+                                        });
+                                    }
+                                }
                             }
-                            if (item.StartDate.Value.Month == date.Month && item.StartDate.Value.Day == date.Day && item.StartDate.Value.Month == date.Month && item.StartDate.Value.Day == date.Day)
+                            else if (date == null && Name != "")
                             {
-                                reminderViews.Add(new CalendarViewModel
+                                //if ((item.StartDate.Value.Date == date.Date && item.StartDate.Value.Date == date.Date)|| item.Name.Contains(Name))
+                                if (item.TypeID == emploeeLookupID)
                                 {
-                                    ID = item.ID,
-                                    Name = item.Name + "  Anniversary ",
-                                    TheDate = item.StartDate
+                                    if (item.Name.Contains(Name))
+                                    {
+                                        reminderViews.Add(new CalendarViewModel
+                                        {
+                                            ID = item.ID,
+                                            Name = item.Name + "  Birthday ",
+                                            TheDate = item.BirthDate.HasValue ? item.BirthDate.Value.ToString("MM/dd/yyyy") : ""
+
+                                        });
+                                    }
+                                    if (item.Name.Contains(Name))
+                                    {
+                                        reminderViews.Add(new CalendarViewModel
+                                        {
+                                            ID = item.ID,
+                                            Name = item.Name + "  Anniversary ",
+                                            TheDate = item.StartDate.HasValue ? item.StartDate.Value.ToString("MM/dd/yyyy") : ""
 
 
-                                });
+                                        });
+                                    }
+                                }
+                                else
+                                {
+                                    if (item.Name.Contains(Name))
+                                    {
+                                        reminderViews.Add(new CalendarViewModel
+                                        {
+                                            ID = item.ID,
+                                            Name = item.Name,
+                                            TheDate = item.StartDate.HasValue ? item.StartDate.Value.ToString("MM/dd/yyyy") : ""
+
+                                        });
+                                    }
+                                }
                             }
+                            else if (date != null && Name != "")
+                            {
+                                if (item.TypeID == emploeeLookupID)
+                                {
+                                    if ((item.Name.Contains(Name)) && (item.BirthDate.Value.Month == date.Value.Month && item.BirthDate.Value.Day == date.Value.Day))
+                                    {
+                                        reminderViews.Add(new CalendarViewModel
+                                        {
+                                            ID = item.ID,
+                                            Name = item.Name + "  Birthday ",
+                                            TheDate = item.BirthDate.HasValue ? item.BirthDate.Value.ToString("MM/dd/yyyy") : ""
+
+                                        });
+                                    }
+                                    if ((item.Name.Contains(Name)) && (item.StartDate.Value.Month == date.Value.Month && item.StartDate.Value.Day == date.Value.Day))
+                                    {
+                                        reminderViews.Add(new CalendarViewModel
+                                        {
+                                            ID = item.ID,
+                                            Name = item.Name + "  Anniversary ",
+                                            TheDate = item.StartDate.HasValue ? item.StartDate.Value.ToString("MM/dd/yyyy") : ""
+
+
+                                        });
+                                    }
+                                }
+                                else
+                                {
+                                    if ((item.Name.Contains(Name)) && (item.StartDate.Value.Month == date.Value.Month && item.StartDate.Value.Day == date.Value.Day))
+                                    {
+                                        reminderViews.Add(new CalendarViewModel
+                                        {
+                                            ID = item.ID,
+                                            Name = item.Name,
+                                            TheDate = item.StartDate.HasValue ? item.StartDate.Value.ToString("MM/dd/yyyy") : ""
+
+                                        });
+                                    }
+                                }
+
+                            
                         }
                         else
                         {
-                            if (item.StartDate.Value.Date == date.Date && item.StartDate.Value.Date == date.Date)
-                            {
-                                reminderViews.Add(new CalendarViewModel
-                                {
-                                    ID = item.ID,
-                                    Name = item.Name,
-                                    TheDate = item.StartDate,
+                            reminderViews = DisplayCurrentReminders();
 
-                                });
-                            }
                         }
+
                     }
+                    
                 }
 
             }
@@ -149,11 +240,6 @@ namespace Appointment.Business.Models
         }
 
 
-
-        public static List<CalendarViewModel> DisplayFilteredReminders(DateTime date )
-        {
-            return GetFilteredReminders(date);
-        }
         ////////////////////////////////////////////////////////
 
         public void Dispose()
@@ -164,30 +250,3 @@ namespace Appointment.Business.Models
         }
     }
 }
-///////////////////////////////////////////////////////////////////////////////////////
-//for (int i = Convert.ToInt32(SettingService.UpComingReminder()); i >= 0; i--)
-//{
-
-
-//}
-//return reminderViews.Where(x => x.TheDate.Value.Day == t.Day && x.TheDate.Value.Month == t.Month).ToList();
-// return reminderViews.FindAll(x => x.TheDate == DateTime.Today || x => x.BirthDate==DateTime.Now);
-
-//////////
-////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-//var t = DateTime.Now.Date.AddDays(Convert.ToDouble(SettingService.UpComingReminder()));
-//List<RemindersViewModel> Calendar = new List<RemindersViewModel>();
-//    for (int i = Convert.ToInt32(SettingService.UpComingReminder()); i >= 0; i--)
-//    {
-
-
-//    }
-/*.Where(x => x.TheDate.Value.Day == t.Day && x.TheDate.Value.Month == t.Month).ToList()*/

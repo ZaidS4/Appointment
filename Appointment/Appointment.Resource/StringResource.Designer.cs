@@ -19,7 +19,7 @@ namespace Appointment.Resource {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class StringResource {
@@ -61,7 +61,7 @@ namespace Appointment.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to shoqpioneer@gmail.com.
+        ///   Looks up a localized string similar to zaids@sssprocess.com.
         /// </summary>
         public static string EmailSender {
             get {
@@ -70,7 +70,7 @@ namespace Appointment.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to killer@19980.
+        ///   Looks up a localized string similar to P@ssw0rd.
         /// </summary>
         public static string EmailSenderPassword {
             get {
@@ -79,7 +79,7 @@ namespace Appointment.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 587.
+        ///   Looks up a localized string similar to 25.
         /// </summary>
         public static string portnumber {
             get {
@@ -115,7 +115,7 @@ namespace Appointment.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to smtp.gmail.com.
+        ///   Looks up a localized string similar to mail.sssprocess.com.
         /// </summary>
         public static string smtpaddress {
             get {

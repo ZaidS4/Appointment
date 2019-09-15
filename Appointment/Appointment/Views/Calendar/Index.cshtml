@@ -9,15 +9,33 @@
 <br />
 <br />
 <br />
+
+<div>
+    <div>
+        Search By Name or Date:
+        <input class=k-textbox type=text id="Name" placeholder="enter search text..." />
+        @Html.TextBox("Date", "", new { @Id = "Date"} )
+
+        <input type="submit" value="Search" class="btn btn-default"  id="refresh" />
+     
+    </div>
+    <br><br>
+    <div id="kGrid"></div>
+</div> 
+
 <div class="row">
-    <div class="col-md-12">
-        @(Html.Kendo().Grid(Model)
+    <div class="col-md-12">     
+      
+            @(Html.Kendo().Grid(Model)
               .Name("CalendarGrid")
 
               .Columns(columns =>
               {
-                  columns.Bound(p => p.Name).Filterable(ftb => ftb.Cell(cell => cell.Operator("contains").SuggestionOperator(FilterType.Contains).Delay(600000)));
-                  columns.Bound(p => p.TheDate).Format("{0:MM/dd/yyyy}");/*.Filterable(f => f.UI());*/
+                  columns.Bound(p => p.Name);
+                  columns.Bound(p => p.TheDate)/*.Format("{0:MM/dd/yyyy}")*/;
+                  columns.Bound(p => p.ID).ClientTemplate("#= Details(data) #");
+
+
               })
               .Editable(editable => editable.Enabled(false).Mode(GridEditMode.InCell))
               .Pageable(pageable => pageable
@@ -29,22 +47,24 @@
               .Scrollable()
               .Selectable(selectable => selectable.Enabled(true).Mode(GridSelectionMode.Single).Type(GridSelectionType.Row))
               .ColumnMenu()
-              .Filterable(filterable => filterable.Mode(GridFilterMode.Row))
+              //.Filterable(filterable => filterable.Mode(GridFilterMode.Row))
               .DataSource(dataSource => dataSource
+              //.Server()
               .Ajax()
                   .PageSize(20)
                   .Model(model => model.Id(p => p.ID))
-                  .Read(read => read.Action("Read", "Calendar") )
+                  .Read(read => read.Action("Read", "Calendar").Data("additionalInfo"))
 
 
               )
-        )
+)
 
 
-    </div>
-
+        </div>
 </div>
 
+
+@*///////////////////////////////////////////////////////////////////////////////*@
 <style>
     .k-grid .k-state-selected {
         background: #1cacff;
@@ -62,15 +82,40 @@
 
     $(document).ready(function () {
         $("form.k-edit-form").kendoValidator();
+        $("#Date").kendoDatePicker({
+            format: "MM/dd/yyyy",
+        });
+
+        $('#refresh').button().click(function () {
+           // debugger;
+            
+
+            $('#CalendarGrid').data('kendoGrid').dataSource.read(); 
+
+            $('#CalendarGrid').data('kendoGrid').refresh();
+
+
+
+        });
     });
+    function additionalInfo() {
+        return {
+            name: $("#Name").val(),
+            Date: $("#Date").val()
+        }
+    }
+   function Details(Reminder) {
+    var action = '@Url.Action("ReminderDetails", "Calendar")';
+
+    var html = kendo.format("<a href='{0}/{1}'>Details</a>",
+        action,
+        Reminder.ID
+    );
+
+    return html;
+}
 </script>
 
 
 @*/////////////////////////////////////*@
-@*<script >
-    function GetImage(image) {
-        var returnString = '<img src="~/img/Untitled11.png" title=\"image\" height=\"24\" alt=\"image\" />';
-        return returnString;
-    }
-    </script>*@
 

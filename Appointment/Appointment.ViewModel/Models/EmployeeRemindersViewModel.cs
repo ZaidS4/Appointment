@@ -17,6 +17,7 @@ namespace Appointment.ViewModel.Models
 
         [StringLength(20)]
         [Required(ErrorMessage = "Name is required")]
+        [Display(Name ="Title")]
         public string Name { get; set; }
 
         
@@ -28,19 +29,24 @@ namespace Appointment.ViewModel.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Birthday is required")]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [Display(Name = "Birth Date")]
         public DateTime? BirthDate { get; set; }
 
         [Required(ErrorMessage = "Start Date is required")]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [Display(Name = "Start Date")]
         public DateTime? StartDate { get; set; }
 
         [Required(ErrorMessage = "Position is required")]
+        [Display(Name = "Position")]
         public int? PositionID { get; set; }
 
         public string Position { get; set; }
 
+        public string Group { get; set; }
 
+        [Display(Name = "Activity")]
         public bool IsActive { get; set; }
 
         [DataType(DataType.Date)]
@@ -60,7 +66,8 @@ namespace Appointment.ViewModel.Models
 
         public string ImagePath { get; set; }
 
-
+        [Required(ErrorMessage = "Employee is required")]
+        [Display(Name = "Employee")]
         public int? EmployeeID { get; set; }
 
     
@@ -69,6 +76,13 @@ namespace Appointment.ViewModel.Models
        
         public List<SelectListItem> Positions { get; set; }
 
+        public List<string> SelectedGroups { get; set; }
+
+
+        public List<SelectListItem> Groups { get; set; }
+
+        [Required(ErrorMessage ="Choose at least one group")]
+        public int[] SelectedGroupsID { get; set; }
 
     }
 }

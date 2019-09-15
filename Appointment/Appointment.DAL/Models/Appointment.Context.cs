@@ -25,7 +25,6 @@ namespace Appointment.DAL.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<EmployeesGroup> EmployeesGroups { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<LookUpCategory> LookUpCategories { get; set; }
@@ -37,5 +36,6 @@ namespace Appointment.DAL.Models
         public virtual DbSet<UserPermission> UserPermissions { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Reminder> Reminders { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using Kendo.Mvc;
 using Kendo.Mvc.UI;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,81 +14,58 @@ namespace Appointment.Controllers
 {
     public class CalendarController : Controller
     {
-        
+
 
         public ActionResult Index()
         {
-            //var type = ReminderService.GetType(id);
-            //if (type == LookupService.GetLookupIdByCode((int)Lookups.employee))
-            return View(CalendarService.DisplayCurrentReminders());
+            var List =  CalendarService.DisplayCurrentReminders(); 
+            return View(List);
         }
 
-
-        //public ActionResult Read([DataSourceRequest]DataSourceRequest request, int? ID)
-        //{
-        //    if (ID.HasValue)
-        //        return Json(GetAllContracts(CustomerID.Value).ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
-        //    else
-        //        return null;
-        //}
-
-
-
-        public ActionResult Read([DataSourceRequest]DataSourceRequest request)
+        public ActionResult Read([DataSourceRequest]DataSourceRequest request, string Date, string Name)
         {
-            String TheDate="";
-            //DateTime CalenderDate = Convert.ToDateTime(TheDate);
-            // int total = 0;
-            //var data = new List<Appointment.ViewModel.Models.CalendarViewModel>();
-            //GetMissingsTransaction(new MissingsTransactionVM() { FromDate = FromDate, ToDate = ToDate }, page.Value, pageSize.Value, out total);
-
+            DateTime? dt = null;
+            if (!string.IsNullOrEmpty(Date))
             {
-                if (request.Filters.FirstOrDefault() is CompositeFilterDescriptor)
-                {
-                    var i = 0;
-                    var thisList = (CompositeFilterDescriptor)request.Filters.FirstOrDefault();
-
-                    foreach (FilterDescriptor item in thisList.FilterDescriptors)
-                    {
-                        //  var thisItem = (item.FilterDescriptors[i] as FilterDescriptor);
-                        if (item.Member == "TheDate")
-                            TheDate = item.ConvertedValue.ToString();
-                    
-                        i++;
-                    }
-                }
-                else
-                {
-                    var thisItem = (request.Filters.FirstOrDefault() as FilterDescriptor);
-                    if (thisItem != null)
-                    {
-
-
-                        if (thisItem.Member == "TheDate")
-                            TheDate = thisItem.ConvertedValue.ToString();
-                    }
-                }
+                dt=DateTime.ParseExact(Date, "MM/dd/yyyy", CultureInfo.InvariantCulture);
             }
-            if (TheDate != "")
+            var data = CalendarService.DisplayFilteredReminders(dt, Name);
+
+            var result = new DataSourceResult
             {
+                Data = data,
+            };
+            return Json(result, JsonRequestBehavior.AllowGet);
 
-
-                DateTime CalenderDate = Convert.ToDateTime(TheDate);
-
-                var data = CalendarService.DisplayFilteredReminders(CalenderDate);
-
-                var result = new DataSourceResult
-                {
-                    Data = data,
-                    //Total = total
-                };
-
-                return Json(result, JsonRequestBehavior.AllowGet);
-            }
-            return View();
 
         }
-    }
 
-    
+
+
+     //////////////////////////////////////////////////////////////////
+
+        public ViewResult ReminderDetails(int id)
+        {
+            var type = ReminderService.GetType(id);
+            if (type == LookupService.GetLookupIdByCode((int)Lookups.employee))
+            {
+                EmployeeRemindersViewModel obj = new EmployeeRemindersViewModel();
+                obj = ReminderService.EmployeeRemindersGetByID(id);
+                obj.Positions = ReminderService.GetPositions();
+                return View("Details", obj);
+            }
+            else
+            {
+                GeneralRemindersViewModel obj = new GeneralRemindersViewModel();
+                obj = ReminderService.generalRemindersGetByID(id);
+                return View("GeneralDetails", obj);
+            }
+
+
+        }
+
+    }
 }
+
+
+

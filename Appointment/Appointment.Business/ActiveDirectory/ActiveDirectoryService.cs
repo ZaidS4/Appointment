@@ -78,7 +78,10 @@ namespace Appointment.Business.ActiveDirectory
 
         }
 
-
+		/// <summary>
+		/// Method to save Users that gotten from active directory
+		/// </summary>
+		/// <param name="ActivDirectoryusers"></param>
         public static void SaveEmployeesData(List<ActiveDirectoryUsersVM> ActivDirectoryusers)
         {
 
@@ -88,27 +91,32 @@ namespace Appointment.Business.ActiveDirectory
                 using (RemindersEntities db = new RemindersEntities())
                 {
                     var employees = db.Employees.ToList();
-
+                    List<string> ExMessages = new List<string>();
                     foreach (var item in ADemployees)
                     {
-                        if (!db.Employees.Any(x => x.Name == item.Name))
+                        try
                         {
-                            employees.Add(new Employee
+                            if (!employees.Any(x => x.Name == item.Name)&& item.Email!=null && item.Email !="")
                             {
-                                Name = item.Name,
-                                Email = item.Email
-                            });
+                                db.Employees.Add(new Employee
+                                {
+                                    Name = item.Name,
+                                    Email = item.Email,
+                                    CreatedOn = DateTime.Now.Date,
+                                    CreatedBy = 1,
+                                    //BirthDate= DateTime.Now.Date
+                                });
+                            }
+                            db.SaveChanges();
                         }
-                        db.SaveChanges();
+                        catch (Exception ex)
+                        {
+                            ExMessages.Add(ex.Message+"For User "+ item.Name);
+                        }
+                       
 
                     }
-                    //foreach (var x in employees)
-                    //{
-                    //    db.Employees.Add(new Employee { Name = x.Name,Email=x.Email,CreatedOn=DateTime.Now.Date,CreatedBy=1 });
-                    //    db.SaveChanges();
-                    //}
-                   
-                }
+              }
             }
             catch (Exception ex)
             {

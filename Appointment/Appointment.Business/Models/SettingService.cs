@@ -250,6 +250,17 @@ namespace Appointment.Business.Models
                 return setting.Description;
             }
         }
+
+        public static string UserName()
+        {
+            string UserNameKey = SettingsKeys.UserNameKey();
+
+            using (RemindersEntities db = new RemindersEntities())
+            {
+                var setting = db.Settings.Where(x => x.Key == UserNameKey).FirstOrDefault();
+                return setting.Values;
+            }
+        }
         public static string PasswordSender()
         {
             string PasswordSenderKey = SettingsKeys.PasswordSenderKey();
@@ -257,7 +268,7 @@ namespace Appointment.Business.Models
             using (RemindersEntities db = new RemindersEntities())
             {
                 var setting = db.Settings.Where(x => x.Key == PasswordSenderKey).FirstOrDefault();
-                return setting.Description;
+                return setting.Values;
             }
         }
         public static string smtpaddress()
@@ -267,7 +278,7 @@ namespace Appointment.Business.Models
             using (RemindersEntities db = new RemindersEntities())
             {
                 var setting = db.Settings.Where(x => x.Key == smtpaddressKey).FirstOrDefault();
-                return setting.Description;
+                return setting.Values;
             }
         }
         public static string portnumber()

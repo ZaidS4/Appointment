@@ -15,26 +15,34 @@ namespace Appointment.ViewModel.Models
 
         [StringLength(20)]
         [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Title")]
         public string Name { get; set; }
 
        
 
         [Required(ErrorMessage = "StartDate is required")]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [Display(Name = "Start Date")]
         public DateTime? StartDate { get; set; }
 
         [Required(ErrorMessage = "EndDate is required")]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [Display(Name = "End Date")]
         public DateTime? EndDate { get; set; }
 
-        [Required(ErrorMessage = "BreifDescription is required")]
+        [Required(ErrorMessage = "Description is required")]
         [StringLength(200)]
+        [Display(Name = "Breif Description")]
         public string BreifDescription { get; set; }
 
         [DataType(DataType.Time)]
         [Required(ErrorMessage = "Time is required")]
         public TimeSpan? Time { get; set; } = TimeSpan.FromTicks(DateTime.Now.Ticks);
 
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm tt}")]
+        public DateTime? TimeForDisplay { get { return (Time.HasValue) ? (DateTime?)DateTime.Today.Add(Time.Value) : null; } }
+
+        [Display(Name = "Activity")]
         public bool IsActive { get; set; }
 
 
@@ -58,6 +66,7 @@ namespace Appointment.ViewModel.Models
 
         public List<SelectListItem> Groups { get; set; }
 
+        [Required(ErrorMessage ="Choose at least one group")]
         public int[] SelectedGroupsID { get; set; }
 
        
